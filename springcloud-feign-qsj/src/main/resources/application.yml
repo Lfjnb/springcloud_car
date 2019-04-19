@@ -1,0 +1,16 @@
+
+server:
+  port:  8767
+
+spring:
+  application:
+    name: springcloud-feign
+  main:
+    allow-bean-definition-overriding: true
+
+
+eureka:
+  client:
+    service-url:
+      defalutZone: htto://localhost:8761/eureka
+
