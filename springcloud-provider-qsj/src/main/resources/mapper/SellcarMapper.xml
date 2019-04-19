@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.dao.SellCarDao">
+
+    <insert id="addSellCar" parameterType="com.jk.pojo.SellcarBean">
+          insert into t_sell(phone,cartype,carseries,licensetime,mileage,licensearea,testcartime)
+          values(#{phone},#{cartype},#{carseries},#{licensetime},#{mileage},#{licensearea},#{testcartime});
+    </insert>
+
+</mapper>
