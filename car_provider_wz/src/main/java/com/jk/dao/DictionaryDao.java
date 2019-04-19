@@ -1,6 +1,6 @@
 package com.jk.dao;
 
-import com.jk.pojo.DictionaryBean;
+import com.jk.pojo.CarBean;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface DictionaryDao {
      *
      *  查询字典表
      */
-    List<DictionaryBean> queryDictionary();
+    List<CarBean> queryDictionary();
 }

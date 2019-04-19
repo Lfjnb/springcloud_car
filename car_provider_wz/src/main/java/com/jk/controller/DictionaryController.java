@@ -1,5 +1,6 @@
 package com.jk.controller;
 
+import com.jk.pojo.CarBean;
 import com.jk.pojo.DictionaryBean;
 import com.jk.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,8 @@ public class DictionaryController {
      */
     @RequestMapping("queryDictionary")
     @ResponseBody
-    public List<DictionaryBean> queryDictionary(){
-        List<DictionaryBean> list = dictionaryService.queryDictionary();
+    public List<CarBean> queryDictionary(){
+        List<CarBean> list = dictionaryService.queryDictionary();
         return list;
     }
 

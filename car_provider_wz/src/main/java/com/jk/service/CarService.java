@@ -17,4 +17,6 @@ public interface CarService {
      *  查询汽车总表
      */
     HashMap<String, Object> queryCar(Integer page, Integer rows, CarBean carBean);
+
+    HashMap<String, Object> queryOuther();
 }

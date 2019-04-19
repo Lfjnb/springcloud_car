@@ -1,7 +1,7 @@
 package com.jk.serviceimpl;
 
 import com.jk.dao.DictionaryDao;
-import com.jk.pojo.DictionaryBean;
+import com.jk.pojo.CarBean;
 import com.jk.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class DictionaryServiceImppl implements DictionaryService {
      *  查询字典表
      */
     @Override
-    public List<DictionaryBean> queryDictionary() {
+    public List<CarBean> queryDictionary() {
         return dictionaryDao.queryDictionary();
     }
 }

@@ -1,6 +1,6 @@
 package com.jk.service;
 
-import com.jk.pojo.DictionaryBean;
+import com.jk.pojo.CarBean;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,6 +23,6 @@ public interface DictionaryService {
      *  查询字典表
      */
     @RequestMapping("queryDictionary")
-    List<DictionaryBean> queryDictionary();
+    List<CarBean> queryDictionary();
 
 }

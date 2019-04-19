@@ -39,4 +39,22 @@ public class CarServiceImpl implements CarService {
         map.put("total",total);
         return map;
     }
+
+    @Override
+    public HashMap<String, Object> queryOuther() {
+        HashMap<String, Object> map=new HashMap<>();
+            map.put("color",carDao.queryColor());
+            map.put("model",carDao.queryCarModel());
+            map.put("carAge",carDao.queryCarAge());
+            map.put("gearbox",carDao.queryGearbox());
+            map.put("mileage",carDao.queryMileage());
+            map.put("carSeat",carDao.queryCarSeat());
+            map.put("carFuel",carDao.queryCarFuel());
+            map.put("license",carDao.queryLicense());
+            map.put("drive",carDao.queryDrive());
+            map.put("nation",carDao.queryNation());
+
+        return map;
+    }
+
 }

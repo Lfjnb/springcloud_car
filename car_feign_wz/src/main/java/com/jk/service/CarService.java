@@ -30,4 +30,7 @@ public interface CarService {
      */
     @RequestMapping("queryCar")
     HashMap<String,Object> queryCar(@RequestParam Integer page, @RequestParam Integer rows,@RequestBody CarBean carBean);
+
+    @RequestMapping("queryOuther")
+    HashMap<String, Object> queryOuther();
 }

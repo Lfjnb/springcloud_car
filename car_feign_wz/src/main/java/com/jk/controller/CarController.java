@@ -46,5 +46,10 @@ public class CarController {
         return map;
     }
 
+    @RequestMapping("queryOuther")
+    @ResponseBody
+    public HashMap<String,Object> queryOuther(){
+        return carService.queryOuther();
+    }
 
 }

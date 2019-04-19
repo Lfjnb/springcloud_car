@@ -3,7 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jk.dao.DictionaryDao">
-    <select id="queryDictionary" resultType="com.jk.pojo.DictionaryBean">
-        select id,codeId,text,codePid from t_dictionary
+    <select id="queryDictionary" resultType="com.jk.pojo.CarBean">
+        SELECT
+	car.id,
+	dic.text AS carAgeName,
+	dic2.text AS carModelName,
+	dic3.text AS mileageName,
+	dic4.text AS carCerNmae,
+	dic5.text AS carSeatName,
+	dic6.text AS carFuelName,
+	dic7.text AS colorName,
+	dic8.text AS nationName,
+	dic9.text AS elseName
+FROM
+	t_car AS car
+	LEFT JOIN t_dictionary AS dic ON car.carAgeId = dic.codeid
+	LEFT JOIN t_dictionary AS dic2 ON car.carModel = dic2.codeid
+	LEFT JOIN t_dictionary AS dic3 ON car.mileageId = dic3.codeid
+	LEFT JOIN t_dictionary AS dic4 ON car.carCerId = dic4.codeid
+	LEFT JOIN t_dictionary AS dic5 ON car.carSeat = dic5.codeid
+	LEFT JOIN t_dictionary AS dic6 ON car.carFuel = dic6.codeid
+	LEFT JOIN t_dictionary AS dic7 ON car.color = dic7.codeid
+	LEFT JOIN t_dictionary AS dic8 ON car.nationId = dic8.codeid
+	LEFT JOIN t_dictionary AS dic9 ON car.elseId = dic9.codeid
     </select>
 </mapper>
