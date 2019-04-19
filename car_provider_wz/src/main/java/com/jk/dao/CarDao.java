@@ -66,5 +66,5 @@ public interface CarDao {
 
     //查询字典表车 国别
     @Select("SELECT *  FROM t_dictionary where codepid=1012")
-    Object queryNation();
+    List<DictionaryBean> queryNation();
 }
