@@ -5,6 +5,67 @@
 <mapper namespace="com.jk.dao.CarDao">
 
 
+	<delete id="deleteCar" parameterType="Integer">
+		delete from t_car where id = #{value}
+	</delete>
+
+
+	<!-- 随机查询 12 张汽车数据 -->
+	<select id="queryCarRandom" resultType="com.jk.pojo.CarBean">
+	SELECT
+		car.id,
+		brand.brandName as brandName,
+		series.seriesName as seriesName,
+		car.price,
+		dic.text as carAgeName,
+		car.gearbox,
+		dic2.text as carModelName,
+		dic3.text as mileageName,
+		dic4.text as carCerNmae,
+		dic5.text as carSeatName,
+		dic6.text as carFuelName,
+		dic7.text as colorName,
+		car.drive,
+		dic8.text as nationName,
+		dic9.text as elseName,
+		own.ownerName as ownerName,
+		store.storName as storeName,
+		area.area as areaName,
+		car.carLicense,
+		img.imgurl
+	FROM
+		t_car AS car
+		LEFT JOIN t_brand AS brand ON car.brandId = brand.id
+		LEFT JOIN t_series AS series ON car.series = series.id
+		LEFT JOIN t_dictionary AS dic ON car.carAgeId = dic.codeid
+		LEFT JOIN t_dictionary AS dic2 ON car.carModel = dic2.codeid
+		LEFT JOIN t_dictionary AS dic3 ON car.mileageId = dic3.codeid
+		LEFT JOIN t_dictionary AS dic4 ON car.carCerId = dic4.codeid
+		LEFT JOIN t_dictionary AS dic5 ON car.carSeat = dic5.codeid
+		LEFT JOIN t_dictionary AS dic6 ON car.carFuel = dic6.codeid
+		LEFT JOIN t_dictionary AS dic7 ON car.color = dic7.codeid
+		LEFT JOIN t_dictionary AS dic8 ON car.nationId = dic8.codeid
+		LEFT JOIN t_dictionary AS dic9 ON car.elseId = dic9.codeid
+		LEFT JOIN t_owner AS own ON car.ownerId = own.id
+		LEFT JOIN t_store AS store ON car.storeId = store.id
+		LEFT JOIN t_area AS area ON car.areaId = area.id
+		LEFT JOIN t_imgs as img ON img.id = (
+	  SELECT MIN(s.id) FROM t_imgs s LEFT JOIN t_car c on s.carid=c.id)
+
+		ORDER BY rand() limit 12
+
+	</select>
+
+
+	<!-- 新增汽车表 -->
+	<insert id="addCar"   parameterType="com.jk.pojo.CarBean">
+
+		insert into t_car (brandId,series,price,carAgeId,gearbox,carModel,mileageId,carCerId,carSeat,carFuel,color,drive,nationId,elseId,ownerId,storeId,areaId,carLicense)
+		values (#{brandId},#{series},#{price},#{carAgeId},#{gearbox},#{carModel},#{mileageId},#{carCerId},#{carSeat},#{carFuel},#{color},#{drive},#{nationId},#{elseId},#{ownerId},#{storeId},#{areaId},#{carLicense})
+	</insert>
+
+
+	<!-- 查询汽车总表 -->
     <select id="queryCar" resultType="com.jk.pojo.CarBean">
       SELECT
 	car.id,

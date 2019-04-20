@@ -2,6 +2,7 @@ package com.jk.dao;
 
 import com.jk.pojo.CarBean;
 import com.jk.pojo.DictionaryBean;
+import com.jk.pojo.ImgsBean;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,10 @@ public interface CarDao {
     @Select("SELECT *  FROM t_dictionary where codepid=1005")
     List<DictionaryBean> queryCer();
 
+    //查询字典表车 排量标准
+    @Select("SELECT *  FROM t_dictionary where codepid=1006")
+    List<DictionaryBean> queryEmissionStandard();
+
     //查询字典表车 座位数
     @Select("SELECT *  FROM t_dictionary where codepid=1007")
     List<DictionaryBean> queryCarSeat();
@@ -67,4 +72,36 @@ public interface CarDao {
     //查询字典表车 国别
     @Select("SELECT *  FROM t_dictionary where codepid=1012")
     List<DictionaryBean> queryNation();
+
+    //查询字典表车 亮点配置
+    @Select("SELECT *  FROM t_dictionary where codepid=1013")
+    List<DictionaryBean> queryConfiguration();
+
+    //查询字典表车 标签
+    @Select("SELECT *  FROM t_dictionary where codepid=1014")
+    List<DictionaryBean> queryLabel();
+
+
+
+    // 新增汽车表
+    int addCar(CarBean carBean);
+
+    /**
+     *
+     * 随机查询 12 张汽车数据
+     */
+    List<CarBean> queryCarRandom();
+
+    /**
+     *
+     *  根据前台Id 删除汽车表
+     *
+     */
+    int deleteCar(Integer id);
+
+
+    @Select("SELECT imgurl from t_imgs where id=(\n" +
+            "\t\tSELECT max(id) from t_imgs WHERE carId=(\n" +
+            "\t\tSELECT carid FROM t_imgs WHERE carid=#{carid} GROUP BY carid)) ")
+    String queryImgsById(Integer carid);
 }

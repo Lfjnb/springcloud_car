@@ -89,6 +89,16 @@ public class CarBean implements Serializable {
 
     private Integer start=0;//状态
 
+    private String imgUrl; //图片路径
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     public Integer getStart() {
         return start;
     }
