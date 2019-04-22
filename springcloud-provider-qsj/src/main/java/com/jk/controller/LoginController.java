@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -142,14 +144,16 @@ public class LoginController {
     //短信登录
     @RequestMapping("quicklogin")
     @ResponseBody
-    public String quicklogin(@RequestParam Long phone, @RequestParam String code) {
-        //验证码是否正确
+    public String quicklogin(@RequestParam Long phone, @RequestParam String code, HttpServletRequest request) {
+        HttpSession session = request.getSession();
         //Object attribute = session.getAttribute(phone);
         Object attribute = redisTemplate.opsForValue().get(ConstantConf.SMS_LOGIN_CODE + phone);
         if (!code.equals(attribute.toString()) && !code.equals("")) {
             return "验证码不存在";
         }
-        //把用户存到session
+        //把用户存到redis
+        redisTemplate.opsForValue().set(ConstantConf.SMS_LOGIN_PHONE+phone,phone);
+        session.setAttribute(session.getId(),phone);
         return "登录成功";
     }
 

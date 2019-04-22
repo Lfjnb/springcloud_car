@@ -1,5 +1,6 @@
 package com.jk.pojo;
 
+
 import java.io.Serializable;
 
 /**
@@ -13,6 +14,7 @@ import java.io.Serializable;
 public class CarBean implements Serializable {
 
     private static final long serialVersionUID = 4592182085915324838L;
+
     private  Integer id;
 
     private String carName;//汽车名称
@@ -81,7 +83,7 @@ public class CarBean implements Serializable {
 
     private String storeName;//车辆所在店铺名称
 
-    private String carLicense; //上牌时间
+    private String carLicense; //上牌时间s
 
     private Integer areaId; //地区Id
 

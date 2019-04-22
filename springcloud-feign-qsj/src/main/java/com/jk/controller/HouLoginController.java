@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.PublicKey;
 
 @Controller
 public class HouLoginController {
@@ -46,6 +47,15 @@ public class HouLoginController {
             map.put("message","密码错误");
         }
         return "login";
+    }
+
+    /**
+     * 跳转到登录页面
+     * @return
+     */
+     @RequestMapping("toLogin")
+     public   String  toLogin (){
+        return  "login";
     }
     /**
      * 新增后台管理员账号

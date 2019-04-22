@@ -48,6 +48,10 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/logina/findduanxin", "anon");
         filterChainDefinitionMap.put("/logina/quicklogin", "anon");
         filterChainDefinitionMap.put("/sell/addSellCar", "anon");
+        filterChainDefinitionMap.put("/isseu/findIsseu", "anon");
+        filterChainDefinitionMap.put("/app/Savexinxi", "anon");
+        filterChainDefinitionMap.put("/deal/CarSave", "anon");
+        filterChainDefinitionMap.put("/deal/queryDealCar", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
         /// **代表所有路径 除以上路径外都拦截 authc代表权限拦截过滤器

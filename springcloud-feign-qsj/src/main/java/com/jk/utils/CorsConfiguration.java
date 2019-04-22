@@ -1,21 +1,17 @@
-package com.jk;
+package com.jk.utils;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-@SpringBootApplication
-@EnableFeignClients
-@EnableEurekaClient
-public class SpringcloudFeignQsjApplication {
+import javax.servlet.*;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringcloudFeignQsjApplication.class, args);
-    }
+
+public class CorsConfiguration implements Filter {
 
     @Bean
     public CorsFilter corsFilter() {
@@ -51,4 +47,19 @@ public class SpringcloudFeignQsjApplication {
         return new CorsFilter(source);
 
     }
+
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+        HttpServletResponse response = (HttpServletResponse) res;
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+        chain.doFilter(req, res);
+    }
+
+    public void init(FilterConfig filterConfig) {}
+
+    public void destroy() {}
+
+
 }

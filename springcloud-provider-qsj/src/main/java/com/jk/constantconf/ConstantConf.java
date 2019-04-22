@@ -40,6 +40,9 @@ public class ConstantConf {
 
 	//短信验证码状态超过三次今天不能登录
 	public  static final String   SMS_Login_STATUS_CODE = "yzmzt";
+	//将用户登录手机号存在redis中
+	public  static  final String  SMS_LOGIN_PHONE = "sjh";
+
 
 
 
