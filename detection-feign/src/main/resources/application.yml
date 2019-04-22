@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  thymeleaf:
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+  application:
+    name: detection-feign
+  main:
+    allow-bean-definition-overriding: true
+
+eureka:
+  client:
+  service-url:
+    defaultZone: http://localhost:8761/eureka
+
