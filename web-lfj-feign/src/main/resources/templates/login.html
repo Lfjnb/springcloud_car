@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title></title>
+    <script src="../bootstrap/jquery.min.js"></script>
+    <script src="../bootstrap/showjs/loginjs.js"></script>
+</head>
+<style type="text/css">.announcement {
+    height:34px;
+    line-height:34px;
+    background:#fffae8;
+    text-align:center;
+    color:#c3a853;
+    font-size:14px
+}
+.icon-close-gb,.icon-gb {
+    vertical-align:middle;
+    margin-top:-2px;
+    background-size:12px 12px;
+    width:12px;
+    height:12px;
+    display:inline-block
+}
+.icon-gb {
+    background:url(//cli-sta.guazistatic.com/c2c_web/gaungbo_icon.c9dd3ec6f62f087bf7191b8320765248.png) no-repeat;
+    margin-right:10px
+}
+.icon-close-gb {
+    background:url(//cli-sta.guazistatic.com/c2c_web/close_icon.6a60703de9f824a8cff6eef325440588.png) no-repeat;
+    margin-left:10px
+}
+</style><style type="text/css">body .ie7-pop {
+    height:432px;
+    margin-top:-216px;
+    overflow:hidden
+}
+.ie7-pop-tit {
+    line-height:72px;
+    text-align:center;
+    font-size:24px;
+    color:#495056
+}
+.ie7-pop-txt {
+    font-size:18px;
+    color:#757f89;
+    line-height:54px;
+    padding-bottom:14px;
+    text-align:center
+}
+.browser-down-box {
+    width:420px;
+    height:42px;
+    margin:0 auto 27px
+}
+.chrome-btn,.ff-btn {
+    width:193px;
+    height:40px;
+    line-height:40px;
+    font-size:16px;
+    color:#22ac38;
+    border:1px solid #22ac38;
+    border-radius:2px;
+    text-align:center
+}
+.chrome-btn:hover,.ff-btn:hover {
+    text-decoration:none;
+    color:#fff;
+    background:#22ac38
+}
+.guide-ewm,.guide-ewm-app,.guide-ewm-weixin {
+    background-image:url(//cli-sta.guazistatic.com/c2c_web/icon.690a9b59b3d34c0c07a05657c6a10351.png);
+    background-repeat:no-repeat
+}
+.guide-ewm {
+    width:425px;
+    height:217px;
+    padding-left:5px;
+    margin:0 auto;
+    background-position:332px -270px
+}
+.guide-ewm-txt {
+    font-size:14px;
+    color:#757f89;
+    line-height:28px
+}
+.guide-ewm-box {
+    padding-top:17px;
+    width:304px;
+    height:132px
+}
+.guide-ewm-app,.guide-ewm-weixin {
+    width:132px;
+    height:132px
+}
+.guide-ewm-weixin {
+    background-position:0 0
+}
+.guide-ewm-app {
+    background-position:0 -135px
+}
+</style><style type="text/css"> {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0
+}
+li,ol,ul {
+    list-style:none
+}
+blockquote,q {
+    quotes:none
+}
+blockquote:after,blockquote:before,q:after,q:before {
+    content:"";
+    content:none
+}
+:focus {
+    outline:0
+}
+del {
+    text-decoration:line-through
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0
+}
+/*address,cite,code,dfn,em,i,input[type=reset],input[type=submit] {*/
+    /*cursor:pointer;*/
+    /*-webkit-appearance:none*/
+/*}*/
+.vm {
+    vertical-align:middle
+}
+.clearfix:after {
+    content:" ";
+    display:block;
+    clear:both;
+    height:0;
+    visibility:hidden
+}
+*+html .clearfix,* html .clearfix {
+    zoom:1
+}
+.fl {
+    float:left
+}
+.fr {
+    float:right
+}
+body {
+    background:#fff
+}
+body,input,select,textarea {
+    font:12px/1.5 arial,helvetica,clean,sans-serif
+}
+a {
+    text-decoration:none!important;
+    color:#24d
+}
+a:hover {
+    text-decoration:underline;
+    color:#c00
+}
+</style><style type="text/css">.pop-box {
+    position:fixed;
+    top:50%;
+    left:50%;
+    z-index:2201;
+    margin:-275px 0 0 -400px;
+    width:800px;
+    height:550px;
+    box-sizing:border-box;
+    background:#fff;
+    border:3px solid #d8dde5;
+    display:none
+}
+.pop-box.show {
+    display:block
+}
+.pop-close {
+    position:absolute;
+    top:15px;
+    right:15px;
+    width:30px;
+    height:30px;
+    cursor:pointer;
+    background:url(//cli-sta.guazistatic.com/c2c_web/icon-close.c0116c189493a8c4a889a1b49ef24dd2.png) no-repeat 50%
+}
+.pop-mask {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:2000;
+    background:#000;
+    opacity:.8;
+    filter:alpha(opacity=80)
+}
+.pop-mask.active {
+    display:block
+}
+.pop-tit {
+    line-height:74px;
+    font-size:24px;
+    margin-bottom:15px
+}
+.free-phone,.pop-tit {
+    text-align:center;
+    color:#495056
+}
+.free-phone {
+    line-height:102px;
+    font-size:22px
+}
+.free-phone em {
+    color:#22ac38
+}
+.p-error {
+    height:50px;
+    line-height:50px;
+    text-align:center;
+    font-size:14px;
+    color:#ff7e00
+}
+.sub-btn {
+    display:block;
+    width:410px;
+    height:50px;
+    border-radius:2px;
+    background:#22ac38;
+    border:none;
+    color:#fff;
+    font-size:20px;
+    margin:0 auto;
+    font-family:microsoft yahei
+}
+.sub-btn:hover {
+    background:#179500
+}
+.pop-submit-sucess {
+    text-align:center;
+    height:420px
+}
+.pop-tit-submit-sucess {
+    color:#2a9f33;
+    font-size:36px;
+    text-align:center;
+    line-height:38px;
+    padding-top:40px;
+    padding-bottom:12px
+}
+.pop-tit-submit-sucess .icon_green_right {
+    background:url(//cli-sta.guazistatic.com/c2c_web/icon_green_right.2f0e4e7b4084e18dbb274b241d35da5f.png) no-repeat;
+    width:32px;
+    height:32px;
+    display:inline-block;
+    vertical-align:middle;
+    margin-top:-5px;
+    margin-right:15px
+}
+.pop-tit-small {
+    font-size:14px;
+    color:#7c808d;
+    line-height:16px;
+    padding-bottom:38px;
+    text-align:center;
+    margin:0 38px;
+    border-bottom:1px solid #e5e5e5;
+    margin-bottom:37px
+}
+.pop-tit-con {
+    font-size:24px;
+    color:#222937;
+    line-height:28px;
+    margin-bottom:26px
+}
+.pop-tit-con span {
+    color:#f86234
+}
+.pop-con-list {
+    text-align:center;
+    width:530px;
+    margin:0 auto;
+    padding-bottom:27px
+}
+.pop-con-list li {
+    line-height:20px;
+    font-size:16px;
+    color:#222937;
+    width:50%;
+    float:left;
+    padding-bottom:12px
+}
+.pop-con-list li i {
+    display:inline-block;
+    width:6px;
+    height:6px;
+    background:#28b342;
+    border-radius:3px;
+    margin-right:7px;
+    vertical-align:middle
+}
+.pop-con-list li .fc-org {
+    color:#f86234
+}
+.pop-con-list li .graytext {
+    color:#7c808d;
+    font-size:14px
+}
+.pop-pricedetail {
+    width:600px;
+    height:269px;
+    margin-left:-300px;
+    margin-top:-135px
+}
+.pop-pricedetail .pop-tit {
+    margin:0 0 6px
+}
+.pop-pricedetail .pricedetail-con {
+    padding:0 34px;
+    font-size:14px;
+    color:#495056;
+    line-height:24px
+}
+.pricedetail-con {
+    position:relative
+}
+.pricedetail-con a.btn-lookdetail,.pricedetail-con a.btn-lookdetail:hover {
+    position:absolute;
+    right:34px;
+    bottom:-24px;
+    color:#22ac38
+}
+</style><style type="text/css">.pop-login {
+    margin:-215px 0 0 -400px;
+    width:800px;
+    height:430px
+}
+.phone-login {
+    padding-left:132px
+}
+.phone-login li {
+    height:80px;
+    padding-bottom:12px
+}
+.phone-login-tit {
+    float:left;
+    width:107px;
+    line-height:42px;
+    color:#495056;
+    font-size:18px
+}
+.phone-login-input {
+    float:left;
+    width:390px;
+    height:20px;
+    line-height:20px;
+    padding:10px 15px;
+    border:1px solid #bec6ce;
+    border-radius:3px;
+    font-size:16px;
+    color:#495056;
+    font-family:microsoft yahei
+}
+.phone-login-code {
+    width:232px
+}
+.get-code {
+    float:left;
+    width:150px;
+    height:42px;
+    background:#22ac38;
+    border:none;
+    border-radius:3px;
+    font-size:16px;
+    margin-left:8px;
+    color:#fff;
+    font-family:microsoft yahei
+}
+.get-code:hover {
+    background:#179500
+}
+.get-code.getting-code,.get-code.getting-code:hover {
+    background:#e6e6e6;
+    cursor:default
+}
+.phone-login-input.error {
+    border:1px solid #ff7e00
+}
+.pop-login .free-phone {
+    height:22px;
+    line-height:22px;
+    font-size:22px;
+    text-align:center;
+    color:#22ac38;
+    padding:20px 0 10px
+}
+.pop-login .free-phone em {
+    color:#22ac38
+}
+.agree-text {
+    text-align:center;
+    color:#b0b7c0;
+    font-size:12px;
+    line-height:12px
+}
+.agree-text a {
+    color:#22ac38
+}
+.p-error {
+    height:40px;
+    line-height:40px;
+    text-align:center;
+    font-size:14px;
+    color:#ff7e00;
+    margin-top:-12px
+}
+.sub-btn {
+    display:block;
+    width:410px;
+    height:50px;
+    border-radius:2px;
+    background:#22ac38;
+    border:none;
+    color:#fff;
+    font-size:20px;
+    margin:0 auto;
+    font-family:microsoft yahei
+}
+.sub-btn:hover {
+    background:#179500
+}
+</style>
+
+<style>
+    .phone-login {
+        padding-left: 132px
+    }
+    .phone-login li {
+        height: 80px;
+        padding-bottom: 12px
+    }
+    .phone-login-tit {
+        float: left;
+        width: 107px;
+        line-height: 42px;
+        color: #495056;
+        font-size: 18px
+    }
+    .phone-login-input {
+        float: left;
+        width: 390px;
+        height: 20px;
+        line-height: 20px;
+        padding: 10px 15px;
+        border: 1px solid #bec6ce;
+        border-radius: 3px;
+        font-size: 16px;
+        color: #495056;
+        font-family: microsoft yahei
+    }
+    .phone-login-code {
+        width: 232px
+    }
+    .get-code {
+        float: left;
+        width: 150px;
+        height: 42px;
+        background: #22ac38;
+        border: none;
+        border-radius: 3px;
+        font-size: 16px;
+        margin-left: 8px;
+        color: #fff;
+        font-family: microsoft yahei
+    }
+    .get-code:hover {
+        background: #179500
+    }
+    .get-code.getting-code,.get-code.getting-code:hover {
+        background: #e6e6e6;
+        cursor: default
+    }
+    .phone-login-input.error {
+        border: 1px solid #ff7e00
+    }
+    .pop-login .free-phone {
+        height: 22px;
+        line-height: 22px;
+        font-size: 22px;
+        text-align: center;
+        color: #22ac38;
+        padding: 20px 0 10px
+    }
+    .pop-login .free-phone em {
+        color: #22ac38
+    }
+    .agree-text {
+        text-align: center;
+        color: #b0b7c0;
+        font-size: 12px;
+        line-height: 12px
+    }
+    .agree-text a {
+        color: #22ac38
+    }
+    .p-error {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 14px;
+        color: #ff7e00;
+        margin-top: -12px
+    }
+    .sub-btn {
+        display: block;
+        width: 410px;
+        height: 50px;
+        border-radius: 2px;
+        background: #22ac38;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        margin: 0 auto;
+        font-family: microsoft yahei
+    }
+
+</style>
+<body>
+<!-- 头部 /bootstrap/bootstrap-bootbox/base.6fe56c7c8e45d3ef95b9.js?_=1555932957819-->
+<!-- 登录弹框  s -->
+<!--<div class="pop-box pop-login show" id="login1">-->
+    <!--<form action="https://www.guazi.com/passport/login" method="post" onsubmit="return window.web_sso_login_check()" target="guazi_login">-->
+        <!--<p class="pop-tit js-logintitle">瓜子二手车直卖网</p>-->
+        <!--<ul class="phone-login">-->
+            <!--<li>-->
+                <!--<p class="phone-login-tit">手机号码</p>-->
+                <!--<input name="phone" class="phone-login-input js-phoneNum1" placeholder="请输入您的手机号码">-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<p class="phone-login-tit"> 验证码</p>-->
+                <!--<input name="code" class="phone-login-input phone-login-code js-code1" placeholder="请输入验证码">-->
+                <!--<button class="get-code">获取验证码</button>-->
+            <!--</li>-->
+        <!--</ul>-->
+        <!--<p class="p-error" id="loginError1"></p>-->
+        <!--<button class="sub-btn  js-checkcode js-imcode" type="submit">登录</button>-->
+        <!--<p class="free-phone">免费咨询400-023-1529</p>-->
+        <!--<p class="agree-text">登录即视为同意<a href="#" data-gzlog="tracking_type=click&amp;eventid=92392518">《用户使用协议》</a>及<a href="#" data-gzlog="tracking_type=click&amp;eventid=92392518">《隐私权条款》</a></p>-->
+
+        <!--<input type="hidden" name="source" value="2">-->
+        <!--<input type="hidden" name="staticPage" value="https://www.guazi.com/ssoJump.php">-->
+        <!--<input type="hidden" name="callBack" value="parent.web_login_callback">-->
+    <!--</form>-->
+<!--</div>-->
+<div class="pop-box pop-login show" id="login1"><form action="" method="post" onsubmit="" target="guazi_login">
+    <div class="pop-close" id="closeLogin1"></div>
+    <p class="pop-tit js-logintitle">瓜子二手车直卖网</p>
+    <ul class="phone-login">
+        <li>
+            <p class="phone-login-tit" >手机号码</p>
+            <input id="phone"   class="phone-login-input js-phoneNum1" placeholder="请输入您的手机号码">
+        </li>
+        <li>
+            <p class="phone-login-tit"> 验证码</p>
+            <input name="code"   class="phone-login-input phone-login-code js-code1" placeholder="请输入验证码">
+            <span id="fsyzm"> <button onclick="inityzm()" >获取验证码</button> </span>
+        </li>
+    </ul>
+    <p class="p-error" id="loginError1"></p>
+    <button data-track-phone=".js-phoneNum1" class="sub-btn  js-checkcode" type="submit">登录</button>
+    <p class="free-phone">免费咨询400-069-6540</p>
+    <p class="agree-text">登录即视为同意<a href="#" data-gzlog="tracking_type=click&amp;eventid=92392518">《用户使用协议》</a>及<a href="https://www.guazi.com/zq_privacy/" data-gzlog="tracking_type=click&amp;eventid=92392518">《隐私权条款》</a></p>
+
+    <input type="hidden" name="source" value="2">
+    <input type="hidden" name="staticPage" value="#">
+    <input type="hidden" name="callBack" value="parent.web_login_callback">
+</form></div>
+
+
+<!--<div style="display:none;" class="js-check-post-code" data-str="994884917dda02b9ee3c7dfe928071c4" data-time="1555931945"></div>-->
+
+
+
+</body>
+
+</html>
