@@ -1,7 +1,9 @@
 package com.jk.serviceimpl;
 
 import com.jk.dao.CarDao;
+import com.jk.model.CarBean2;
 import com.jk.pojo.CarBean;
+import com.jk.pojo.ImgsBean;
 import com.jk.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -104,13 +106,93 @@ public class CarServiceImpl implements CarService {
      *
      */
     @Override
-    public Boolean deleteCar(Integer id) {
+    public Boolean deleteCar(String id) {
+
+        String[] split = id.split(",");
+
         Boolean bool=false;
-        int i = carDao.deleteCar(id);
+        int i = carDao.deleteCar(split);
         if(i>0){
             bool = true;
         }
         return bool;
+    }
+
+    /**
+     * 根据Id查询单条汽车表的详情
+     */
+    @Override
+    public List<CarBean> queryCarById(Integer id) {
+
+        List<CarBean> carBean = carDao.queryCarById(id);
+
+
+
+        return carBean;
+    }
+
+    /**
+     * 根据Id查询单条汽车图片的详情
+     */
+    @Override
+    public List<ImgsBean> queryImgById(Integer id) {
+
+        List<ImgsBean> imgsBeans = carDao.queryImgById(id);
+
+        return imgsBeans;
+    }
+
+    /**
+     * 修改根据Id回显
+     */
+    @Override
+    public CarBean findCarById(Integer id) {
+        return carDao.findCarById(id);
+    }
+
+    /**
+     * 修改根据回显的Id
+     */
+    @Override
+    public Boolean updateCarById(CarBean carBean) {
+        Boolean bool = false;
+        int i = carDao.updateCarById(carBean);
+        if(i>0){
+            bool = true;
+        }
+        return bool;
+    }
+
+    /**
+     *
+     * 查询Car表所有数据 缓存到ES
+     */
+    @Override
+    public List<CarBean2> findCarListAll() {
+
+        return carDao.findCarListAll();
+    }
+
+    /**
+     * 新增图片表
+     */
+    @Override
+    public Boolean addImgs(ImgsBean imgsBean) {
+        Boolean bool = false;
+        int i = carDao.addImgs(imgsBean);
+        if(i>0){
+            bool = true;
+        }
+
+        return bool;
+    }
+
+    /**
+     * 根据汽车Id 查询图片表
+     */
+    @Override
+    public List<ImgsBean> queryImgs(Integer id) {
+        return carDao.queryImgs(id);
     }
 
 

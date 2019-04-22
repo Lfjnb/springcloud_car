@@ -1,11 +1,13 @@
 package com.jk.dao;
 
+import com.jk.model.CarBean2;
 import com.jk.pojo.CarBean;
 import com.jk.pojo.DictionaryBean;
 import com.jk.pojo.ImgsBean;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -96,12 +98,49 @@ public interface CarDao {
      *
      *  根据前台Id 删除汽车表
      *
+     * @param split
      */
-    int deleteCar(Integer id);
+    int deleteCar(String[] split);
 
 
     @Select("SELECT imgurl from t_imgs where id=(\n" +
             "\t\tSELECT max(id) from t_imgs WHERE carId=(\n" +
             "\t\tSELECT carid FROM t_imgs WHERE carid=#{carid} GROUP BY carid)) ")
     String queryImgsById(Integer carid);
+
+    /**
+     * 根据Id查询单条汽车表的详情
+     */
+    List<CarBean> queryCarById(Integer id);
+
+    /**
+     * 根据Id查询单条汽车图片的详情
+     */
+    List<ImgsBean> queryImgById(Integer id);
+
+    /**
+     * 修改根据Id回显
+     */
+    CarBean findCarById(Integer id);
+
+    /**
+     * 修改根据回显的Id
+     */
+    int updateCarById(CarBean carBean);
+
+    /**
+     *
+     * 查询Car表所有数据 缓存到ES
+     */
+    List<CarBean2> findCarListAll();
+
+    /**
+     * 新增图片表
+     */
+    int addImgs(ImgsBean imgsBean);
+
+    /**
+     * 根据汽车Id 查询图片表
+     */
+    List<ImgsBean> queryImgs(Integer id);
 }
