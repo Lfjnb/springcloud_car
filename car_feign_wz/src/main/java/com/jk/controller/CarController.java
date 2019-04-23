@@ -75,15 +75,13 @@ public class CarController {
 
     /**
      *
-     *
-     * @param carNames
-     * @param page
-     * @param rows
      * @ 通过ES 全局搜索
      */
-    @RequestMapping("findCarList")
+    @RequestMapping("queryCares")
     @ResponseBody
     public List<CarBean2> findBookList(String carNames, Integer page, Integer rows) {
+        page=1;
+        rows=12;
         List<CarBean2> carList = new ArrayList<>();
         Client client = elasticsearchTemplate.getClient();
         SearchRequestBuilder searchRequestBuilder = null;
@@ -96,9 +94,21 @@ public class CarController {
         searchRequestBuilder.setQuery(QueryBuilders.matchAllQuery());
         searchRequestBuilder.setFrom((page - 1) * rows).setSize(rows);
         //条件
-        searchRequestBuilder = client.prepareSearch("1809a")
-                .setTypes("car")
-                .setQuery(new QueryStringQueryBuilder(carNames));
+        if (carNames!=null &&  !carNames.equals("")) {
+            searchRequestBuilder = client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(new QueryStringQueryBuilder(carNames));
+        }
+//        if (carBean.getCarAgeName()!=null && !carBean.getCarAgeName().equals("-1")){
+//            searchRequestBuilder=client.prepareSearch("1809a")
+//                    .setTypes("car")
+//                    .setQuery(QueryBuilders.matchQuery("carAgeName",carBean.getCarAgeName()));
+//        }
+//        if (carBean.getCarModelName()!=null && !carBean.getCarModelName().equals("-1")){
+//            searchRequestBuilder=client.prepareSearch("1809a")
+//                    .setTypes("car")
+//                    .setQuery(QueryBuilders.matchQuery("carModelName",carBean.getCarModelName()));
+//        }
 
 
         //得到查询结果
@@ -358,6 +368,8 @@ public class CarController {
     @RequestMapping("queryCar")
     @ResponseBody
     public HashMap<String,Object> queryCar(Integer page, Integer rows,CarBean carBean){
+         page = 1;
+         rows = 10;
         HashMap<String,Object> map = carService.queryCar(page,rows,carBean);
         return map;
     }

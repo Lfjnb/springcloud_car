@@ -91,44 +91,20 @@ public class CarBean implements Serializable {
 
     private String imgUrl; //图片路径
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public Integer getStart() {
-        return start;
-    }
-
-    public void setStart(Integer start) {
-        this.start = start;
-    }
-
-    public String getCarLicense() {
-        return carLicense;
-    }
-
-    public void setCarLicense(String carLicense) {
-        this.carLicense = carLicense;
-    }
-
-    public Integer getAreaId() {
-        return areaId;
-    }
-
-    public void setAreaId(Integer areaId) {
-        this.areaId = areaId;
-    }
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getCarName() {
+        return carName;
+    }
+
+    public void setCarName(String carName) {
+        this.carName = carName;
     }
 
     public Integer getBrandId() {
@@ -139,12 +115,28 @@ public class CarBean implements Serializable {
         this.brandId = brandId;
     }
 
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
     public Integer getSeries() {
         return series;
     }
 
     public void setSeries(Integer series) {
         this.series = series;
+    }
+
+    public String getSeriesName() {
+        return seriesName;
+    }
+
+    public void setSeriesName(String seriesName) {
+        this.seriesName = seriesName;
     }
 
     public Double getPrice() {
@@ -155,12 +147,36 @@ public class CarBean implements Serializable {
         this.price = price;
     }
 
+    public Double getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(Double startPrice) {
+        this.startPrice = startPrice;
+    }
+
+    public Double getEndPrice() {
+        return endPrice;
+    }
+
+    public void setEndPrice(Double endPrice) {
+        this.endPrice = endPrice;
+    }
+
     public Integer getCarAgeId() {
         return carAgeId;
     }
 
     public void setCarAgeId(Integer carAgeId) {
         this.carAgeId = carAgeId;
+    }
+
+    public String getCarAgeName() {
+        return carAgeName;
+    }
+
+    public void setCarAgeName(String carAgeName) {
+        this.carAgeName = carAgeName;
     }
 
     public Integer getGearbox() {
@@ -179,12 +195,28 @@ public class CarBean implements Serializable {
         this.carModel = carModel;
     }
 
+    public String getCarModelName() {
+        return carModelName;
+    }
+
+    public void setCarModelName(String carModelName) {
+        this.carModelName = carModelName;
+    }
+
     public Integer getMileageId() {
         return mileageId;
     }
 
     public void setMileageId(Integer mileageId) {
         this.mileageId = mileageId;
+    }
+
+    public String getMileageName() {
+        return mileageName;
+    }
+
+    public void setMileageName(String mileageName) {
+        this.mileageName = mileageName;
     }
 
     public Integer getCarCerId() {
@@ -195,12 +227,28 @@ public class CarBean implements Serializable {
         this.carCerId = carCerId;
     }
 
+    public String getCarCerNmae() {
+        return carCerNmae;
+    }
+
+    public void setCarCerNmae(String carCerNmae) {
+        this.carCerNmae = carCerNmae;
+    }
+
     public Integer getCarSeat() {
         return carSeat;
     }
 
     public void setCarSeat(Integer carSeat) {
         this.carSeat = carSeat;
+    }
+
+    public String getCarSeatName() {
+        return carSeatName;
+    }
+
+    public void setCarSeatName(String carSeatName) {
+        this.carSeatName = carSeatName;
     }
 
     public Integer getCarFuel() {
@@ -211,12 +259,28 @@ public class CarBean implements Serializable {
         this.carFuel = carFuel;
     }
 
+    public String getCarFuelName() {
+        return carFuelName;
+    }
+
+    public void setCarFuelName(String carFuelName) {
+        this.carFuelName = carFuelName;
+    }
+
     public Integer getColor() {
         return color;
     }
 
     public void setColor(Integer color) {
         this.color = color;
+    }
+
+    public String getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
     }
 
     public Integer getLicense() {
@@ -243,110 +307,6 @@ public class CarBean implements Serializable {
         this.nationId = nationId;
     }
 
-    public Integer getElseId() {
-        return elseId;
-    }
-
-    public void setElseId(Integer elseId) {
-        this.elseId = elseId;
-    }
-
-    public Integer getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Integer ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public String getBrandName() {
-        return brandName;
-    }
-
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
-    }
-
-    public String getSeriesName() {
-        return seriesName;
-    }
-
-    public void setSeriesName(String seriesName) {
-        this.seriesName = seriesName;
-    }
-
-    public Double getStartPrice() {
-        return startPrice;
-    }
-
-    public void setStartPrice(Double startPrice) {
-        this.startPrice = startPrice;
-    }
-
-    public Double getEndPrice() {
-        return endPrice;
-    }
-
-    public void setEndPrice(Double endPrice) {
-        this.endPrice = endPrice;
-    }
-
-    public String getCarAgeName() {
-        return carAgeName;
-    }
-
-    public void setCarAgeName(String carAgeName) {
-        this.carAgeName = carAgeName;
-    }
-
-    public String getCarModelName() {
-        return carModelName;
-    }
-
-    public void setCarModelName(String carModelName) {
-        this.carModelName = carModelName;
-    }
-
-    public String getMileageName() {
-        return mileageName;
-    }
-
-    public void setMileageName(String mileageName) {
-        this.mileageName = mileageName;
-    }
-
-    public String getCarCerNmae() {
-        return carCerNmae;
-    }
-
-    public void setCarCerNmae(String carCerNmae) {
-        this.carCerNmae = carCerNmae;
-    }
-
-    public String getCarSeatName() {
-        return carSeatName;
-    }
-
-    public void setCarSeatName(String carSeatName) {
-        this.carSeatName = carSeatName;
-    }
-
-    public String getCarFuelName() {
-        return carFuelName;
-    }
-
-    public void setCarFuelName(String carFuelName) {
-        this.carFuelName = carFuelName;
-    }
-
-    public String getColorName() {
-        return colorName;
-    }
-
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
-    }
-
     public String getNationName() {
         return nationName;
     }
@@ -355,12 +315,28 @@ public class CarBean implements Serializable {
         this.nationName = nationName;
     }
 
+    public Integer getElseId() {
+        return elseId;
+    }
+
+    public void setElseId(Integer elseId) {
+        this.elseId = elseId;
+    }
+
     public String getElseName() {
         return elseName;
     }
 
     public void setElseName(String elseName) {
         this.elseName = elseName;
+    }
+
+    public Integer getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getOwnerName() {
@@ -387,6 +363,22 @@ public class CarBean implements Serializable {
         this.storeName = storeName;
     }
 
+    public String getCarLicense() {
+        return carLicense;
+    }
+
+    public void setCarLicense(String carLicense) {
+        this.carLicense = carLicense;
+    }
+
+    public Integer getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Integer areaId) {
+        this.areaId = areaId;
+    }
+
     public String getAreaName() {
         return areaName;
     }
@@ -395,11 +387,65 @@ public class CarBean implements Serializable {
         this.areaName = areaName;
     }
 
-    public String getCarName() {
-        return carName;
+    public Integer getStart() {
+        return start;
     }
 
-    public void setCarName(String carName) {
-        this.carName = carName;
+    public void setStart(Integer start) {
+        this.start = start;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+
+    @Override
+    public String toString() {
+        return "CarBean{" +
+                "id=" + id +
+                ", carName='" + carName + '\'' +
+                ", brandId=" + brandId +
+                ", brandName='" + brandName + '\'' +
+                ", series=" + series +
+                ", seriesName='" + seriesName + '\'' +
+                ", price=" + price +
+                ", startPrice=" + startPrice +
+                ", endPrice=" + endPrice +
+                ", carAgeId=" + carAgeId +
+                ", carAgeName='" + carAgeName + '\'' +
+                ", gearbox=" + gearbox +
+                ", carModel=" + carModel +
+                ", carModelName='" + carModelName + '\'' +
+                ", mileageId=" + mileageId +
+                ", mileageName='" + mileageName + '\'' +
+                ", carCerId=" + carCerId +
+                ", carCerNmae='" + carCerNmae + '\'' +
+                ", carSeat=" + carSeat +
+                ", carSeatName='" + carSeatName + '\'' +
+                ", carFuel=" + carFuel +
+                ", carFuelName='" + carFuelName + '\'' +
+                ", color=" + color +
+                ", colorName='" + colorName + '\'' +
+                ", license=" + license +
+                ", drive=" + drive +
+                ", nationId=" + nationId +
+                ", nationName='" + nationName + '\'' +
+                ", elseId=" + elseId +
+                ", elseName='" + elseName + '\'' +
+                ", ownerId=" + ownerId +
+                ", ownerName='" + ownerName + '\'' +
+                ", storeId=" + storeId +
+                ", storeName='" + storeName + '\'' +
+                ", carLicense='" + carLicense + '\'' +
+                ", areaId=" + areaId +
+                ", areaName='" + areaName + '\'' +
+                ", start=" + start +
+                ", imgUrl='" + imgUrl + '\'' +
+                '}';
     }
 }

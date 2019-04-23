@@ -53,7 +53,7 @@
         var cityDomain = 'bj';
     </script>
     <link rel="canonical" href="https://www.guazi.com/bj/buy/">
-    <script type="text/javascript" src="./www.guazi.com_files/base.6fe56c7c8e45d3ef95b9.js.下载"></script>
+    <script type="text/javascript" src="../www.guazi.com_files/base.6fe56c7c8e45d3ef95b9.js.下载"></script>
     <style type="text/css">.announcement {
         height: 34px;
         line-height: 34px;
@@ -81,7 +81,7 @@
         background: url(//cli-sta.guazistatic.com/c2c_web/close_icon.6a60703de9f824a8cff6eef325440588.png) no-repeat;
         margin-left: 10px
     }</style>
-    <script type="text/javascript" src="./www.guazi.com_files/list_v4.c02e1730c907c76be4ca.js.下载"></script>
+    <script type="text/javascript" src="../www.guazi.com_files/list_v4.c02e1730c907c76be4ca.js.下载"></script>
     <style type="text/css">body .ie7-pop {
         height: 432px;
         margin-top: -216px;
@@ -9409,7 +9409,7 @@
 <!-- 登录弹层  s -->
 <!-- 登录弹框  s -->
 <div class="pop-box pop-login" id="login1"></div>
-<iframe name="guazi_login" style="display: none;" src="./www.guazi.com_files/saved_resource.html"></iframe>
+<iframe name="guazi_login" style="display: none;" src="../www.guazi.com_files/saved_resource.html"></iframe>
 <!--新版登录 end-->
 
 <!--[if IE 7]>
@@ -10256,9 +10256,9 @@
         <div class="search js-search">
             <div class="search-box suggestion_widget" data-default-count="9">
                 <input type="text" class="search-input js_search_input_index" placeholder="搜索您想要的车"
-                       data-role="keywordInput" name="keyword" autocomplete="off" data-domain="bj">
+                       data-role="keywordInput" name="keyword" autocomplete="off" data-domain="bj" id="carName">
                 <button class="search-btn" data-gzlog="tracking_type=click&amp;eventid=0020070000000022"
-                        type="button"></button>
+                        type="button" onclick="carChange()"></button>
                 <input type="hidden" value="bj" name="hiddenCity">
             </div>
             <ul class="search-select" style="display: none;">
@@ -10867,343 +10867,106 @@
         <!-- 更多 -->
         <dl class="clearfix js-more">
             <dt>更多</dt>
+
+            <form  id ="carForm">
             <dd>
+                <input type="hidden" id="name" name="carName" >
+                <!--车辆品牌 -->
+                <input type="text" id="pinp" name="brandId" value="-1" onchange="carChange()">
+                <!--车辆系列 -->
+                <input type="text" id="cx" name="series" value="-1" onchange="carChange()" >
+                <!--车辆地区 -->
+                <input type="number" id="diqu" name="areaId"  value="-1" onchange="carChange()">
+
                 <!-- 第一个li是默认大小，第二个是加长版，第三个是颜色下拉 -->
                 <ul class="dd-more ">
                     <!-- 车龄 -->
                     <li class="js-hover">
-                        <p class="dd-sel"><i></i>
-                            车龄 </p>
-                        <div class="dd-option">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92564682&amp;filter=cheling&amp;cheling=1"
-                               href="https://www.guazi.com/bj/buy/l1/#bread">1年以内</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92564682&amp;filter=cheling&amp;cheling=2"
-                               href="https://www.guazi.com/bj/buy/l2/#bread">3年以内</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92564682&amp;filter=cheling&amp;cheling=3"
-                               href="https://www.guazi.com/bj/buy/l3/#bread">5年以内</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92564682&amp;filter=cheling&amp;cheling=4"
-                               href="https://www.guazi.com/bj/buy/l4/#bread">8年以内</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92564682&amp;filter=cheling&amp;cheling=5"
-                               href="https://www.guazi.com/bj/buy/l5/#bread">8年以上</a>
-                        </div>
+                        <!--<p class="dd-sel"><i></i>
+                            车龄 </p>-->
+                      <!--  <div class="dd-option" >
+                           &lt;!&ndash; <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>&ndash;&gt;
+
+
+                        </div>-->
+                        <select name = "carAgeName" id ="carAgeIdA" onchange="carChange()">
+
+                        </select>
                     </li>
                     <!-- 变速箱 -->
                     <li class="js-hover">
-                        <p class="dd-sel"><i></i>
-                            变速箱 </p>
-                        <div class="dd-option">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92587674&amp;filter=gearbox&amp;gearbox=1"
-                               href="https://www.guazi.com/bj/buy/n1/#bread">手动</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92587674&amp;filter=gearbox&amp;gearbox=2"
-                               href="https://www.guazi.com/bj/buy/n2/#bread">自动</a>
-                        </div>
+                        <select name = "gearboxName" id ="gearbox" onchange="carChange()">
+
+                        </select>
+
                     </li>
                     <!-- 车型 -->
                     <li class="js-hover">
-                        <p class="dd-sel"><i></i>
-                            车型 </p>
-                        <div class="dd-option">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92607697&amp;filter=chexing&amp;chexing=5"
-                               href="https://www.guazi.com/bj/buy/h5/#bread">两厢轿车</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92607697&amp;filter=chexing&amp;chexing=6"
-                               href="https://www.guazi.com/bj/buy/h6/#bread">三厢轿车</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92607697&amp;filter=chexing&amp;chexing=4"
-                               href="https://www.guazi.com/bj/buy/h4/#bread">跑车</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92607697&amp;filter=chexing&amp;chexing=2"
-                               href="https://www.guazi.com/bj/buy/h2/#bread">SUV</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92607697&amp;filter=chexing&amp;chexing=3"
-                               href="https://www.guazi.com/bj/buy/h3/#bread">MPV</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92607697&amp;filter=chexing&amp;chexing=7"
-                               href="https://www.guazi.com/bj/buy/h7/#bread">面包车</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92607697&amp;filter=chexing&amp;chexing=8"
-                               href="https://www.guazi.com/bj/buy/h8/#bread">皮卡</a>
-                        </div>
+                        <select name = "carModelName" id ="carModel" onchange="carChange()">
+
+                        </select>
                     </li>
                     <!-- 里程 -->
                     <li class="js-hover">
-                        <p class="dd-sel dd-sel-100"><i></i>
-                            里程 </p>
-                        <div class="dd-option dd-option-100">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92627460&amp;filter=road_haul&amp;road_haul=1"
-                               href="https://www.guazi.com/bj/buy/g1/#bread">1万公里内</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92627460&amp;filter=road_haul&amp;road_haul=2"
-                               href="https://www.guazi.com/bj/buy/g2/#bread">3万公里内</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92627460&amp;filter=road_haul&amp;road_haul=3"
-                               href="https://www.guazi.com/bj/buy/g3/#bread">5万公里内</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92627460&amp;filter=road_haul&amp;road_haul=4"
-                               href="https://www.guazi.com/bj/buy/g4/#bread">8万公里内</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92627460&amp;filter=road_haul&amp;road_haul=5"
-                               href="https://www.guazi.com/bj/buy/g5/#bread">10万公里内</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92627460&amp;filter=road_haul&amp;road_haul=6"
-                               href="https://www.guazi.com/bj/buy/g6/#bread">10万公里以上</a>
-                        </div>
+                        <select name = "mileageName" id ="mileageId" onchange="carChange()">
+
+                        </select>
                     </li>
                     <!-- 排量 -->
                     <li class="js-hover">
-                        <p class="dd-sel"><i></i>
-                            排量 </p>
-                        <div class="dd-option">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92679721&amp;filter=air_displacement&amp;air_displacement=1"
-                               href="https://www.guazi.com/bj/buy/j1/#bread">1.0L以下</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92679721&amp;filter=air_displacement&amp;air_displacement=2"
-                               href="https://www.guazi.com/bj/buy/j2/#bread">1.0-1.6L</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92679721&amp;filter=air_displacement&amp;air_displacement=3"
-                               href="https://www.guazi.com/bj/buy/j3/#bread">1.6-2.0L</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92679721&amp;filter=air_displacement&amp;air_displacement=4"
-                               href="https://www.guazi.com/bj/buy/j4/#bread">2.0-3.0L</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92679721&amp;filter=air_displacement&amp;air_displacement=5"
-                               href="https://www.guazi.com/bj/buy/j5/#bread">3.0-4.0L</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92679721&amp;filter=air_displacement&amp;air_displacement=6"
-                               href="https://www.guazi.com/bj/buy/j6/#bread">4.0L以上</a>
-                        </div>
+                        <select name = "carCerName" id ="carCerId" onchange="carChange()">
+
+                        </select>
                     </li>
-                    <!-- 排放标准 -->
-                    <li class="js-hover">
-                        <p class="dd-sel"><i></i>
-                            排放标准 </p>
-                        <div class="dd-option">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92699420&amp;filter=vehicle_config&amp;vehicle_config=1"
-                               href="https://www.guazi.com/bj/buy/v1/#bread">国二及以上</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92699420&amp;filter=vehicle_config&amp;vehicle_config=2"
-                               href="https://www.guazi.com/bj/buy/v2/#bread">国三及以上</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92699420&amp;filter=vehicle_config&amp;vehicle_config=3"
-                               href="https://www.guazi.com/bj/buy/v3/#bread">国四及以上</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92699420&amp;filter=vehicle_config&amp;vehicle_config=4"
-                               href="https://www.guazi.com/bj/buy/v4/#bread">国五</a>
-                        </div>
-                    </li>
+
                     <!-- 座位数 -->
                     <li class="js-hover">
-                        <p class="dd-sel"><i></i>
-                            座位数 </p>
-                        <div class="dd-option">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92720882&amp;filter=seat&amp;seat=2"
-                               href="https://www.guazi.com/bj/buy/s2/#bread">2座</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92720882&amp;filter=seat&amp;seat=4"
-                               href="https://www.guazi.com/bj/buy/s4/#bread">4座</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92720882&amp;filter=seat&amp;seat=5"
-                               href="https://www.guazi.com/bj/buy/s5/#bread">5座</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92720882&amp;filter=seat&amp;seat=6"
-                               href="https://www.guazi.com/bj/buy/s6/#bread">6座</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92720882&amp;filter=seat&amp;seat=7"
-                               href="https://www.guazi.com/bj/buy/s7/#bread">7座及以上</a>
-                        </div>
+                        <select name = "carSeatName" id ="carSeat" onchange="carChange()">
+
+                        </select>
                     </li>
                     <!-- 燃油类型 -->
                     <li class="js-hover">
-                        <p class="dd-sel"><i></i>
-                            燃油类型 </p>
-                        <div class="dd-option">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92754658&amp;filter=fuel_type&amp;fuel_type=1"
-                               href="https://www.guazi.com/bj/buy/f1/#bread">汽油</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92754658&amp;filter=fuel_type&amp;fuel_type=2"
-                               href="https://www.guazi.com/bj/buy/f2/#bread">柴油</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92754658&amp;filter=fuel_type&amp;fuel_type=3"
-                               href="https://www.guazi.com/bj/buy/f3/#bread">电动</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92754658&amp;filter=fuel_type&amp;fuel_type=4"
-                               href="https://www.guazi.com/bj/buy/f4/#bread">油电混合</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92754658&amp;filter=fuel_type&amp;fuel_type=5"
-                               href="https://www.guazi.com/bj/buy/f5/#bread">其他</a>
-                        </div>
+                        <select name = "carFuelName" id ="carFuel" onchange="carChange()">
+
+                        </select>
                     </li>
                     <!-- 颜色 -->
                     <li class="js-hover">
-                        <p class="dd-sel"><i></i>
-                            颜色 </p>
-                        <div class="dd-color">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=1"
-                               href="https://www.guazi.com/bj/buy/m1/#bread"><i class="icon-color icon-black"></i>黑色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=2"
-                               href="https://www.guazi.com/bj/buy/m2/#bread"><i class="icon-color icon-white"></i>白色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=3"
-                               href="https://www.guazi.com/bj/buy/m3/#bread"><i class="icon-color icon-grey"></i>银灰色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=4"
-                               href="https://www.guazi.com/bj/buy/m4/#bread"><i
-                                    class="icon-color icon-grey2"></i>深灰色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=6"
-                               href="https://www.guazi.com/bj/buy/m6/#bread"><i class="icon-color icon-red"></i>红色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=10"
-                               href="https://www.guazi.com/bj/buy/m10/#bread"><i
-                                    class="icon-color icon-orange"></i>橙色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=8"
-                               href="https://www.guazi.com/bj/buy/m8/#bread"><i class="icon-color icon-green"></i>绿色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=7"
-                               href="https://www.guazi.com/bj/buy/m7/#bread"><i class="icon-color icon-blue"></i>蓝色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=5"
-                               href="https://www.guazi.com/bj/buy/m5/#bread"><i
-                                    class="icon-color icon-brown"></i>咖啡色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=12"
-                               href="https://www.guazi.com/bj/buy/m12/#bread"><i
-                                    class="icon-color icon-purple"></i>紫色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=11"
-                               href="https://www.guazi.com/bj/buy/m11/#bread"><i class="icon-color icon-champagne"></i>香槟色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=13"
-                               href="https://www.guazi.com/bj/buy/m13/#bread"><i class="icon-color icon-multicolor"></i>多彩色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=9"
-                               href="https://www.guazi.com/bj/buy/m9/#bread"><i
-                                    class="icon-color icon-yellow"></i>黄色</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92771109&amp;filter=car_color&amp;car_color=14"
-                               href="https://www.guazi.com/bj/buy/m14/#bread"><i
-                                    class="icon-color icon-other"></i>其它</a>
-                        </div>
+                        <select name = "colorName" id ="color" onchange="carChange()">
+
+                        </select>
                     </li>
                     <!-- 车牌所在地 -->
                     <li class="js-hover">
-                        <p class="dd-sel dd-sel-100"><i></i>
-                            车牌所在地 </p>
-                        <div class="dd-option dd-option-100">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92785989&amp;filter=diff_city&amp;diff_city=0"
-                               href="https://www.guazi.com/bj/buy/d12/#bread">本地</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92785989&amp;filter=diff_city&amp;diff_city=1"
-                               href="https://www.guazi.com/bj/buy/d12-/#bread">外地</a>
-                        </div>
+                        <select name = "license" id ="license" onchange="carChange()">
+
+                        </select>
                     </li>
                     <!-- 驱动类型 -->
-                    <li class="js-hover js-hide hidden">
-                        <p class="dd-sel"><i></i>
-                            驱动类型 </p>
-                        <div class="dd-option">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92923264&amp;filter=drive&amp;drive=4"
-                               href="https://www.guazi.com/bj/buy/q4/#bread">两驱</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92923264&amp;filter=drive&amp;drive=5"
-                               href="https://www.guazi.com/bj/buy/q5/#bread">四驱</a>
-                        </div>
+                    <li class="js-hover js-hide">
+                        <select name = "driveName" id ="drive" onchange="carChange()">
+
+                        </select>
                     </li>
                     <!-- 国别 -->
-                    <li class="js-hover js-hide hidden">
-                        <p class="dd-sel"><i></i>
-                            国别 </p>
-                        <div class="dd-option">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92802907&amp;filter=guobie&amp;guobie=4"
-                               href="https://www.guazi.com/bj/buy/u4/#bread">德系</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92802907&amp;filter=guobie&amp;guobie=5"
-                               href="https://www.guazi.com/bj/buy/u5/#bread">日系</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92802907&amp;filter=guobie&amp;guobie=2"
-                               href="https://www.guazi.com/bj/buy/u2/#bread">美系</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92802907&amp;filter=guobie&amp;guobie=1"
-                               href="https://www.guazi.com/bj/buy/u1/#bread">法系</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92802907&amp;filter=guobie&amp;guobie=6"
-                               href="https://www.guazi.com/bj/buy/u6/#bread">韩系</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92802907&amp;filter=guobie&amp;guobie=3"
-                               href="https://www.guazi.com/bj/buy/u3/#bread">国产</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92802907&amp;filter=guobie&amp;guobie=7"
-                               href="https://www.guazi.com/bj/buy/u7/#bread">其他</a>
-                        </div>
+                    <li class="js-hover js-hide">
+                        <select name = "nationName" id ="nationId" onchange="carChange()">
+
+                        </select>
                     </li>
                     <!-- 亮点配置-->
-                    <li class="js-hover js-hide hidden">
-                        <p class="dd-sel dd-sel-110"><i></i>
-                            亮点配置 </p>
-                        <div class="dd-option dd-option-110">
-                            <a rel="”nofollow”" href="https://www.guazi.com/bj/buy/#bread">不限</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92892097&amp;filter=car_config&amp;car_config=1"
-                               href="https://www.guazi.com/bj/buy/k1/#bread">全景天窗</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92892097&amp;filter=car_config&amp;car_config=2"
-                               href="https://www.guazi.com/bj/buy/k2/#bread">车身稳定控制</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92892097&amp;filter=car_config&amp;car_config=3"
-                               href="https://www.guazi.com/bj/buy/k3/#bread">倒车影像系统</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92892097&amp;filter=car_config&amp;car_config=4"
-                               href="https://www.guazi.com/bj/buy/k4/#bread">真皮座椅</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92892097&amp;filter=car_config&amp;car_config=7"
-                               href="https://www.guazi.com/bj/buy/k7/#bread">无钥匙进入系统</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92892097&amp;filter=car_config&amp;car_config=8"
-                               href="https://www.guazi.com/bj/buy/k8/#bread">儿童座椅接口</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92892097&amp;filter=car_config&amp;car_config=5"
-                               href="https://www.guazi.com/bj/buy/k5/#bread">倒车雷达</a>
-                            <a rel="”nofollow”"
-                               data-gzlog="tracking_type=click&amp;eventid=92892097&amp;filter=car_config&amp;car_config=6"
-                               href="https://www.guazi.com/bj/buy/k6/#bread">GPS导航</a>
-                        </div>
+                    <li class="js-hover js-hide">
+                        <select name = "elseName" id ="elseId" onchange="carChange()">
+
+                        </select>
                     </li>
                     <!-- 区域 -->
 
                 </ul>
-                <span class="dd-btn js-disMore js-option-hid" data-local="">全部<i></i></span>
+               <!-- <span class="dd-btn js-disMore js-option-hid" data-local="">全部<i></i></span>-->
             </dd>
+            </form>
         </dl>
 
     </div>
@@ -11262,29 +11025,8 @@
         </div>
     </div>    <!-- 车源展示 -->
     <!-- 车源列表 -->
-    <ul class="carlist clearfix js-top">
-        <li data-scroll-track="79479516@0@0@0&amp;0120000000000057">
-            <a title="沃尔沃S90 2019款 T5 智逸版"
-               href="https://www.guazi.com/bj/020c020e79da4d1cx.htm#fr_page=list&amp;fr_pos=city&amp;fr_no=0"
-               target="_blank" class="car-a"
-               data-gzlog="tracking_type=click&amp;eventid=0120000000000057&amp;carid=79479516&amp;pageno=0&amp;position=0&amp;city_filter=12&amp;num=15066&amp;is_baomai=0">
-                <img src="./www.guazi.com_files/37e41855c1a4d3b004ca3001e2919485.jpg@base@tag=imgScale&amp;w=287&amp;h=192&amp;c=1&amp;m=2&amp;q=88">
-                <h2 class="t">沃尔沃S90 2019款 T5 智逸版</h2>
-                <!-- 年款里程 -->
-                <div class="t-i">2019年<span class="icon-pad">|</span>100公里</div>
-                <div class="t-price">
-                    <!-- 价格 -->
-                    <!-- 如果是保卖车且有降价,则是'补贴金'的话术样式-->
-                    <p>31.00<span>万</span></p>
-                    <!-- 标签 -->
-                    <!-- 如果是保卖车且有降价,则是'补贴金'的话术样式-->
-                    <i class="i-green">准新车</i><em class="line-through">43.70万</em></div>
-                <!-- 上侧标签 -->
-                <!-- 如果是保卖车且有降价,则是'补贴金'的话术样式-->
-                <em class="icon-new">新上架</em>
+    <ul class="carlist clearfix js-top" id="setli">
 
-            </a>
-        </li>
 
 
         <input type="hidden" class="clue_ids"
@@ -11340,7 +11082,7 @@
                         <ul class="history-list clearfix">
                             <li class="list-infoBox js-infoBox"><a href="https://www.guazi.com/bj/0dda8d7b14924f81x.htm"
                                                                    class="info-img"><img
-                                    src="./www.guazi.com_files/86b0d353e7997fdb77896b1d681ef065.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
+                                    src="../www.guazi.com_files/86b0d353e7997fdb77896b1d681ef065.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
                                     class="icon-collect js-collect " data-puid="3008189388"
                                     data-gzlog="tracking_type=click&amp;eventid=1015123400000010">收藏</span><a
                                     class="info-name" href="https://www.guazi.com/bj/0dda8d7b14924f81x.htm"><h2>传祺GS8
@@ -11350,7 +11092,7 @@
                                 </p></li>
                             <li class="list-infoBox js-infoBox"><a href="https://www.guazi.com/bj/59e94a2a5e4d11c3x.htm"
                                                                    class="info-img"><img
-                                    src="./www.guazi.com_files/qn171101134442139c6a3dfb73971d163314e657b5672d.jpg"></a><span
+                                    src="../www.guazi.com_files/qn171101134442139c6a3dfb73971d163314e657b5672d.jpg"></a><span
                                     class="icon-collect js-collect " data-puid="3002741752"
                                     data-gzlog="tracking_type=click&amp;eventid=1015123400000010">收藏</span><a
                                     class="info-name" href="https://www.guazi.com/bj/59e94a2a5e4d11c3x.htm"><h2>红旗H7
@@ -11360,7 +11102,7 @@
                                 </p></li>
                             <li class="list-infoBox js-infoBox"><a href="https://www.guazi.com/sy/eed0e98643ffb274x.htm"
                                                                    class="info-img"><img
-                                    src="./www.guazi.com_files/be0fe40a81c2d12bf5d92bda3842e8a8.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
+                                    src="../www.guazi.com_files/be0fe40a81c2d12bf5d92bda3842e8a8.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
                                     class="icon-collect js-collect " data-puid="3008091127"
                                     data-gzlog="tracking_type=click&amp;eventid=1015123400000010">收藏</span><a
                                     class="info-name" href="https://www.guazi.com/sy/eed0e98643ffb274x.htm"><h2>雪佛兰 科帕奇
@@ -11370,7 +11112,7 @@
                                 </p></li>
                             <li class="list-infoBox js-infoBox"><a
                                     href="https://www.guazi.com/xuzhou/6ff2a295bea9e1b6x.htm" class="info-img"><img
-                                    src="./www.guazi.com_files/520380d86cf16e850afebf40f1783682.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
+                                    src="../www.guazi.com_files/520380d86cf16e850afebf40f1783682.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
                                     class="icon-collect js-collect " data-puid="3008827723"
                                     data-gzlog="tracking_type=click&amp;eventid=1015123400000010">收藏</span><a
                                     class="info-name" href="https://www.guazi.com/xuzhou/6ff2a295bea9e1b6x.htm"><h2>哈弗H8
@@ -11380,7 +11122,7 @@
                                 </p></li>
                             <li class="list-infoBox js-infoBox"><a
                                     href="https://www.guazi.com/baotou/c7abd6e958a480bfx.htm" class="info-img"><img
-                                    src="./www.guazi.com_files/0412985396e31f585143bb02c1a1c641.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
+                                    src="../www.guazi.com_files/0412985396e31f585143bb02c1a1c641.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
                                     class="icon-collect js-collect " data-puid="3008140698"
                                     data-gzlog="tracking_type=click&amp;eventid=1015123400000010">收藏</span><a
                                     class="info-name" href="https://www.guazi.com/baotou/c7abd6e958a480bfx.htm"><h2>路虎
@@ -11390,7 +11132,7 @@
                                 </p></li>
                             <li class="list-infoBox js-infoBox"><a href="https://www.guazi.com/bj/23a8aa0f3450dd14x.htm"
                                                                    class="info-img"><img
-                                    src="./www.guazi.com_files/c94960f2288ce556277fe12e62ad41aa.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
+                                    src="../www.guazi.com_files/c94960f2288ce556277fe12e62ad41aa.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
                                     class="icon-collect js-collect " data-puid="3008562371"
                                     data-gzlog="tracking_type=click&amp;eventid=1015123400000010">收藏</span><a
                                     class="info-name" href="https://www.guazi.com/bj/23a8aa0f3450dd14x.htm"><h2>日产 奇骏
@@ -11400,7 +11142,7 @@
                                 </p></li>
                             <li class="list-infoBox js-infoBox"><a href="https://www.guazi.com/bj/cc3f54876e6cd9e2x.htm"
                                                                    class="info-img"><img
-                                    src="./www.guazi.com_files/f14f676bacffc86d1602b88036a58975.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
+                                    src="../www.guazi.com_files/f14f676bacffc86d1602b88036a58975.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
                                     class="icon-collect js-collect " data-puid="3008575380"
                                     data-gzlog="tracking_type=click&amp;eventid=1015123400000010">收藏</span><a
                                     class="info-name" href="https://www.guazi.com/bj/cc3f54876e6cd9e2x.htm"><h2>本田 思域
@@ -11410,7 +11152,7 @@
                                 </p></li>
                             <li class="list-infoBox js-infoBox"><a
                                     href="https://www.guazi.com/tangshan/e3f25a298eb2bf17x.htm" class="info-img"><img
-                                    src="./www.guazi.com_files/3ed86373c68093e3ffb4780b3d37e3dc.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
+                                    src="../www.guazi.com_files/3ed86373c68093e3ffb4780b3d37e3dc.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
                                     class="icon-collect js-collect " data-puid="3008675961"
                                     data-gzlog="tracking_type=click&amp;eventid=1015123400000010">收藏</span><a
                                     class="info-name" href="https://www.guazi.com/tangshan/e3f25a298eb2bf17x.htm"><h2>现代
@@ -11420,7 +11162,7 @@
                                 </p></li>
                             <li class="list-infoBox js-infoBox"><a href="https://www.guazi.com/qd/07b167886a478f18x.htm"
                                                                    class="info-img"><img
-                                    src="./www.guazi.com_files/cd980177d56ae13c34e831a4e9cc8dd8.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
+                                    src="../www.guazi.com_files/cd980177d56ae13c34e831a4e9cc8dd8.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
                                     class="icon-collect js-collect " data-puid="3008710763"
                                     data-gzlog="tracking_type=click&amp;eventid=1015123400000010">收藏</span><a
                                     class="info-name" href="https://www.guazi.com/qd/07b167886a478f18x.htm"><h2>福特 蒙迪欧
@@ -11430,7 +11172,7 @@
                                 </p></li>
                             <li class="list-infoBox js-infoBox"><a href="https://www.guazi.com/jn/a1585cf59b79977ex.htm"
                                                                    class="info-img"><img
-                                    src="./www.guazi.com_files/15e78f4c002c3a05ae8a19e22466a6e7.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
+                                    src="../www.guazi.com_files/15e78f4c002c3a05ae8a19e22466a6e7.jpg@base@tag=imgScale&amp;w=290&amp;h=192&amp;c=1&amp;m=2&amp;q=88"></a><span
                                     class="icon-collect js-collect " data-puid="3008820484"
                                     data-gzlog="tracking_type=click&amp;eventid=1015123400000010">收藏</span><a
                                     class="info-name" href="https://www.guazi.com/jn/a1585cf59b79977ex.htm"><h2>丰田 皇冠
@@ -12414,7 +12156,7 @@
         </div>
 
         <div class="ewm-box">
-            <img src="./www.guazi.com_files/ewm-wx-2.png" alt="" class="gz-ewm">
+            <img src="../www.guazi.com_files/ewm-wx-2.png" alt="" class="gz-ewm">
             <p class="ewm-tit">关注微信</p>
         </div>
 
@@ -12470,18 +12212,387 @@
 <input type="text" name="js-waf-seo-referer" value="https://www.guazi.com/bj/" style="display:none;"><input
         type="hidden" data-role="dataSource" class="dataSourceButton" data-source="[]">
 
-<from  id="myForm">
-    <input  type="text"  name="dqid"  value="">
-    <input  type="text"   name="carName" id="carName">
-</from>
+
+
 <script>
     $(function () {
+        carAge();
+        gearbox();
+        carModel();
+        mileageId();
+        carCerId();
+        carSeat();
+        carFuel();
+        color();
+        license();
+        drive();
+        nationId();
+        elseId();
         var id=[[${dqid}]]
+
+        /*地区传过来的值*/
         $("[name='dqid']").val(id)
-        selectCarAllbyid()
+        selectCarAllbyid(id)
+
+        /*es传过来的值*/
         var carName=[[${carName}]]
-        selectCarAllbyes($("#carName").val(carName))
+        selectCarAllbyes(carName)
     })
+
+
+    function carAge(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+
+                var op = "<option value='-1'>车龄</option>";
+
+                for ( var i = 0; i < data.carAge.length; i++) {
+
+                    op += "<option type='text' name='carAgeId' value='"+data.carAge[i].text+"'>"+data.carAge[i].text+"</option>"
+
+                }
+
+                $("#carAgeIdA").html(op);
+            }
+        })
+
+    }
+
+
+    function gearbox(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+
+                var op = "<option value='-1'>变速箱</option>";
+
+                for ( var i = 0; i < data.gearbox.length; i++) {
+
+                    op += "<option type='text'  value='"+data.gearbox[i].text+"'>"+data.gearbox[i].text+"</option>"
+
+                }
+
+                $("#gearbox").html(op);
+            }
+        })
+
+    }
+
+
+
+    function carModel(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+
+                var op = "<option value='-1'>车型</option>";
+
+                for ( var i = 0; i < data.model.length; i++) {
+
+                    op += "<option type='text'  value='"+data.model[i].text+"'>"+data.model[i].text+"</option>"
+
+                }
+
+                $("#carModel").html(op);
+            }
+        })
+
+    }
+
+
+
+    function mileageId(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+
+                var op = "<option value='-1'>里程</option>";
+
+                for ( var i = 0; i < data.mileage.length; i++) {
+
+                    op += "<option type='text'  value='"+data.mileage[i].text+"'>"+data.mileage[i].text+"</option>"
+
+                }
+
+                $("#mileageId").html(op);
+            }
+        })
+
+    }
+
+
+
+
+    function carCerId(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+
+                var op = "<option value='-1'>排量</option>";
+
+                for ( var i = 0; i < data.cer.length; i++) {
+
+                    op += "<option type='text'  value='"+data.cer[i].text+"'>"+data.cer[i].text+"</option>"
+
+                }
+
+                $("#carCerId").html(op);
+            }
+        })
+
+    }
+
+
+
+
+
+    function carSeat(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+
+                var op = "<option value='-1'>座位数</option>";
+
+                for ( var i = 0; i < data.carSeat.length; i++) {
+
+                    op += "<option type='text'  value='"+data.carSeat[i].text+"'>"+data.carSeat[i].text+"</option>"
+
+                }
+
+                $("#carSeat").html(op);
+            }
+        })
+
+    }
+
+
+
+    function carFuel(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+                var op = "<option value='-1'>燃油类型</option>";
+                for ( var i = 0; i < data.carFuel.length; i++) {
+                    op += "<option type='text'  value='"+data.carFuel[i].text+"'>"+data.carFuel[i].text+"</option>"
+                }
+                $("#carFuel").html(op);
+            }
+        })
+
+    }
+
+
+
+
+    function color(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+
+                var op = "<option value='-1'>颜色</option>";
+
+                for ( var i = 0; i < data.color.length; i++) {
+
+                    op += "<option type='text'  value='"+data.color[i].text+"'>"+data.color[i].text+"</option>"
+
+                }
+
+                $("#color").html(op);
+            }
+        })
+
+    }
+
+
+
+
+
+    function license(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+
+                var op = "<option value='-1'>车牌所在地</option>";
+
+                for ( var i = 0; i < data.license.length; i++) {
+
+                    op += "<option type='text'  value='"+data.license[i].text+"'>"+data.license[i].text+"</option>"
+
+                }
+
+                $("#license").html(op);
+            }
+        })
+
+    }
+
+
+
+
+    function drive(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+
+                var op = "<option value='-1'>驱动类型</option>";
+
+                for ( var i = 0; i < data.drive.length; i++) {
+
+                    op += "<option type='text'  value='"+data.drive[i].text+"'>"+data.drive[i].text+"</option>"
+
+                }
+
+                $("#drive").html(op);
+            }
+        })
+
+    }
+
+
+
+
+
+
+    function nationId(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+
+                var op = "<option value='-1'>国别</option>";
+
+                for ( var i = 0; i < data.nation.length; i++) {
+
+                    op += "<option type='text'  value='"+data.nation[i].text+"'>"+data.nation[i].text+"</option>"
+
+                }
+
+                $("#nationId").html(op);
+            }
+        })
+
+    }
+
+
+
+    function elseId(){
+        $.ajax({
+            url:"http://localhost:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+
+                var op = "<option value='-1'>亮点配置</option>";
+
+                for ( var i = 0; i < data.configuration.length; i++) {
+
+                    op += "<option type='text'  value='"+data.configuration[i].text+"'>"+data.configuration[i].text+"</option>"
+
+                }
+
+                $("#elseId").html(op);
+            }
+        })
+
+    }
+
+
+
+    function carChange() {
+
+
+        //var carFormser= $("#carForm").serialize();
+        $.ajax({
+            url:"http://localhost:9999/Car/queryCares",
+            data:{
+               carNames: $("#carName").val()
+            },
+            success:function(data){
+                var html="";
+                for (var i=0;i<data.length;i++){
+                    html+=""+
+                        "<li data-scroll-track='79479516@0@0@0&amp;0120000000000057'>"+
+                        "<a title='"+data[i].carName+"' href='../PageController/jumpcarxq?carId="+data[i].id+"' target='_blank' class='car-a' data-gzlog='tracking_type=click&amp;eventid=0120000000000057&amp;carid=79479516&amp;pageno=0&amp;position=0&amp;city_filter=12&amp;num=15066&amp;is_baomai=0'>"+
+                        "<img src='"+data[i].imgUrl+"'>"+
+                        " <h2 class='t'>"+data[i].seriesName+" "+data[i].carName+"</h2>"+
+
+                        "<div class='t-i'>"+data[i].carLicense+"<span class='icon-pad'>|</span>"+data[i].mileageName+"</div>"+
+                        "<div class='t-price'>"+
+
+                        "<p>"+(data[i].price/10000)+"<span>万</span></p>"+
+
+                        "<i class='i-green'>准新车</i><em class='line-through'></em></div>"+
+
+                        "<em class='icon-new'>新上架</em>"+
+
+                        "</a>"+
+                        "</li>"
+                }
+                $("#setli").html(html);
+            }
+        })
+
+    }
+
+
+
+
+    $.ajax({
+        url:"http://localhost:9999/Car/queryCares",
+        dataType:"json",
+        success:function(data){
+
+            var html="";
+            for (var i=0;i<data.length;i++){
+                html+=""+
+                    "<li data-scroll-track='79479516@0@0@0&amp;0120000000000057'>"+
+                "<a title='"+data[i].carName+"' href='#' target='_blank' class='car-a' data-gzlog='tracking_type=click&amp;eventid=0120000000000057&amp;carid=79479516&amp;pageno=0&amp;position=0&amp;city_filter=12&amp;num=15066&amp;is_baomai=0'>"+
+                "<img src='"+data[i].imgUrl+"'>"+
+                " <h2 class='t'>"+data[i].seriesName+" "+data[i].carName+"</h2>"+
+
+                "<div class='t-i'>"+data[i].carLicense+"<span class='icon-pad'>|</span>"+data[i].mileageName+"</div>"+
+                "<div class='t-price'>"+
+
+                "<p>"+(data[i].price/10000)+"<span>万</span></p>"+
+
+                "<i class='i-green'>准新车</i><em class='line-through'></em></div>"+
+
+                "<em class='icon-new'>新上架</em>"+
+
+                "</a>"+
+                "</li>"
+            }
+            $("#setli").html(html);
+    }
+    })
+
+
+
+
+
+
 </script>
 </body>
 </html>
