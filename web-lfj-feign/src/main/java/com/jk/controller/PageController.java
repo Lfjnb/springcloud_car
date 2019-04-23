@@ -33,9 +33,8 @@ public class PageController {
     }
     /*跳转汽车list页面*/
     @RequestMapping("jumpcarlist")
-    public   String  jumpcarlist(Integer  dqid,String carName, Model model){
+    public   String  jumpcarlist(Integer  dqid, Model model){
         model.addAttribute("dqid",dqid);
-        model.addAttribute("carName",carName);
         System.out.println(dqid);
         return  "carlist";
     }

@@ -4,6 +4,7 @@ import com.jk.model.CarBean2;
 import com.jk.pojo.CarBean;
 import com.jk.pojo.DictionaryBean;
 import com.jk.pojo.ImgsBean;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +23,11 @@ public interface CarDao {
     /**
      *  查询汽车总表总条数
      */
-    long queryCount(CarBean carBean);
+    long queryCount( CarBean carBean);
     /**
      *  查询汽车总表
      */
-    List<CarBean> queryCar(long start, Integer rows, CarBean carBean);
+    List<CarBean> queryCar( long start, Integer rows,@Param("carBean") CarBean carBean);
 
     //查询字典表车 颜色
     @Select("SELECT *  FROM t_dictionary where codepid=1009")

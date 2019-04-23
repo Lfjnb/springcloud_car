@@ -32,6 +32,7 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public HashMap<String, Object> queryCar(Integer page, Integer rows, CarBean carBean) {
+
         long start = (page-1)*rows;
         long total = carDao.queryCount(carBean);
 
