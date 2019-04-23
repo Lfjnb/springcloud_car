@@ -47,7 +47,9 @@ public class PageController {
     }
     /*跳转汽车详情*/
     @RequestMapping("jumpcarxq")
-    public   String  jumpcarxq(Integer  carId){
+    public   String  jumpcarxq(Integer  carId, Model model){
+        model.addAttribute("carId",carId);
+        System.out.println(carId);
         return  "carxiangqing";
     }
     /*跳转我要卖车*/

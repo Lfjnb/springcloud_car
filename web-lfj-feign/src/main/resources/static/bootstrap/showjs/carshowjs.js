@@ -14,7 +14,7 @@ $(function () {
 /*查询瓜子问答*/
 function initgzwd() {
     $.ajax({
-        url:"http://192.168.1.127:8767/isseu/findIsseu",
+        url:"http://192.168.1.101:8767/isseu/findIsseu",
         type:"post",
         success:function (data) {
             for (var i=0; i<data.length;i++){
@@ -89,7 +89,7 @@ function initCarType() {
     })
 }
 function jumpcarxiangqing(id) {
-    alert(id)
+    location.href="../PageController/jumpcarxq?carId="+id;
 }
 /*跳转我要卖车*/
 function jumpsellcar() {

@@ -3,7 +3,7 @@ $(function () {
 })
 function selectgzwd() {
     $.ajax({
-        url:"http://192.168.1.127:8767/isseu/findIsseu",
+        url:"http://192.168.1.101:8767/isseu/findIsseu",
         type:"post",
         success:function (data) {
             var   html="";
