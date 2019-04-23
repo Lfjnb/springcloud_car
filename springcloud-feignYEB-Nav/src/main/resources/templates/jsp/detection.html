@@ -47,7 +47,7 @@
 
     function queryBasic(){
         $("#queryBasic").bootstrapTable({
-            url:"http://192.168.1.116:8080/queryBasic",
+            url:"http://192.168.1.144:8080/queryBasic",
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {
@@ -69,7 +69,7 @@
     }
     function queryBasic2(){
         $("#queryBasic2").bootstrapTable({
-            url:"http://192.168.1.116/queryBrake",
+            url:"http://192.168.1.144:8080/queryBrake",
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {
@@ -91,7 +91,7 @@
     }
     function queryBasic3(){
         $("#queryBasic3").bootstrapTable({
-            url:"http://192.168.1.116/queryEngine",
+            url:"http://192.168.1.144:8080/queryEngine",
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {
@@ -104,7 +104,7 @@
                 {field:"cylinder",title:"气缸"},
                 {field:"horsepower",title:"最大马力"},
                 {field:"torque",title:"最大扭矩"},
-                {field:"stopBrake",title:"燃料类型"},
+                {field:"fuel",title:"燃料类型"},
                 {field:"fuelLabel",title:"燃油标号"},
                 {field:"supply",title:"供油方式"},
                 {field:"emissions",title:"排放标准"}
@@ -113,7 +113,7 @@
     }
     function queryBasic4(){
         $("#queryBasic4").bootstrapTable({
-            url:"http://192.168.1.116/queryExternal",
+            url:"http://192.168.1.144:8080/queryExternal",
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {
@@ -154,7 +154,7 @@
     }
     function queryBasic5(){
         $("#queryBasic5").bootstrapTable({
-            url:"http://192.168.1.116/queryInternal",
+            url:"http://192.168.1.144:8080/queryInternal",
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {
@@ -195,7 +195,7 @@
     }
     function queryBasic6(){
         $("#queryBasic6").bootstrapTable({
-            url:"http://192.168.1.116/querySecurity",
+            url:"http://192.168.1.144:8080/querySecurity",
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/bootstrap3/js/jquery-1.9.1.min.js"></script>
+    <script src="../js/bootstrap3/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../js/bootstrap3/css/bootstrap.css">
+
+    <script src="../js/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+    <link rel="stylesheet" href="../js/bootstrap-treeview/bootstrap-treeview.min.css">
+
+    <!-- 选项卡插件 -->
+    <script src="../js/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>
+    <link rel="stylesheet" href="../js/bootStrap-addTabs/bootstrap.addtabs.css">
+
+    <!-- 表格插件 -->
+    <script src="../js/bootstrap-table/bootstrap-table.js"></script>
+    <link rel="stylesheet" href="../js/bootstrap-table/bootstrap-table.css">
+    <script src="../js/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+    <!-- 时间插件 -->
+    <script src="../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <link rel="stylesheet" href="../js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <script src="../js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <!-- 弹框插件 -->
+    <script src="../js/bootstrap-bootbox/bootbox.js"></script>
+
+</head>
+<body>
+<sapn><input type="hidden" id="carId" th:value="${session.id}"></sapn>
+<button type="button" onclick="openAddImg()" class="btn btn-info">添加汽车图片</button>
+</body>
+<script>
+
+    $(function(){
+        showImg();
+    })
+
+    function showImg(){
+        var id = $("#carId").val();
+        $.ajax({
+            url:"http://192.168.1.110:9999/Brand/queryBrand",
+            type:"get",
+            data:{id:id},
+            dataType:"json",
+            success:function (data) {
+                var imgg = '';
+                for (var i = 0;i<data.length;i++) {
+                    imgg += "<img width='100px' height='100px' src='"+data+"'/>"
+                }
+                $("#imgTable").html(imgg);
+            }
+        })
+    }
+
+    function openAddImg(){
+        var id = $("#carId").val();
+        var  url = "../feignNav/toaddimg?carId="+id;
+        var dialog = bootbox.dialog({
+            title: '添加图片',
+            message: createAddContent(url),
+            size: 'large',
+            buttons: {
+                cancel: {
+                    label: "关闭",
+                    className: 'btn-danger',
+                    callback: function(){
+                        console.log('Custom cancel clicked');
+                    }
+                },
+                ok: {
+                    label: "保存",
+                    className: 'btn-info',
+                    callback: function(){
+                        $.ajax({
+                            url:'../book/addBook.do',
+                            type:'post',
+                            data:$("#imgForm").serialize(),
+                            success:function(){
+                                alert("添加成功")
+                                console.log('Custom cancel clicked');
+                                showImg();
+                            }
+                        })
+                    }
+                }
+            }
+        });
+    }
+
+    var res;
+    function createAddContent(url){
+        $.ajax({
+            url:url,
+            async:false,
+            success:function(data){
+                res = data;
+            }
+        });
+        return res;
+    }
+
+
+</script>
+</html>

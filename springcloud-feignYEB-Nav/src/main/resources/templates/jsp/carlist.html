@@ -74,8 +74,8 @@
                 {field:"img",title:"封面",formatter:function(data){
                         return "<img width='50px' height='50px' src='"+data+"'/>"
                     }},
-                {field:"brandName",title:"品牌名称"},
-                {field:"seriesName",title:"车辆系列名称"},
+                {field:"brandName",title:"品牌"},
+                {field:"seriesName",title:"车系"},
                 {field:"price",title:"价格",onDblClickRow:function(value,row,index){
                        alert(1)
                     }},
@@ -88,7 +88,7 @@
                 {field:"carCerNmae",title:"排量表"},
                 {field:"carSeatName",title:"座位数表"},
                 {field:"carFuelName",title:"燃油类型"},
-                {field:"colorName",title:"汽车颜色"},
+                {field:"colorName",title:"颜色"},
                 {field:"license",title:"牌照",formatter:function(value,row,index){
                         return value == 1 ? '本地':'外地';
                     }},
@@ -97,15 +97,71 @@
                     }},
                 {field:"nationName",title:"国别"},
                 {field:"elseName",title:"其他配置"},
-                {field:"ownerName",title:"车主名称"},
+                {field:"ownerName",title:"车主"},
                 {field:"storeName",title:"店铺"},
                 {field:"carLicense",title:"上牌时间"},
-                {field:"ownerName",title:"车主名称"},
                 {field:"areaName",title:"地区"},
-                {field:"123",title:"操作",formatter:function(value,row,index){
-                        return '<a href="javascript:detection('+row.id+')">配置详情</a>';
+                {field:"123",title:"操作",width:"80px",formatter:function(value,row,index){
+                        return '<a href="javascript:detection('+row.id+')">配置详情</a> | <a href="javascript:findImg('+row.id+')">查看图片</a>| <a href="javascript:editCaar('+row.id+')">修改</a>';
                     }}
             ]
+        })
+    }
+    
+    function findImg(id) {
+        var  url = "../feignNav/toimg?id="+id;
+        var dialog = bootbox.dialog({
+            title: '图片管理',
+            message: createAddContent(url),
+            size: 'large',
+            buttons: {
+                cancel: {
+                    label: "关闭",
+                    className: 'btn-danger',
+                    callback: function(){
+                        console.log('Custom cancel clicked');
+                    }
+                }
+            }
+        });
+    }
+
+    function deleteAll(){
+        var ids = '';
+        var cars = $("#carTable").bootstrapTable('getSelections');
+        for (var i = 0; i < cars.length; i++) {
+            ids += ids == '' ? cars[i].id : ','+cars[i].id;
+        }
+        deleteCar(ids);
+    }
+
+    function deleteCar(ids){
+        bootbox.confirm({
+            size:"small",
+            message:"你确定删除吗？",
+            callback:function(result){
+                if(result){
+                    $.ajax({
+                        url:"http://192.168.1.110:9999/Car/deleteCar",
+                        type:"post",
+                        data:{
+                            id:ids
+                        },
+                        dataType:"json",
+                        success:function(data){
+                            if(data){
+                                initCarTable();
+                            }else{
+                                bootbox.alert({
+                                    size:"small",
+                                    tutle:"提示",
+                                    message:"删除失败"
+                                })
+                            }
+                        }
+                    })
+                }
+            }
         })
     }
     
@@ -131,7 +187,7 @@
     function openAdd(){
         var  url = "../feignNav/toaddCar";
         var dialog = bootbox.dialog({
-            title: '新增图书',
+            title: '新增汽车',
             message: createAddContent(url),
             size: 'large',
             buttons: {
@@ -172,6 +228,324 @@
             }
         });
         return res;
+    }
+
+    function editCaar(id) {
+        //打开回显数据
+        openUpdate();
+        //查询回显数据
+        findBrand();
+        findSeries();
+        findCarAge();
+        carModel();
+        mileageId();
+        carSeat();
+        carFuel();
+        color();
+        nationId();
+        elseId();
+        //ownerId();
+        storeId();
+        areaId();
+        carCerId();
+        gearbox();
+        license();
+        drive();
+        //回显数据
+        $.ajax({
+            url:"",
+            type:"post",
+            data:{
+                id:id
+            },
+            success:function (data) {
+                $("#id").val(data.id);
+                $("#carName").val(data.carName);
+                $("#price").val(data.price);
+                $("#brandId").val(data.brandId);
+                $("#carAgeId").val(data.carAgeId);
+                $("#series").val(data.series);
+                $("#gearbox").val(data.gearbox);
+                $("#carModel").val(data.carModel);
+                $("#mileageId").val(data.mileageId);
+                $("#carCerId").val(data.carCerId);
+                $("#carSeat").val(data.carSeat);
+                $("#carFuel").val(data.carFuel);
+                $("#color").val(data.color);
+                $("#license").val(data.license);
+                $("#drive").val(data.drive);
+                $("#nationId").val(data.nationId);
+                $("#elseId").val(data.configuration);
+                $("#areaId").val(data.areaId);
+                $("#storeId").val(data.storeId);
+                $("#carLicense").val(data.carLicense);
+                $("#ownerId").val(data.ownerId);
+            }
+        })
+    }
+
+
+    function openUpdate(id){
+        var  url = "../feignNav/toupdateCar"+id;
+        var dialog = bootbox.dialog({
+            title: '修改汽车信息',
+            message: createAddContent(url),
+            size: 'large',
+            buttons: {
+                cancel: {
+                    label: "关闭",
+                    className: 'btn-danger',
+                    callback: function(){
+                        console.log('Custom cancel clicked');
+                    }
+                },
+                ok: {
+                    label: "保存",
+                    className: 'btn-info',
+                    callback: function(){
+                        $.ajax({
+                            url:'../book/addBook.do',
+                            type:'post',
+                            data:$("#bookForm").serialize(),
+                            success:function(){
+                                alert("修改成功")
+                                console.log('Custom cancel clicked');
+                                initCarTable();
+                            }
+                        })
+                    }
+                }
+            }
+        });
+    }
+
+    function findBrand(){ //品牌回显
+        $.ajax({
+            url:"http://192.168.1.110:9999/Brand/queryBrand",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.length;i++) {
+                    op += "<option type='text' name='"+data[i].brandId+"' value='"+data[i].id+"'>"+data[i].brandName+"</option>"
+                }
+                $("#brandId").html(op);
+            }
+        })
+    }
+    function drive(){ //驱动类型
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.drive.length;i++) {
+                    op += "<option type='text' name='drive' value='"+data.drive[i].codeId+"'>"+data.drive[i].text+"</option>"
+                }
+                $("#drive").html(op);
+            }
+        })
+    }
+    function license(){ //车牌所在地
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.license.length;i++) {
+                    op += "<option type='text' name='license' value='"+data.license[i].codeId+"'>"+data.license[i].text+"</option>"
+                }
+                $("#license").html(op);
+            }
+        })
+    }
+
+    function findCarAge(){ //车龄
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.carAge.length;i++) {
+                    op += "<option type='text' name='carAgeId' value='"+data.carAge[i].codeId+"'>"+data.carAge[i].text+"</option>"
+                }
+                $("#carAgeId").html(op);
+            }
+        })
+    }
+    function gearbox(){ //变速箱
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.gearbox.length;i++) {
+                    op += "<option type='text' name='gearbox' value='"+data.gearbox[i].codeId+"'>"+data.gearbox[i].text+"</option>"
+                }
+                $("#gearbox").html(op);
+            }
+        })
+    }
+    function findSeries(){ //车系列回显
+        $.ajax({
+            url:"http://192.168.1.110:9999/Series/querySeries",
+            data:{
+                id:1
+            },
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.length;i++) {
+                    op += "<option type='text' name='series' value='"+data[i].codeId+"'>"+data[i].seriesName+"</option>"
+                }
+                $("#series").html(op);
+            }
+        })
+    }
+    function carModel(){ //车型
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.model.length;i++) {
+                    op += "<option type='text' name='carModel' value='"+data.model[i].codeId+"'>"+data.model[i].text+"</option>"
+                }
+                $("#carModel").html(op);
+            }
+        })
+    }
+    function mileageId(){ //里程表
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.mileage.length;i++) {
+                    op += "<option type='text' name='mileageId' value='"+data.mileage[i].codeId+"'>"+data.mileage[i].text+"</option>"
+                }
+                $("#mileageId").html(op);
+            }
+        })
+    }
+    function carCerId(){ //排量表
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.cer.length;i++) {
+                    op += "<option type='text' name='carCerId' value='"+data.cer[i].codeId+"'>"+data.cer[i].text+"</option>"
+                }
+                $("#carCerId").html(op);
+            }
+        })
+    }
+    function carSeat(){ //座位数
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.carSeat.length;i++) {
+                    op += "<option type='text' name='carSeat' value='"+data.carSeat[i].codeId+"'>"+data.carSeat[i].text+"</option>"
+                }
+                $("#carSeat").html(op);
+            }
+        })
+    }
+    function carFuel(){ //燃油类型
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.carFuel.length;i++) {
+                    op += "<option type='text' name='carFuel' value='"+data.carFuel[i].id+"'>"+data.carFuel[i].text+"</option>"
+                }
+                $("#carFuel").html(op);
+            }
+        })
+    }
+    function color(){ //颜色
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.color.length;i++) {
+                    op += "<option type='text' name='color' value='"+data.color[i].id+"'>"+data.color[i].text+"</option>"
+                }
+                $("#color").html(op);
+            }
+        })
+    }
+    function nationId(){ //国别表 。。。
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.nation.length;i++) {
+                    op += "<option type='text' name='nationId' value='"+data.nation[i].codeId+"'>"+data.nation[i].text+"</option>"
+                }
+                $("#nationId").html(op);
+            }
+        })
+    }
+    function elseId(){ //其他配置 。。。
+        $.ajax({
+            url:"http://192.168.1.110:9999/Car/queryOuther",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.configuration.length;i++) {
+                    op += "<option type='text' name='elseId' value='"+data.configuration[i].id+"'>"+data.configuration[i].text+"</option>"
+                }
+                $("#elseId").html(op);
+            }
+        })
+    }
+    function storeId(){ //车辆所在店铺表。。。
+        $.ajax({
+            url:"http://192.168.1.110:9999/Store/queryStore",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.length;i++) {
+                    op += "<option type='text' name='storeId' value='"+data[i].id+"'>"+data[i].storName+"</option>"
+                }
+                $("#storeId").html(op);
+            }
+        })
+    }
+    function areaId(){ //地区。。。
+        $.ajax({
+            url:"http://192.168.1.110:9999/Area/queryArea",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var op = "<option>请选择</option>";
+                for (var i = 0;i<data.length;i++) {
+                    op += "<option type='text' name='areaId' value='"+data[i].id+"'>"+data[i].area+"</option>"
+                }
+                $("#areaId").html(op);
+            }
+        })
     }
 </script>
 </html>
