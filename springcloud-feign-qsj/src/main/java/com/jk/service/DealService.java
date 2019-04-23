@@ -20,6 +20,6 @@ public interface DealService {
 
     @RequestMapping("deal/queryDealCar")
     @ResponseBody
-    HashMap<String, Object> queryDealCar();
+    List<CarBean>  queryDealCar();
 
 }
