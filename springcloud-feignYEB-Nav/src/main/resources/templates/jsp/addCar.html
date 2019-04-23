@@ -35,8 +35,7 @@
 <body>
 
 <div class="container-fluid">
-    <form class="form-horizontal" id="imgForm">
-        <input id="id" class="form-control"  name="id"/>
+    <form class="form-horizontal" id="carForm">
         <div class="form-group">
             <label for="carName" class="col-sm-2 control-label">车名</label>
             <div class="col-sm-4">
@@ -50,21 +49,21 @@
         <div class="form-group">
             <label for="brandId" class="col-sm-2 control-label">品牌</label>
             <div class="col-sm-4">
-                <select id="brandId" class="form-control"></select>
+                <select id="brandId" name="brandId" class="form-control"></select>
             </div>
             <label for="carAgeId" class="col-sm-2 control-label">车龄</label>
             <div class="col-sm-4">
-                <select id="carAgeId" class="form-control"></select>
+                <select id="carAgeId" name="carAgeId" class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
             <label for="series" class="col-sm-2 control-label">车辆系列</label>
             <div class="col-sm-4">
-                <select id="series" class="form-control"></select>
+                <select id="series" name="series" class="form-control"></select>
             </div>
             <label for="gearbox" class="col-sm-2 control-label">变速箱</label>
             <div class="col-sm-4">
-                <select id="gearbox" class="form-control">
+                <select id="gearbox" name="gearbox" class="form-control">
                 </select>
             </div>
         </div>
@@ -72,32 +71,32 @@
         <div class="form-group">
             <label for="carModel" class="col-sm-2 control-label">车型</label>
             <div class="col-sm-4">
-                <select id="carModel" class="form-control"></select>
+                <select id="carModel" name="carModel" class="form-control"></select>
             </div>
             <label for="mileageId" class="col-sm-2 control-label">里程表</label>
             <div class="col-sm-4">
-                <select id="mileageId" class="form-control"></select>
+                <select id="mileageId" name="mileageId" class="form-control"></select>
             </div>
         </div>
 
         <div class="form-group">
             <label for="carCerId" class="col-sm-2 control-label">排量表</label>
             <div class="col-sm-4">
-                <select id="carCerId" class="form-control"></select>
+                <select id="carCerId" name="carCerId" class="form-control"></select>
             </div>
             <label for="carSeat" class="col-sm-2 control-label">座位数</label>
             <div class="col-sm-4">
-                <select id="carSeat" class="form-control"></select>
+                <select id="carSeat" name="carSeat" class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
             <label for="carFuel" class="col-sm-2 control-label">燃油类型</label>
             <div class="col-sm-4">
-                <select id="carFuel" class="form-control"></select>
+                <select id="carFuel" name="carFuel" class="form-control"></select>
             </div>
             <label for="color" class="col-sm-2 control-label">颜色</label>
             <div class="col-sm-4">
-                <select id="color" class="form-control"></select>
+                <select id="color" name="color" class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
@@ -108,7 +107,7 @@
             </div>
             <label for="drive" class="col-sm-2 control-label">驱动类型</label>
             <div class="col-sm-4">
-                <select id="drive" class="form-control">
+                <select id="drive" name="drive" class="form-control">
                 </select>
             </div>
         </div>
@@ -116,33 +115,33 @@
         <div class="form-group">
             <label for="nationId" class="col-sm-2 control-label">国别</label>
             <div class="col-sm-4">
-                <select id="nationId" class="form-control"></select>
+                <select id="nationId" name="nationId" class="form-control"></select>
             </div>
             <label for="elseId" class="col-sm-2 control-label">其他配置</label>
             <div class="col-sm-4">
-                <select id="elseId" class="form-control"></select>
+                <select id="elseId" name="elseId" class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
             <label for="areaId" class="col-sm-2 control-label">地区</label>
             <div class="col-sm-4">
-                <select id="areaId" class="form-control"  onChange="areaId()"></select>
+                <select id="areaId" name="areaId" class="form-control"  onChange="areaId()"></select>
             </div>
 
             <label for="storeId" class="col-sm-2 control-label">车辆所在店铺名称</label>
             <div class="col-sm-4">
-                <select id="storeId" class="form-control"></select>
+                <select id="storeId" name="storeId" class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
             <label for="carLicense" class="col-sm-2 control-label">上牌时间</label>
             <div class="col-sm-4">
-                <input id="carLicense" class="form-control" name="price"/>
+                <input id="carLicense" class="form-control date" name="carLicense"/>
             </div>
 
             <label for="ownerId" class="col-sm-2 control-label">车主</label>
             <div class="col-sm-4">
-                <input id="ownerId" class="form-control" name="price" value="请输入数字："/>
+                <input id="ownerId" class="form-control" name="ownerId"/>
             </div>
         </div>
     </form>
@@ -254,7 +253,7 @@
             success:function (data) {
                 var op = "<option>请选择</option>";
                 for (var i = 0;i<data.length;i++) {
-                    op += "<option type='text' name='series' value='"+data[i].codeId+"'>"+data[i].seriesName+"</option>"
+                    op += "<option type='text' name='series' value='"+data[i].id+"'>"+data[i].seriesName+"</option>"
                 }
                 $("#series").html(op);
             }
@@ -324,7 +323,7 @@
             success:function (data) {
                 var op = "<option>请选择</option>";
                 for (var i = 0;i<data.carFuel.length;i++) {
-                    op += "<option type='text' name='carFuel' value='"+data.carFuel[i].id+"'>"+data.carFuel[i].text+"</option>"
+                    op += "<option type='text' name='carFuel' value='"+data.carFuel[i].codeId+"'>"+data.carFuel[i].text+"</option>"
                 }
                 $("#carFuel").html(op);
             }
@@ -338,7 +337,7 @@
             success:function (data) {
                 var op = "<option>请选择</option>";
                 for (var i = 0;i<data.color.length;i++) {
-                    op += "<option type='text' name='color' value='"+data.color[i].id+"'>"+data.color[i].text+"</option>"
+                    op += "<option type='text' name='color' value='"+data.color[i].codeId+"'>"+data.color[i].text+"</option>"
                 }
                 $("#color").html(op);
             }
@@ -366,7 +365,7 @@
             success:function (data) {
                 var op = "<option>请选择</option>";
                 for (var i = 0;i<data.configuration.length;i++) {
-                    op += "<option type='text' name='elseId' value='"+data.configuration[i].id+"'>"+data.configuration[i].text+"</option>"
+                    op += "<option type='text' name='elseId' value='"+data.configuration[i].codeId+"'>"+data.configuration[i].text+"</option>"
                 }
                 $("#elseId").html(op);
             }
@@ -440,5 +439,13 @@
         $('#testimg').val(img);
     });
 
+    $('.date').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: 'yyyy-mm-dd',//显示格式
+        minView: "month",//设置只显示到月份
+        initialDate: new Date(),//初始化当前日期
+        autoclose: true,//选中自动关闭
+        todayBtn: true//显示今日按钮
+    });
 </script>
 </html>
