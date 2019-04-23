@@ -12470,15 +12470,17 @@
 <input type="text" name="js-waf-seo-referer" value="https://www.guazi.com/bj/" style="display:none;"><input
         type="hidden" data-role="dataSource" class="dataSourceButton" data-source="[]">
 
-<from>
-    <input  type="hidden"  name="dqid"  value="">
+<from  id="myForm">
+    <input  type="text"  name="dqid"  value="">
+    <input  type="text"   name="carName" id="carName">
 </from>
 <script>
     $(function () {
         var id=[[${dqid}]]
         $("[name='dqid']").val(id)
-        var   dqid= $("[name='dqid']").val()
-        selectCarAllbyid(dqid)
+        selectCarAllbyid()
+        var carName=[[${carName}]]
+        selectCarAllbyes($("#carName").val(carName))
     })
 </script>
 </body>

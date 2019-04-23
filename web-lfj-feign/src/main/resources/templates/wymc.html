@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../bootstrap/jquery.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap/bootstrap3/css/bootstrap.css">
+    <script src="../bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../bootstrap/bootStrap-addTabs/bootstrap.addtabs.css">
+    <script src="../bootstrap/bootstrap-bootbox/bootbox.js"></script>
+    <script src="../bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="../bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel="stylesheet" href="../bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap-fileinput/css/fileinput.css">
+    <script src="../bootstrap/bootstrap-fileinput/js/fileinput.min.js"></script>
+
+</head>
+<body>
+
+ <!--       <form  id="myForm">
+            <input type="text" id="phone" name="phone"  >
+            <div class="form-group">
+                <label for="cartype">售卖车型</label>
+                <select class="selectpicker" name="cartype" id="cartype">
+                    <option value="1">广东省</option>
+                    <option value="2">广西省</option>
+                    <option value="3">福建省</option>
+                    <option value="4">湖南省</option>
+                    <option value="5">山东省</option>
+                </select>
+
+                <select class="selectpicker" name="carseries" id="carxi">
+                    <option value="1">广东省</option>
+                    <option value="2">广西省</option>
+                    <option value="3">福建省</option>
+                    <option value="4">湖南省</option>
+                    <option value="5">山东省</option>
+                </select>
+            </div>
+            <div class="form-group">s
+                <label for="createTime">上牌时间</label>
+                <input type="text" class="form-control date" name="licensetime" id="createTime">
+            </div>
+            <div class="form-group">
+                <label for="mileage">公里数</label>
+                <input type="text" id="mileage" class="form-control"  name="mileage">
+            </div>
+
+            <div class="form-group">
+                <label for="licensearea">牌照地</label>
+                <input type="text" id="licensearea"  name="licensearea">
+            </div>
+
+
+
+            <button type="submit" class="btn btn-default">提交信息</button>
+        </form>-->
+ <center>        <form id="myForm" class="form-inline">
+            <div class="form-group">
+                <label for="testcartime">看车时间</label>
+                <input type="text" class="form-control date" name="testcartime" id="testcartime">
+            </div>
+            <div class="form-group">
+                <label for="licensetime">上牌时间</label>
+                <input type="text" class="form-control date" name="licensetime" id="licensetime">
+            </div></br>
+            <input type="text" id="phone" name="phone"  >
+            <div class="form-group">
+                <label for="cartype">售卖车型</label>
+                <select class="selectpicker" name="cartype" id="cartype"  onchange="initCarTypeMini()">
+
+                </select>
+
+                <select class="selectpicker" name="carseries" id="carxi">
+                    <option value=' ' >请选择<option>
+                </select>
+            </div></br>
+            <div class="form-group">
+                <label for="mileage">公里数</label>
+                <input type="text" id="mileage" class="form-control"  name="mileage">
+            </div>
+
+            <div class="form-group">
+                <input  type="hidden" name="licensearea"  value="0">
+            </div></br>
+     <button type="button" onclick="addmaiCar()" class="btn btn-success">确认</button>  <button type="button" onclick="qx()" class="btn btn-danger">取消</button>
+        </form></center>
+<script>
+   $(function () {
+       var  phone=[[${phone}]]
+       $("#phone").val(phone)
+
+       initCarType()
+   })
+    $('.date').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: 'yyyy-mm-dd ',//显示格式
+        minView: "month",//设置只显示到月份
+        initialDate: new Date(),//初始化当前日期
+        autoclose: true,//选中自动关闭
+        todayBtn: true//显示今日按钮
+    });
+function initCarType() {
+    $.ajax({
+        url:"http://192.168.1.110:9999/Brand/queryBrand",
+        type:"post",
+        success:function (data) {
+            var   html="    <option value=' ' >请选择<option>";
+            for (var i=0; i<data.length;i++){
+                html+='    <option value="'+data[i].id+'">'+data[i].brandName+'</option> '
+            }
+            $("#cartype").append(html)
+        }
+    })
+}
+function initCarTypeMini() {
+    var id=$("#cartype").val()
+    if (id==' '){
+        $("#carxi").html('<option value=" " >请选择<option>')
+        return
+    }else{
+        $.ajax({
+            url:"http://192.168.1.110:9999/Series/querySeries",
+            type:"post",
+            data:{
+                id:id
+            },
+            success:function (data) {
+
+                var   html="    <option value=' ' >请选择<option>";
+                for (var i=0; i<data.length;i++){
+                    html+='    <option value="'+data[i].id+'">'+data[i].seriesName+'</option> '
+                }
+                $("#carxi").html(html)
+            }
+
+        })
+    }
+
+}
+function addmaiCar() {
+
+    var myDate = (new Date()).getTime();
+    var lookCar =$("#testcartime").val().split(/[-]/);
+    var startDate = Date.parse(new Date(lookCar[0], lookCar[1]-1, lookCar[2]));
+    console.log("看车时间"+startDate)
+    var upCar =$("#licensetime").val().split(/[-]/);
+    var upCar2 = Date.parse(new Date(upCar[0], upCar[1]-1, upCar[2]));
+    console.log("上盘时间"+upCar2)
+    console.log("当前时间"+myDate)
+    if (startDate<myDate){
+       alert("请您正确填写卖车信息")
+        return
+    }
+    if (upCar2>myDate){
+        alert("请您正确填写卖车信息")
+        return
+    }
+
+    $.ajax({
+        url:"http://192.168.1.127:8767/sell/addSellCar",
+        type:"post",
+        data:$("#myForm").serialize(),
+        success:function (data) {
+            if (data){
+               alert("您已成功预约！请您保持手机畅通！")
+                location.href="../PageController/jumpsellcar";
+            }else{
+                alert("预约失败！请您正确填写卖车信息")
+            }
+
+        }
+    })
+}
+function qx() {
+    location.href="../PageController/jumpsellcar";
+}
+</script>
+</body>
+</html>
