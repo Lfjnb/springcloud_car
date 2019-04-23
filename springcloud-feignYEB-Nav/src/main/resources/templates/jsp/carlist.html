@@ -134,7 +134,7 @@
                 {field:"carLicense",title:"上牌时间"},
                 {field:"areaName",title:"地区"},
                 {field:"123",title:"操作",width:"80px",formatter:function(value,row,index){
-                        return '<a href="javascript:detection('+row.id+')">配置详情</a> | <a href="javascript:findImg('+row.id+')">查看图片</a>| <a href="javascript:editCaar('+row.id+')">修改</a>';
+                        return '<a href="javascript:detection('+row.id+')">配置详情</a> | <a href="javascript:findImg('+row.id+')">查看图片</a> | <a href="javascript:editCaar('+row.id+')">修改</a>';
                     }}
             ]
         })
@@ -287,6 +287,7 @@
         $.ajax({
             url:"http://192.168.1.110:9999/Car/findCarById",
             type:"post",
+            saync:false,
             data:{
                 id:id
             },
