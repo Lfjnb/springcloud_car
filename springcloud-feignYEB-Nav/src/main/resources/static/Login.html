@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- CSS -->
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/supersized.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Javascript -->
+    <script src="/assets/js/jquery-1.8.2.min.js"></script>
+    <script src="/assets/js/supersized.3.2.7.min.js"></script>
+    <script src="/assets/js/supersized-init.js"></script>
+    <script src="/assets/js/scripts.js"></script>
+</head>
+<body>
+<div class="page-container">
+    <h1>Login</h1>
+    <form action="" method="post">
+        <input type="text" id="name" class="username" placeholder="Username">
+        <input type="password" id="password" class="password" placeholder="Password">
+        <button type="submit" onclick="login()">登陆</button>
+        <div class="error"><span>+</span></div>
+    </form>
+    <div class="connect">
+        <p>Or connect with:</p>
+        <p>
+            <a class="facebook" href=""></a>
+            <a class="twitter" href="<%=request.getContextPath() %>/reg.jsp"></a>
+        </p>
+    </div>
+</div>
+<div align="center">Collect from <a href="http://www.cssmoban.com/" target="_blank" title="哈哈哈">哈哈哈</a></div>
+
+</body>
+
+
+<script type="text/javascript">
+
+    function login(){
+        var name = $("#name").val();
+        var password = $("#password").val();
+        //var code = $("#code").val();
+        $.ajax({
+            url:'<%=request.getContextPath() %>/user/login.do',
+            type:'post',
+            data:{
+                name:name,
+                password:password
+
+            },
+            dataType:'json',
+            success:function(data){
+                if(data.code != 0){
+                    alert(data.msg)
+                }else{
+                    alert("1")
+                    window.location.href="<%=request.getContextPath() %>/type/index.do";
+                }
+            }
+
+        })
+
+
+    }
+    /* function changeCode(){
+        $("#imgCode").attr('src','../verificationCode?t='+Date.now());
+    } */
+</script>
+</html>
