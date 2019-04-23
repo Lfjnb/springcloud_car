@@ -7426,14 +7426,24 @@
                 <div class="search">
                     <div class="index-title"></div>
                     <div class="search-box suggestion_widget autocomplete" data-default-count="9">
-                        <input type="text" class="search-input js_search_input_index" placeholder="请输入关键词，例如：君越  2.4L"
+                        <input type="text" id="es" value=" " class="search-input js_search_input_index" placeholder="请输入关键词，例如：君越  2.4L"
                                data-role="keywordInput" name="keyword" autocomplete="off" data-domain="bj"
                                data-gzlog="tracking_type=click&amp;eventid=92743472">
                         <button class="search-btn" data-gzlog="tracking_type=click&amp;eventid=0020070000000022"
-                                type="button">搜索
+                            onclick="essousuo()"    type="button">搜索
                         </button>
                         <input type="hidden" value="bj" name="hiddenCity">
                         <!-- <div class="autocomplete-dropdown open"> -->
+                        <script>
+                            function essousuo() {
+                            var es=  $("#es").val()
+                             if (es==" "){
+                                  alert("请输入要搜索的内容！")
+                                  return
+                             }
+                                location.href="../PageController/jumpcarlist2?carName="+es;
+                            }
+                        </script>
                         <div class="autocomplete-dropdown">
                             <ul>
                                 <li class="item"><span class="hot-tip">热门推荐</span></li>

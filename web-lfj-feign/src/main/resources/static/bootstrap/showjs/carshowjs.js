@@ -50,7 +50,7 @@ function initcnxh() {
             for (var i=0; i<data.length;i++){
                 var   html="";
                 html=' <li data-scroll-track="74269993@0@0@0&amp;92102665">'+
-                    '<a href="#"'+
+                    '<a href="javascript:jumpcarxiangqing('+data[i].id+')"'+
                 'target="_blank" class="car-a"'+
                 'data-gzlog="tracking_type=click&amp;eventid=0080310000000030&amp;carid=74269993&amp;position=0&amp;is_baomai=0">'+
                    ' <img src="'+data[i].imgUrl+'"'+
@@ -62,7 +62,7 @@ function initcnxh() {
                   '  <!-- 价格 -->'+
                 '   <p>'+data[i].price+'<span>万</span></p>'+
                '<!-- 标签 -->'+
-               '<i class="i-green">准新车</i><em class="line-through">19.80万</em></div>'+
+               '<i class="i-green">准新车</i></div>'+
                '</div>'+
                ' </a>'+
                 ' </li>'+
@@ -87,6 +87,9 @@ function initCarType() {
 
         }
     })
+}
+function jumpcarxiangqing(id) {
+    alert(id)
 }
 /*跳转我要卖车*/
 function jumpsellcar() {

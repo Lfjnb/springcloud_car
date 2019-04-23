@@ -60,8 +60,12 @@ function selectCarAll(id) {
     })
     selectCarAllbyid(id)
 }
+/* 提交form  #myForm   走调差 查询汽车信息 list*/
 function selectCarAllbyid(id){
-
+          alert(id)
+}
+/*走es*/
+function selectCarAllbyes(carName){
 alert(id)
 }
 /*跳转首页*/
