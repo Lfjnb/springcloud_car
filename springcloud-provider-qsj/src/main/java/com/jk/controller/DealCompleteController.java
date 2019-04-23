@@ -47,17 +47,17 @@ public class DealCompleteController {
      */
     @RequestMapping("queryDealCar")
     @ResponseBody
-    public   HashMap<String,Object>  queryDealCar(){
-        HashMap<String, Object> a = new HashMap<>();
+    public   List<CarBean>  queryDealCar(){
+        List<CarBean> list = new ArrayList<>();
         Query query  =   new Query();
         List<AppointmentBean>  app  = mongoTemplate.find(query,AppointmentBean.class);
         for (int  i = 0; i<app.size(); i++) {
             Integer  carid  = app.get(i).getCarid();
             System.out.println(carid);
-            List<CarBean> carBeans = dealDao.queryDealCar(carid);
-            a.put("carBean"+i,carBeans);
+            CarBean carBeans =  dealDao.queryDealCar(carid);
+            list.add((CarBean) carBeans);
         }
-             return a;
+             return list;
     }
 
 }
