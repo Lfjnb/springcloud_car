@@ -35,11 +35,11 @@
 <body>
 <div class="container-fluid">
     <form class="form-horizontal" id="imgForm">
-        <input id="carId" class="form-control" name="carId" th:value="${session.carId}"/>
+        <input type="hidden" id="carId" class="form-control" name="carId" th:value="${session.carId}"/>
         <div class="form-group">
             <label for="imgId" class="col-sm-2 control-label">图片</label>
             <div class="col-sm-10">
-                <input type="hidden" id="testimg" name="imgurl">
+                <input type="text" id="testimg" name="imgurl">
                 <input type="file" id="imgId" class="projectfile" name="img">
             </div>
         </div>
@@ -70,7 +70,7 @@
             msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
 
         }).on('fileuploaded', function(event, data, previewId, index) {
-            var img=data.response.img;
+            var img = data.response.path;
             $('#testimg').val(img);
         });
 

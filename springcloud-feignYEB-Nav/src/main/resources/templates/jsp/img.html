@@ -31,6 +31,7 @@
 <body>
 <sapn><input type="hidden" id="carId" th:value="${session.id}"></sapn>
 <button type="button" onclick="openAddImg()" class="btn btn-info">添加汽车图片</button>
+<div id="imgTable"></div>
 </body>
 <script>
 
@@ -41,14 +42,14 @@
     function showImg(){
         var id = $("#carId").val();
         $.ajax({
-            url:"http://192.168.1.110:9999/Brand/queryBrand",
+            url:"http://192.168.1.110:9999/Car/queryImgs",
             type:"get",
             data:{id:id},
             dataType:"json",
             success:function (data) {
                 var imgg = '';
                 for (var i = 0;i<data.length;i++) {
-                    imgg += "<img width='100px' height='100px' src='"+data+"'/>"
+                    imgg += "<img width='100px' height='100px' src='"+data[i].imgurl+"'/>"
                 }
                 $("#imgTable").html(imgg);
             }
@@ -75,7 +76,7 @@
                     className: 'btn-info',
                     callback: function(){
                         $.ajax({
-                            url:'../book/addBook.do',
+                            url:'http://192.168.1.110:9999/Car/addImgs',
                             type:'post',
                             data:$("#imgForm").serialize(),
                             success:function(){

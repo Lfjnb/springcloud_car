@@ -45,7 +45,8 @@ public class NavController {
         return "jsp/userlist";
     }
     @RequestMapping("todetection")
-    public String detection(){
+    public String detection(Integer carId,HttpSession session){
+        session.setAttribute("carId",carId);
         return "jsp/detection";
     }
     @RequestMapping("toimg")
@@ -59,7 +60,13 @@ public class NavController {
         return "jsp/addimg";
     }
     @RequestMapping("toupdateCar")
-    public String toupdateCar(){
+    public String toupdateCar(Integer id ,HttpSession session){
+        session.setAttribute("id",id);
         return "jsp/updateCar";
+    }
+
+    @RequestMapping("outcar")
+    public String outcar(){
+       return "jsp/outcar";
     }
 }

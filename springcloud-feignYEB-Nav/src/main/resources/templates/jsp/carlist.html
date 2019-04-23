@@ -28,7 +28,30 @@
     <script src="../js/bootstrap-bootbox/bootbox.js"></script>
 </head>
 <body>
-
+<div id="toolbar" class="text-center">
+    <form class="form-inline">
+        <div class="input-group">
+            <label for="carName">车名</label>
+            <div class="input-group" >
+                <input type="text" id="carName" class="form-control"/>
+            </div>
+            <label for="brandId2">品牌</label>
+            <div class="input-group">
+                <select id="brandId2" class="form-control"></select>
+            </div>
+            <label for="carAgeId2">车龄</label>
+            <div class="input-group">
+                <select id="carAgeId2" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-info" onclick="searchCar()">
+                <i class="glyphicon glyphicon-search"></i>
+                搜索
+            </button>
+        </div>
+    </form>
+</div>
 <div id="carTable">
     <button type="button" onclick="openAdd()" class="btn btn-info">新增</button>
     <button type="button" onclick="deleteAll()" class="btn btn-danger">批量删除</button>
@@ -42,9 +65,14 @@
         initCarTable();
     })
 
+    function searchCar(){
+        $("#carTable").bootstrapTable("refresh");
+    }
+
     function initCarTable(){
         $("#carTable").bootstrapTable({
             url:"http://127.0.0.1:9999/Car/queryCar",
+            toolbar:"#toolbar",
             pagination: true, //是否展示分页
             pageList: [1, 2, 3, 4, 5],//分页组件
             pageNumber: 1,
@@ -53,9 +81,15 @@
             //searchText:'试试',//初始化搜索文字
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
+                var carName = $("#carName").val();
+                var brandId = $("#brandId2").val();
+                var carAgeId = $("#carAgeId2").val();
                 return {
                     page: this.pageNumber, // 每页显示数据的开始行号
                     rows: this.pageSize, // 每页要显示的数据条数,
+                    carName:carName,
+                    brandId:brandId,
+                    carAgeId:carAgeId
                     // dataId: $("#dataId").val() // 额外添加的参数,
                 }
             },
@@ -71,9 +105,7 @@
             columns:[
                 {checkbox:true},
                 {field:"id",title:"主键Id"},
-                {field:"img",title:"封面",formatter:function(data){
-                        return "<img width='50px' height='50px' src='"+data+"'/>"
-                    }},
+                {field:"carname",title:"车名"},
                 {field:"brandName",title:"品牌"},
                 {field:"seriesName",title:"车系"},
                 {field:"price",title:"价格",onDblClickRow:function(value,row,index){
@@ -167,7 +199,7 @@
     
     
     function detection(id) {
-        var url = "../feignNav/todetection";
+        var url = "../feignNav/todetection?carId="+id;
         var dialog = bootbox.dialog({
             title: '259项专业检测',
             message: createAddContent(url),
@@ -203,7 +235,7 @@
                     className: 'btn-info',
                     callback: function(){
                         $.ajax({
-                            url:'../book/addBook.do',
+                            url:'http://192.168.1.110:9999/Car/addCar',
                             type:'post',
                             data:$("#carForm").serialize(),
                             success:function(){
@@ -232,7 +264,7 @@
 
     function editCaar(id) {
         //打开回显数据
-        openUpdate();
+        openUpdate(id);
         //查询回显数据
         findBrand();
         findSeries();
@@ -253,40 +285,40 @@
         drive();
         //回显数据
         $.ajax({
-            url:"",
+            url:"http://192.168.1.110:9999/Car/findCarById",
             type:"post",
             data:{
                 id:id
             },
             success:function (data) {
                 $("#id").val(data.id);
-                $("#carName").val(data.carName);
-                $("#price").val(data.price);
-                $("#brandId").val(data.brandId);
-                $("#carAgeId").val(data.carAgeId);
-                $("#series").val(data.series);
-                $("#gearbox").val(data.gearbox);
-                $("#carModel").val(data.carModel);
-                $("#mileageId").val(data.mileageId);
-                $("#carCerId").val(data.carCerId);
-                $("#carSeat").val(data.carSeat);
-                $("#carFuel").val(data.carFuel);
-                $("#color").val(data.color);
-                $("#license").val(data.license);
-                $("#drive").val(data.drive);
-                $("#nationId").val(data.nationId);
-                $("#elseId").val(data.configuration);
-                $("#areaId").val(data.areaId);
-                $("#storeId").val(data.storeId);
-                $("#carLicense").val(data.carLicense);
-                $("#ownerId").val(data.ownerId);
+                $("#carName3").val(data.carName);
+                $("#price3").val(data.price);
+                $("#brandId3").val(data.brandId);
+                $("#carAgeId3").val(data.carAgeId);
+                $("#series3").val(data.series);
+                $("#gearbox3").val(data.gearbox);
+                $("#carModel3").val(data.carModel);
+                $("#mileageId3").val(data.mileageId);
+                $("#carCerId3").val(data.carCerId);
+                $("#carSeat3").val(data.carSeat);
+                $("#carFuel3").val(data.carFuel);
+                $("#color3").val(data.color);
+                $("#license3").val(data.license);
+                $("#drive3").val(data.drive);
+                $("#nationId3").val(data.nationId);
+                $("#elseId3").val(data.configuration);
+                $("#areaId3").val(data.areaId);
+                $("#storeId3").val(data.storeId);
+                $("#carLicense3").val(data.carLicense);
+                $("#ownerId3").val(data.ownerId);
             }
         })
     }
 
 
     function openUpdate(id){
-        var  url = "../feignNav/toupdateCar"+id;
+        var  url = "../feignNav/toupdateCar?id="+id;
         var dialog = bootbox.dialog({
             title: '修改汽车信息',
             message: createAddContent(url),
@@ -304,9 +336,9 @@
                     className: 'btn-info',
                     callback: function(){
                         $.ajax({
-                            url:'../book/addBook.do',
+                            url:'http://192.168.1.110:9999/Car/updateCarById',
                             type:'post',
-                            data:$("#bookForm").serialize(),
+                            data:$("#updateCarForm").serialize(),
                             success:function(){
                                 alert("修改成功")
                                 console.log('Custom cancel clicked');
@@ -319,17 +351,23 @@
         });
     }
 
+    $(function () {
+        findBrand();
+        findCarAge();
+    })
+
     function findBrand(){ //品牌回显
         $.ajax({
             url:"http://192.168.1.110:9999/Brand/queryBrand",
             type:"get",
             dataType:"json",
             success:function (data) {
-                var op = "<option>请选择</option>";
+                var op = "<option value='-1'>请选择</option>";
                 for (var i = 0;i<data.length;i++) {
                     op += "<option type='text' name='"+data[i].brandId+"' value='"+data[i].id+"'>"+data[i].brandName+"</option>"
                 }
-                $("#brandId").html(op);
+                $("#brandId2").html(op);
+                $("#brandId3").html(op);
             }
         })
     }
@@ -339,11 +377,11 @@
             type:"get",
             dataType:"json",
             success:function (data) {
-                var op = "<option>请选择</option>";
+                var op = "<option value='-1'>请选择</option>";
                 for (var i = 0;i<data.drive.length;i++) {
                     op += "<option type='text' name='drive' value='"+data.drive[i].codeId+"'>"+data.drive[i].text+"</option>"
                 }
-                $("#drive").html(op);
+                $("#drive3").html(op);
             }
         })
     }
@@ -353,11 +391,11 @@
             type:"get",
             dataType:"json",
             success:function (data) {
-                var op = "<option>请选择</option>";
+                var op = "<option value='-1'>请选择</option>";
                 for (var i = 0;i<data.license.length;i++) {
                     op += "<option type='text' name='license' value='"+data.license[i].codeId+"'>"+data.license[i].text+"</option>"
                 }
-                $("#license").html(op);
+                $("#license3").html(op);
             }
         })
     }
@@ -368,11 +406,12 @@
             type:"get",
             dataType:"json",
             success:function (data) {
-                var op = "<option>请选择</option>";
+                var op = "<option value='-1'>请选择</option>";
                 for (var i = 0;i<data.carAge.length;i++) {
                     op += "<option type='text' name='carAgeId' value='"+data.carAge[i].codeId+"'>"+data.carAge[i].text+"</option>"
                 }
-                $("#carAgeId").html(op);
+                $("#carAgeId3").html(op);
+                $("#carAgeId2").html(op);
             }
         })
     }
@@ -382,11 +421,11 @@
             type:"get",
             dataType:"json",
             success:function (data) {
-                var op = "<option>请选择</option>";
+                var op = "<option value='-1'>请选择</option>";
                 for (var i = 0;i<data.gearbox.length;i++) {
                     op += "<option type='text' name='gearbox' value='"+data.gearbox[i].codeId+"'>"+data.gearbox[i].text+"</option>"
                 }
-                $("#gearbox").html(op);
+                $("#gearbox3").html(op);
             }
         })
     }
@@ -403,7 +442,7 @@
                 for (var i = 0;i<data.length;i++) {
                     op += "<option type='text' name='series' value='"+data[i].codeId+"'>"+data[i].seriesName+"</option>"
                 }
-                $("#series").html(op);
+                $("#series3").html(op);
             }
         })
     }
@@ -417,7 +456,7 @@
                 for (var i = 0;i<data.model.length;i++) {
                     op += "<option type='text' name='carModel' value='"+data.model[i].codeId+"'>"+data.model[i].text+"</option>"
                 }
-                $("#carModel").html(op);
+                $("#carModel3").html(op);
             }
         })
     }
@@ -431,7 +470,7 @@
                 for (var i = 0;i<data.mileage.length;i++) {
                     op += "<option type='text' name='mileageId' value='"+data.mileage[i].codeId+"'>"+data.mileage[i].text+"</option>"
                 }
-                $("#mileageId").html(op);
+                $("#mileageId3").html(op);
             }
         })
     }
@@ -445,7 +484,7 @@
                 for (var i = 0;i<data.cer.length;i++) {
                     op += "<option type='text' name='carCerId' value='"+data.cer[i].codeId+"'>"+data.cer[i].text+"</option>"
                 }
-                $("#carCerId").html(op);
+                $("#carCerId3").html(op);
             }
         })
     }
@@ -459,7 +498,7 @@
                 for (var i = 0;i<data.carSeat.length;i++) {
                     op += "<option type='text' name='carSeat' value='"+data.carSeat[i].codeId+"'>"+data.carSeat[i].text+"</option>"
                 }
-                $("#carSeat").html(op);
+                $("#carSeat3").html(op);
             }
         })
     }
@@ -473,7 +512,7 @@
                 for (var i = 0;i<data.carFuel.length;i++) {
                     op += "<option type='text' name='carFuel' value='"+data.carFuel[i].id+"'>"+data.carFuel[i].text+"</option>"
                 }
-                $("#carFuel").html(op);
+                $("#carFuel3").html(op);
             }
         })
     }
@@ -487,7 +526,7 @@
                 for (var i = 0;i<data.color.length;i++) {
                     op += "<option type='text' name='color' value='"+data.color[i].id+"'>"+data.color[i].text+"</option>"
                 }
-                $("#color").html(op);
+                $("#color3").html(op);
             }
         })
     }
@@ -501,7 +540,7 @@
                 for (var i = 0;i<data.nation.length;i++) {
                     op += "<option type='text' name='nationId' value='"+data.nation[i].codeId+"'>"+data.nation[i].text+"</option>"
                 }
-                $("#nationId").html(op);
+                $("#nationId3").html(op);
             }
         })
     }
@@ -515,7 +554,7 @@
                 for (var i = 0;i<data.configuration.length;i++) {
                     op += "<option type='text' name='elseId' value='"+data.configuration[i].id+"'>"+data.configuration[i].text+"</option>"
                 }
-                $("#elseId").html(op);
+                $("#elseId3").html(op);
             }
         })
     }
@@ -529,7 +568,7 @@
                 for (var i = 0;i<data.length;i++) {
                     op += "<option type='text' name='storeId' value='"+data[i].id+"'>"+data[i].storName+"</option>"
                 }
-                $("#storeId").html(op);
+                $("#storeId3").html(op);
             }
         })
     }
@@ -543,7 +582,7 @@
                 for (var i = 0;i<data.length;i++) {
                     op += "<option type='text' name='areaId' value='"+data[i].id+"'>"+data[i].area+"</option>"
                 }
-                $("#areaId").html(op);
+                $("#areaId3").html(op);
             }
         })
     }

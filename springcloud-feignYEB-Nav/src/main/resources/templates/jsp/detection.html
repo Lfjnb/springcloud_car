@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -28,6 +28,7 @@
     <script src="../js/bootstrap-bootbox/bootbox.js"></script>
 </head>
 <body>
+<input type="hidden" id="carIdth" th:value="${session.carId}">
 <div id="queryBasic"></div>
 <div id="queryBasic2"></div>
 <div id="queryBasic3"></div>
@@ -46,12 +47,13 @@
     })
 
     function queryBasic(){
+        var carId = $("#carIdth").val();
         $("#queryBasic").bootstrapTable({
             url:"http://192.168.1.144:8080/queryBasic",
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {
-                    carId:1
+                    carId: carId
                 }
             },
             columns:[
@@ -73,7 +75,7 @@
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {
-                    carId:1
+                    carId:$("#carIdth").val()
                 }
             },
             columns:[
@@ -95,7 +97,7 @@
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {
-                    carId:1
+                    carId:$("#carIdth").val()
                 }
             },
             columns:[
@@ -117,7 +119,7 @@
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {
-                    carId:1
+                    carId:$("#carIdth").val()
                 }
             },
             columns:[
@@ -158,7 +160,7 @@
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {
-                    carId:1
+                    carId:$("#carIdth").val()
                 }
             },
             columns:[
@@ -199,7 +201,7 @@
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 return {
-                    carId:1
+                    carId:$("#carIdth").val()
                 }
             },
             columns:[
