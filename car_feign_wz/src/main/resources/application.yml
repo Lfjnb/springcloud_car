@@ -1,6 +1,11 @@
 server:
   port: 9999
 spring:
+  data:
+    elasticsearch:
+      cluster-nodes: localhost:9300
+      repositories:
+        enabled: true
   application:
     name: car-feign-wz
   thymeleaf:

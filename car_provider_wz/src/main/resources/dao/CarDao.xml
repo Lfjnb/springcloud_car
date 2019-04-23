@@ -4,9 +4,161 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jk.dao.CarDao">
 
+	<!-- 查询图片表 -->
+	<select id="queryImgs" parameterType="Integer" resultType="com.jk.pojo.ImgsBean">
+		select id,imgurl,carId from t_imgs where carId = #{value}
+	</select>
 
-	<delete id="deleteCar" parameterType="Integer">
-		delete from t_car where id = #{value}
+
+	<!-- 新增图片表 -->
+	<insert id="addImgs" parameterType="com.jk.pojo.ImgsBean">
+		insert  into t_imgs(imgurl,carId)
+		values(#{imgurl},#{carId})
+	</insert>
+
+
+
+	<!-- 查询所有car ES用  -->
+	<select id="findCarListAll" resultType="com.jk.pojo.CarBean">
+		 SELECT
+	car.id,
+	brand.brandName as brandName,
+	series.seriesName as seriesName,
+	car.price,
+	dic.text as carAgeName,
+	car.gearbox,
+	dic2.text as carModelName,
+	dic3.text as mileageName,
+	dic4.text as carCerNmae,
+	dic5.text as carSeatName,
+	dic6.text as carFuelName,
+	dic7.text as colorName,
+	car.drive,
+	dic8.text as nationName,
+	dic9.text as elseName,
+	own.ownerName as ownerName,
+	store.storName as storeName,
+	area.area as areaName,
+	car.carLicense,
+	car.carName
+FROM
+	t_car AS car
+	LEFT JOIN t_brand AS brand ON car.brandId = brand.id
+	LEFT JOIN t_series AS series ON car.series = series.id
+	LEFT JOIN t_dictionary AS dic ON car.carAgeId = dic.codeid
+	LEFT JOIN t_dictionary AS dic2 ON car.carModel = dic2.codeid
+	LEFT JOIN t_dictionary AS dic3 ON car.mileageId = dic3.codeid
+	LEFT JOIN t_dictionary AS dic4 ON car.carCerId = dic4.codeid
+	LEFT JOIN t_dictionary AS dic5 ON car.carSeat = dic5.codeid
+	LEFT JOIN t_dictionary AS dic6 ON car.carFuel = dic6.codeid
+	LEFT JOIN t_dictionary AS dic7 ON car.color = dic7.codeid
+	LEFT JOIN t_dictionary AS dic8 ON car.nationId = dic8.codeid
+	LEFT JOIN t_dictionary AS dic9 ON car.elseId = dic9.codeid
+	LEFT JOIN t_owner AS own ON car.ownerId = own.id
+	LEFT JOIN t_store AS store ON car.storeId = store.id
+	LEFT JOIN t_area AS area ON car.areaId = area.id
+	</select>
+
+
+
+	<!-- 修改根据回显的表 -->
+	<update id="updateCarById" parameterType="com.jk.pojo.CarBean">
+		update t_car set brandId = #{brandId},series=#{series},price=#{price},carAgeId=#{carAgeId},
+		gearbox=#{gearbox},carModel=#{carModel},mileageId=#{mileageId},carCerId=#{carCerId},carSeat=#{carSeat},
+		carFuel=#{carFuel},color=#{color},drive=#{drive},nationId=#{nationId},elseId=#{elseId},
+		ownerId=#{ownerId},storeId=#{storeId},areaId=#{areaId},carLicense=#{carLicense},carName=#{carName}
+		where id = #{id}
+	</update>
+
+
+	<!--  修改根据Id回显 -->
+	<select id="findCarById" parameterType="Integer" resultType="com.jk.pojo.CarBean">
+		SELECT
+			c.id,
+			c.brandId,
+			c.series,
+			c.price,
+			c.carAgeId,
+			c.gearbox,
+			c.carModel,
+			c.mileageId,
+			c.carCerId,
+			c.carSeat,
+			c.carFuel,
+			c.color,
+			c.drive,
+			c.nationId,
+			c.elseId,
+			c.ownerId,
+			c.storeId,
+			c.areaId,
+			c.carLicense,
+			c.carname
+		FROM
+			t_car AS c
+		WHERE
+			id = #{value}
+	</select>
+
+	<!--根据Id查询单条汽车表的详情-->
+	<select id="queryImgById" parameterType="Integer" resultType="com.jk.pojo.ImgsBean">
+		SELECT * FROM t_imgs
+		WHERE carid = #{value}
+	</select>
+
+
+	<!-- 根据Id查询汽车表详情 -->
+	<select id="queryCarById" parameterType="Integer" resultType="com.jk.pojo.CarBean">
+		SELECT
+		car.id,
+		brand.brandName as brandName,
+		series.seriesName as seriesName,
+		car.price,
+		dic.text as carAgeName,
+		car.gearbox,
+		dic2.text as carModelName,
+		dic3.text as mileageName,
+		dic4.text as carCerNmae,
+		dic5.text as carSeatName,
+		dic6.text as carFuelName,
+		dic7.text as colorName,
+		car.drive,
+		dic8.text as nationName,
+		dic9.text as elseName,
+		own.ownerName as ownerName,
+		store.storName as storeName,
+		area.area as areaName,
+		car.carLicense,
+		img.imgurl,
+		car.carName
+	FROM
+		t_car AS car
+		LEFT JOIN t_brand AS brand ON car.brandId = brand.id
+		LEFT JOIN t_series AS series ON car.series = series.id
+		LEFT JOIN t_dictionary AS dic ON car.carAgeId = dic.codeid
+		LEFT JOIN t_dictionary AS dic2 ON car.carModel = dic2.codeid
+		LEFT JOIN t_dictionary AS dic3 ON car.mileageId = dic3.codeid
+		LEFT JOIN t_dictionary AS dic4 ON car.carCerId = dic4.codeid
+		LEFT JOIN t_dictionary AS dic5 ON car.carSeat = dic5.codeid
+		LEFT JOIN t_dictionary AS dic6 ON car.carFuel = dic6.codeid
+		LEFT JOIN t_dictionary AS dic7 ON car.color = dic7.codeid
+		LEFT JOIN t_dictionary AS dic8 ON car.nationId = dic8.codeid
+		LEFT JOIN t_dictionary AS dic9 ON car.elseId = dic9.codeid
+		LEFT JOIN t_owner AS own ON car.ownerId = own.id
+		LEFT JOIN t_store AS store ON car.storeId = store.id
+		LEFT JOIN t_area AS area ON car.areaId = area.id
+		LEFT JOIN t_imgs as img ON img.id = (
+	  SELECT MIN(s.id) FROM t_imgs s LEFT JOIN t_car c on s.carid=c.id)
+		WHERE car.id = #{value}
+	</select>
+
+
+	<!-- 根据Id删除汽车表 -->
+	<delete id="deleteCar" parameterType="String">
+		delete from t_car  where id  in
+		<foreach collection="array" close=")" open="(" item="id" separator=",">
+			#{id}
+		</foreach>
 	</delete>
 
 
@@ -32,7 +184,8 @@
 		store.storName as storeName,
 		area.area as areaName,
 		car.carLicense,
-		img.imgurl
+		img.imgurl,
+		car.carName
 	FROM
 		t_car AS car
 		LEFT JOIN t_brand AS brand ON car.brandId = brand.id
@@ -60,8 +213,8 @@
 	<!-- 新增汽车表 -->
 	<insert id="addCar"   parameterType="com.jk.pojo.CarBean">
 
-		insert into t_car (brandId,series,price,carAgeId,gearbox,carModel,mileageId,carCerId,carSeat,carFuel,color,drive,nationId,elseId,ownerId,storeId,areaId,carLicense)
-		values (#{brandId},#{series},#{price},#{carAgeId},#{gearbox},#{carModel},#{mileageId},#{carCerId},#{carSeat},#{carFuel},#{color},#{drive},#{nationId},#{elseId},#{ownerId},#{storeId},#{areaId},#{carLicense})
+		insert into t_car (brandId,series,price,carAgeId,gearbox,carModel,mileageId,carCerId,carSeat,carFuel,color,drive,nationId,elseId,ownerId,storeId,areaId,carLicense,carname)
+		values (#{brandId},#{series},#{price},#{carAgeId},#{gearbox},#{carModel},#{mileageId},#{carCerId},#{carSeat},#{carFuel},#{color},#{drive},#{nationId},#{elseId},#{ownerId},#{storeId},#{areaId},#{carLicense},#{carName})
 	</insert>
 
 
@@ -86,7 +239,8 @@
 	own.ownerName as ownerName,
 	store.storName as storeName,
 	area.area as areaName,
-	car.carLicense
+	car.carLicense,
+	car.carName
 FROM
 	t_car AS car
 	LEFT JOIN t_brand AS brand ON car.brandId = brand.id
@@ -103,6 +257,7 @@ FROM
 	LEFT JOIN t_owner AS own ON car.ownerId = own.id
 	LEFT JOIN t_store AS store ON car.storeId = store.id
 	LEFT JOIN t_area AS area ON car.areaId = area.id
+	<include refid="CarSql"></include>
 	LIMIT #{start},#{rows}
 
 
@@ -112,4 +267,49 @@ FROM
     <select id="queryCount" resultType="long">
         select count(1) from t_car
     </select>
+
+
+
+	<sql id="CarSql">
+		where 1 = 1
+			<if test="carBean.carAgeId!=null">
+				and #{carBean.carAgeId} = dic.codeid
+			</if>
+			<if test="carBean.gearbox!=null">
+				and #{carBean.gearbox} = car.gearbox
+			</if>
+			<if test="carBean.carModel!=null">
+				and #{carBean.carModel} = dic2.codeid
+			</if>
+			<if test="carBean.mileageId!=null">
+				and #{carBean.mileageId} = dic3.codeid
+			</if>
+			<if test="carBean.carCerId!=null">
+				and #{carBean.carCerId} = dic4.codeid
+			</if>
+			<if test="carBean.carSeat!=null">
+				and #{carBean.carSeat} = dic5.codeid
+			</if>
+			<if test="carBean.carFuel!=null">
+				and #{carBean.carFuel} = dic6.codeid
+			</if>
+			<if test="carBean.color!=null">
+				and #{carBean.color}  = dic7.codeid
+			</if>
+			<if test="carBean.license!=null">
+				and #{carBean.license} = car.license
+			</if>
+			<if	test="carBean.drive!=null">
+				and #{carBean.drive} = car.drive
+			</if>
+			<if test="carBean.nationId!=null">
+				and #{carBean.nationId} = dic8.codeid
+			</if>
+			<if test="carBean.elseId!=null">
+				and #{carBean.elseId} = dic9.codeid
+			</if>
+	</sql>
+
+
+
 </mapper>
