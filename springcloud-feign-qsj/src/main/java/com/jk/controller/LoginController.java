@@ -166,4 +166,14 @@ public class LoginController {
         System.out.println(session.getId());
         return "登录成功";
     }
+
+    @RequestMapping("queryUser")
+    @ResponseBody
+    public  String  queryUser(String  phone){
+
+        Object attribute = redisTemplate.opsForValue().get(ConstantConf.SMS_LOGIN_PHONE+phone.toString());
+        String phonee = attribute.toString();
+        return  phonee;
+    }
+
 }

@@ -7,5 +7,22 @@
           insert into t_sell(phone,cartype,carseries,licensetime,mileage,licensearea,testcartime)
           values(#{phone},#{cartype},#{carseries},#{licensetime},#{mileage},#{licensearea},#{testcartime});
     </insert>
-
+    <select id="findCount" resultType="int" parameterType="map">
+       select  count(1) from  t_sell
+    </select>
+    <select id="findlist" resultType="com.jk.pojo.SellcarBean" parameterType="map">
+        SELECT sell.id,sell.phone,brand.brandName AS cartype,series.seriesName AS carseries,sell.licensetime,sell.mileage,area.area AS licenseareaName,sell.testcartime   FROM  t_sell AS sell
+        LEFT JOIN  t_area As area  ON  area.id = sell.licensearea
+        LEFT JOIN t_brand As brand ON sell.cartype = brand.id
+        LEFT JOIN t_series AS series ON sell.carseries = series.id
+        <include refid="sellwhere"></include>
+        LIMIT  #{start},#{rows}
+    </select>
+    <sql id="sellwhere">
+        <where>
+            <if test="sellcarBean.phone != null and  sellcarBean.phone != ''">
+                 and  sell.phone = #{sellcarBean.phone}
+            </if>
+        </where>
+    </sql>
 </mapper>

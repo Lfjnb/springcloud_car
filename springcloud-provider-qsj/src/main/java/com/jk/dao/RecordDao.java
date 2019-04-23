@@ -3,10 +3,9 @@ package com.jk.dao;
 import com.jk.pojo.CarBean;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
 
-public interface DealDao {
-
-
+public interface RecordDao {
 
     @Select("SELECT\n" +
             "\t\tcar.id,\n" +
@@ -47,12 +46,7 @@ public interface DealDao {
             "\t\tLEFT JOIN t_store AS store ON car.storeId = store.id\n" +
             "\t\tLEFT JOIN t_area AS area ON car.areaId = area.id\n" +
             "\t\tLEFT JOIN t_imgs as img ON img.id = (\n" +
-            "\t  SELECT MIN(s.id) FROM t_imgs s LEFT JOIN t_car c on s.carid=c.id)" +
+            "\t  SELECT MIN(s.id) FROM t_imgs s LEFT JOIN t_car c on s.carid=c.id)"+
             "where  car.id = #{value}")
-       CarBean queryDealCar(Integer carid);
-
-
-
-
-
+    List<CarBean> saveRecord(Integer carid);
 }

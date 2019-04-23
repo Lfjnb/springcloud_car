@@ -43,6 +43,9 @@ public class ConstantConf {
    //将用户登录手机号存在redis中
 	public  static  final String  SMS_LOGIN_PHONE = "sjh";
 
+	//浏览记录粗在redis
+	public  static  final String  SMS_LOOK_RECORD_CAR ="lljl";
+
 
 
 }

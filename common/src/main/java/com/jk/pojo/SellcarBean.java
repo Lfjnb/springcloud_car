@@ -19,7 +19,18 @@ public class SellcarBean implements Serializable {
 
      private  Integer licensearea;//地区
 
+    private   String  licenseareaName;//地区名称
+
      private  String  testcartime;//验车时间
+
+
+    public String getLicenseareaName() {
+        return licenseareaName;
+    }
+
+    public void setLicenseareaName(String licenseareaName) {
+        this.licenseareaName = licenseareaName;
+    }
 
     public Integer getId() {
         return id;

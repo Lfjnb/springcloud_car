@@ -4,6 +4,7 @@ package com.jk.controller;
 import com.jk.constantconf.ConstantConf;
 import com.jk.pojo.AppointmentBean;
 import com.jk.pojo.CarBean;
+import com.jk.pojo.SellcarBean;
 import com.jk.service.DealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -59,9 +60,16 @@ public class DealCompleteController {
 
     @RequestMapping("queryDealCar")
     @ResponseBody
-    public HashMap<String , Object> queryDealCar(){
+    public  List<CarBean>  queryDealCar(){
+       // stringObjectHashMap =
+       /* List<CarBean> carBeans = new ArrayList<>();
+        for (int i=0;i<stringObjectHashMap.size();i++){
+            List<CarBean> o = (List<CarBean>) stringObjectHashMap.get("carBean" + i);
+        }*/
 
-        return   dealService.queryDealCar();
+
+
+        return  dealService.queryDealCar();
     }
 
 
