@@ -7,7 +7,10 @@ $(function () {
     initcnxh()
     /*瓜子问答*/
     initgzwd()
+    /**/
+    initUser
 })
+
 /*查询瓜子问答*/
 function initgzwd() {
     $.ajax({

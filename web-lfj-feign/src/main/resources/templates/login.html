@@ -5,6 +5,8 @@
     <title></title>
     <script src="../bootstrap/jquery.min.js"></script>
     <script src="../bootstrap/showjs/loginjs.js"></script>
+    <link rel="stylesheet" href="../bootstrap/bootstrap3/css/bootstrap.css">
+    <script src="../bootstrap/bootstrap3/js/bootstrap.js"></script>
 </head>
 <style type="text/css">.announcement {
     height:34px;
@@ -556,7 +558,7 @@ a:hover {
         <!--<input type="hidden" name="callBack" value="parent.web_login_callback">-->
     <!--</form>-->
 <!--</div>-->
-<div class="pop-box pop-login show" id="login1"><form action="" method="post" onsubmit="" target="guazi_login">
+<div class="pop-box pop-login show" id="login1"><form id="myform" method="post"  target="guazi_login">
     <div class="pop-close" id="closeLogin1"></div>
     <p class="pop-tit js-logintitle">瓜子二手车直卖网</p>
     <ul class="phone-login">
@@ -566,12 +568,12 @@ a:hover {
         </li>
         <li>
             <p class="phone-login-tit"> 验证码</p>
-            <input name="code"   class="phone-login-input phone-login-code js-code1" placeholder="请输入验证码">
+            <input name="code"  id="code"  class="phone-login-input phone-login-code js-code1" placeholder="请输入验证码">
             <span id="fsyzm"> <button onclick="inityzm()" >获取验证码</button> </span>
         </li>
     </ul>
     <p class="p-error" id="loginError1"></p>
-    <button data-track-phone=".js-phoneNum1" class="sub-btn  js-checkcode" type="submit">登录</button>
+    <center><button type="button" class="btn btn-success"  onclick="logincar()" >登录</button></center>
     <p class="free-phone">免费咨询400-069-6540</p>
     <p class="agree-text">登录即视为同意<a href="#" data-gzlog="tracking_type=click&amp;eventid=92392518">《用户使用协议》</a>及<a href="https://www.guazi.com/zq_privacy/" data-gzlog="tracking_type=click&amp;eventid=92392518">《隐私权条款》</a></p>
 
@@ -583,7 +585,28 @@ a:hover {
 
 <!--<div style="display:none;" class="js-check-post-code" data-str="994884917dda02b9ee3c7dfe928071c4" data-time="1555931945"></div>-->
 
-
+<script>
+    function logincar() {
+         var  phone=$("#phone").val();
+         var  code=$("#code").val();
+             $.ajax({
+                 url:"http://192.168.1.127:8767/logina/quicklogin",
+                 type:"post",
+                 data:{
+                     phone:phone,
+                     code:code
+                 },
+                 success:function (data) {
+                     alert(data)
+                     if (data=="登录成功"){
+                         location.href="http://127.0.0.1:8081/PageController/PageOrderShow2?phone="+phone
+                     }else{
+                         alert("登陆失败，请检查手机号和验证码是否有误")
+                     }
+                 }
+             })
+    }
+</script>
 
 </body>
 

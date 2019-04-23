@@ -13,6 +13,14 @@ public class PageController {
     public   String  PageOrderShow(){
         return  "carshow2";
     }
+
+    /*跳转展示首页*/
+    @RequestMapping("PageOrderShow2")
+    public   String  PageOrderShow2(Long phone,Model model){
+        System.out.println(phone);
+        model.addAttribute("phone",phone);
+        return  "carshow2";
+    }
     /*跳转我要卖车*/
     @RequestMapping("jumpsellcar")
     public   String  jumpsellcar(){
@@ -36,4 +44,11 @@ public class PageController {
     public   String  jumpcarxq(Integer  carId){
         return  "carxiangqing";
     }
+    /*跳转我要卖车*/
+    @RequestMapping("wymc")
+    public   String  wymc(Long phone,Model  model){
+        model.addAttribute("phone",phone);
+        return  "wymc";
+    }
+
 }
