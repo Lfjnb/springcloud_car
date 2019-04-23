@@ -105,7 +105,7 @@
             columns:[
                 {checkbox:true},
                 {field:"id",title:"主键Id"},
-                {field:"carname",title:"车名"},
+                {field:"carName",title:"车名"},
                 {field:"brandName",title:"品牌"},
                 {field:"seriesName",title:"车系"},
                 {field:"price",title:"价格",onDblClickRow:function(value,row,index){
@@ -291,6 +291,20 @@
                 id:id
             },
             success:function (data) {
+                //alert(data.carAgeId)
+                 alert(data.series)
+                //alert(data.gearbox)
+              //  alert(data.carModel)
+               // alert(data.mileageId)
+              //  alert(data.carCerId)
+               // alert(data.carSeat)
+               // alert(data.carFuel)
+              //  alert(data.color)
+              //  alert(data.drive)
+              // alert(data.nationId)
+              //  alert(data.areaId)
+              //  alert(data.storeId)
+              //  alert(data.carLicense)
                 $("#id").val(data.id);
                 $("#carName3").val(data.carName);
                 $("#price3").val(data.price);
@@ -440,7 +454,7 @@
             success:function (data) {
                 var op = "<option>请选择</option>";
                 for (var i = 0;i<data.length;i++) {
-                    op += "<option type='text' name='series' value='"+data[i].codeId+"'>"+data[i].seriesName+"</option>"
+                    op += "<option type='text' name='series' value='"+data[i].id+"'>"+data[i].seriesName+"</option>"
                 }
                 $("#series3").html(op);
             }

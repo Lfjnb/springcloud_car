@@ -69,4 +69,9 @@ public class NavController {
     public String outcar(){
        return "jsp/outcar";
     }
+
+    @RequestMapping("sellcar")
+    public String sellcar(){
+       return "jsp/sellcar";
+    }
 }

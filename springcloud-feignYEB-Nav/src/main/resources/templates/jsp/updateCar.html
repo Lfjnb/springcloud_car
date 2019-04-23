@@ -36,12 +36,12 @@
 
 <div class="container-fluid">
     <form class="form-horizontal" id="updateCarForm">
-        <input type="hidden" id="updateCarId" name="carId" class="form-control" th:value="${session.carId}" />
+        <input type="hidden" id="updateCarId" class="form-control" th:value="${session.carId}" />
         <input type="hidden" id="id" name="id" class="form-control"/>
         <div class="form-group">
-            <label for="seriesName3" class="col-sm-2 control-label">车名</label>
+            <label for="carName3" class="col-sm-2 control-label">车名</label>
             <div class="col-sm-4">
-                <input id="seriesName3" class="form-control" name="seriesName"/>
+                <input id="carName3" class="form-control" name="carName"/>
             </div>
             <label for="price3" class="col-sm-2 control-label">价格</label>
             <div class="col-sm-4">
@@ -51,21 +51,21 @@
         <div class="form-group">
             <label for="brandId3" class="col-sm-2 control-label">品牌</label>
             <div class="col-sm-4">
-                <select id="brandId3" class="form-control"></select>
+                <select id="brandId3" name="brandId" class="form-control" onchange="findSeries()"></select>
             </div>
             <label for="carAgeId3" class="col-sm-2 control-label">车龄</label>
             <div class="col-sm-4">
-                <select id="carAgeId3" class="form-control"></select>
+                <select id="carAgeId3" name="carAgeId" class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
             <label for="series3" class="col-sm-2 control-label">车辆系列</label>
             <div class="col-sm-4">
-                <select id="series3" class="form-control"></select>
+                <select id="series3" name="series" class="form-control"></select>
             </div>
             <label for="gearbox3" class="col-sm-2 control-label">变速箱</label>
             <div class="col-sm-4">
-                <select id="gearbox3" class="form-control">
+                <select id="gearbox3" name="gearbox" class="form-control">
                 </select>
             </div>
         </div>
@@ -73,43 +73,43 @@
         <div class="form-group">
             <label for="carModel3" class="col-sm-2 control-label">车型</label>
             <div class="col-sm-4">
-                <select id="carModel3" class="form-control"></select>
+                <select id="carModel3" name="carModel" class="form-control"></select>
             </div>
             <label for="mileageId3" class="col-sm-2 control-label">里程表</label>
             <div class="col-sm-4">
-                <select id="mileageId3" class="form-control"></select>
+                <select id="mileageId3" name="mileageId" class="form-control"></select>
             </div>
         </div>
 
         <div class="form-group">
             <label for="carCerId3" class="col-sm-2 control-label">排量表</label>
             <div class="col-sm-4">
-                <select id="carCerId3" class="form-control"></select>
+                <select id="carCerId3" name="carCerId" class="form-control"></select>
             </div>
             <label for="carSeat3" class="col-sm-2 control-label">座位数</label>
             <div class="col-sm-4">
-                <select id="carSeat3" class="form-control"></select>
+                <select id="carSeat3" name="carSeat" class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
             <label for="carFuel3" class="col-sm-2 control-label">燃油类型</label>
             <div class="col-sm-4">
-                <select id="carFuel3" class="form-control"></select>
+                <select id="carFuel3" name="carFuel" class="form-control"></select>
             </div>
             <label for="color3" class="col-sm-2 control-label">颜色</label>
             <div class="col-sm-4">
-                <select id="color3" class="form-control"></select>
+                <select id="color3" name="color" class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
             <label for="license3" class="col-sm-2 control-label">牌照</label>
             <div class="col-sm-4">
-                <select id="license3" class="form-control">
+                <select id="license3" name="license" class="form-control">
                 </select>
             </div>
             <label for="drive3" class="col-sm-2 control-label">驱动类型</label>
             <div class="col-sm-4">
-                <select id="drive3" class="form-control">
+                <select id="drive3" name="drive" class="form-control">
                 </select>
             </div>
         </div>
@@ -117,33 +117,33 @@
         <div class="form-group">
             <label for="nationId3" class="col-sm-2 control-label">国别</label>
             <div class="col-sm-4">
-                <select id="nationId3" class="form-control"></select>
+                <select id="nationId3" name="nationId" class="form-control"></select>
             </div>
             <label for="elseId3" class="col-sm-2 control-label">其他配置</label>
             <div class="col-sm-4">
-                <select id="elseId3" class="form-control"></select>
+                <select id="elseId3" name="elseId" class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
             <label for="areaId3" class="col-sm-2 control-label">地区</label>
             <div class="col-sm-4">
-                <select id="areaId3" class="form-control"  onChange="areaId()"></select>
+                <select id="areaId3" name="areaId" class="form-control"  onChange="areaId()"></select>
             </div>
 
             <label for="storeId3" class="col-sm-2 control-label">车辆所在店铺名称</label>
             <div class="col-sm-4">
-                <select id="storeId3" class="form-control"></select>
+                <select id="storeId3" name="storeId" class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
             <label for="carLicense3" class="col-sm-2 control-label">上牌时间</label>
             <div class="col-sm-4">
-                <input id="carLicense3" class="form-control" name="price"/>
+                <input id="carLicense3" class="form-control" name="carLicense"/>
             </div>
 
             <label for="ownerId3" class="col-sm-2 control-label">车主</label>
             <div class="col-sm-4">
-                <input id="ownerId3" class="form-control" name="price" value="请输入数字："/>
+                <input id="ownerId3" class="form-control" name="ownerId"/>
             </div>
         </div>
     </form>
@@ -154,23 +154,7 @@
 <script>
 
     $(function(){
-        findBrand();
-        findSeries();
-        findCarAge();
-        carModel();
-        mileageId();
-        carSeat();
-        carFuel();
-        color();
-        nationId();
-        elseId();
-        //ownerId();
-        storeId();
-        areaId();
-        carCerId();
-        gearbox();
-        license();
-        drive();
+
     })
 
     function findBrand(){ //品牌回显
@@ -183,7 +167,7 @@
                 for (var i = 0;i<data.length;i++) {
                     op += "<option type='text' name='"+data[i].brandId+"' value='"+data[i].id+"'>"+data[i].brandName+"</option>"
                 }
-                $("#brandId").html(op);
+                $("#brandId3").html(op);
             }
         })
     }
@@ -197,7 +181,7 @@
                 for (var i = 0;i<data.drive.length;i++) {
                     op += "<option type='text' name='drive' value='"+data.drive[i].codeId+"'>"+data.drive[i].text+"</option>"
                 }
-                $("#drive").html(op);
+                $("#drive3").html(op);
             }
         })
     }
@@ -211,7 +195,7 @@
                 for (var i = 0;i<data.license.length;i++) {
                     op += "<option type='text' name='license' value='"+data.license[i].codeId+"'>"+data.license[i].text+"</option>"
                 }
-                $("#license").html(op);
+                $("#license3").html(op);
             }
         })
     }
@@ -226,7 +210,7 @@
                 for (var i = 0;i<data.carAge.length;i++) {
                     op += "<option type='text' name='carAgeId' value='"+data.carAge[i].codeId+"'>"+data.carAge[i].text+"</option>"
                 }
-                $("#carAgeId").html(op);
+                $("#carAgeId3").html(op);
             }
         })
     }
@@ -240,24 +224,24 @@
                 for (var i = 0;i<data.gearbox.length;i++) {
                     op += "<option type='text' name='gearbox' value='"+data.gearbox[i].codeId+"'>"+data.gearbox[i].text+"</option>"
                 }
-                $("#gearbox").html(op);
+                $("#gearbox3").html(op);
             }
         })
     }
-    function findSeries(){ //车系列回显
+    function findSeries(id){ //车系列回显
         $.ajax({
             url:"http://192.168.1.110:9999/Series/querySeries",
             data:{
-                id:1
+                id:id
             },
             type:"get",
             dataType:"json",
             success:function (data) {
                 var op = "<option>请选择</option>";
                 for (var i = 0;i<data.length;i++) {
-                    op += "<option type='text' name='series' value='"+data[i].codeId+"'>"+data[i].seriesName+"</option>"
+                    op += "<option type='text' name='series' value='"+data[i].id+"'>"+data[i].seriesName+"</option>"
                 }
-                $("#series").html(op);
+                $("#series3").html(op);
             }
         })
     }
@@ -271,7 +255,7 @@
                 for (var i = 0;i<data.model.length;i++) {
                     op += "<option type='text' name='carModel' value='"+data.model[i].codeId+"'>"+data.model[i].text+"</option>"
                 }
-                $("#carModel").html(op);
+                $("#carModel3").html(op);
             }
         })
     }
@@ -285,7 +269,7 @@
                 for (var i = 0;i<data.mileage.length;i++) {
                     op += "<option type='text' name='mileageId' value='"+data.mileage[i].codeId+"'>"+data.mileage[i].text+"</option>"
                 }
-                $("#mileageId").html(op);
+                $("#mileageId3").html(op);
             }
         })
     }
@@ -299,7 +283,7 @@
                 for (var i = 0;i<data.cer.length;i++) {
                     op += "<option type='text' name='carCerId' value='"+data.cer[i].codeId+"'>"+data.cer[i].text+"</option>"
                 }
-                $("#carCerId").html(op);
+                $("#carCerId3").html(op);
             }
         })
     }
@@ -313,7 +297,7 @@
                 for (var i = 0;i<data.carSeat.length;i++) {
                     op += "<option type='text' name='carSeat' value='"+data.carSeat[i].codeId+"'>"+data.carSeat[i].text+"</option>"
                 }
-                $("#carSeat").html(op);
+                $("#carSeat3").html(op);
             }
         })
     }
@@ -327,7 +311,7 @@
                 for (var i = 0;i<data.carFuel.length;i++) {
                     op += "<option type='text' name='carFuel' value='"+data.carFuel[i].id+"'>"+data.carFuel[i].text+"</option>"
                 }
-                $("#carFuel").html(op);
+                $("#carFuel3").html(op);
             }
         })
     }
@@ -341,7 +325,7 @@
                 for (var i = 0;i<data.color.length;i++) {
                     op += "<option type='text' name='color' value='"+data.color[i].id+"'>"+data.color[i].text+"</option>"
                 }
-                $("#color").html(op);
+                $("#color3").html(op);
             }
         })
     }
@@ -355,7 +339,7 @@
                 for (var i = 0;i<data.nation.length;i++) {
                     op += "<option type='text' name='nationId' value='"+data.nation[i].codeId+"'>"+data.nation[i].text+"</option>"
                 }
-                $("#nationId").html(op);
+                $("#nationId3").html(op);
             }
         })
     }
@@ -369,7 +353,7 @@
                 for (var i = 0;i<data.configuration.length;i++) {
                     op += "<option type='text' name='elseId' value='"+data.configuration[i].id+"'>"+data.configuration[i].text+"</option>"
                 }
-                $("#elseId").html(op);
+                $("#elseId3").html(op);
             }
         })
     }
@@ -383,7 +367,7 @@
                 for (var i = 0;i<data.length;i++) {
                     op += "<option type='text' name='storeId' value='"+data[i].id+"'>"+data[i].storName+"</option>"
                 }
-                $("#storeId").html(op);
+                $("#storeId3").html(op);
             }
         })
     }
@@ -397,7 +381,7 @@
                 for (var i = 0;i<data.length;i++) {
                     op += "<option type='text' name='areaId' value='"+data[i].id+"'>"+data[i].area+"</option>"
                 }
-                $("#areaId").html(op);
+                $("#areaId3").html(op);
             }
         })
     }
