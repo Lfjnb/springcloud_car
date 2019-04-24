@@ -174,7 +174,7 @@
             callback:function(result){
                 if(result){
                     $.ajax({
-                        url:"http://192.168.1.110:9999/Car/deleteCar",
+                        url:"http://127.0.0.1:9999/Car/deleteCar",
                         type:"post",
                         data:{
                             id:ids
@@ -235,7 +235,7 @@
                     className: 'btn-info',
                     callback: function(){
                         $.ajax({
-                            url:'http://192.168.1.110:9999/Car/addCar',
+                            url:'http://127.0.0.1:9999/Car/addCar',
                             type:'post',
                             data:$("#carForm").serialize(),
                             success:function(){
@@ -285,7 +285,7 @@
         drive();
         //回显数据
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/findCarById",
+            url:"http://127.0.0.1:9999/Car/findCarById",
             type:"post",
             saync:false,
             data:{
@@ -351,7 +351,7 @@
                     className: 'btn-info',
                     callback: function(){
                         $.ajax({
-                            url:'http://192.168.1.110:9999/Car/updateCarById',
+                            url:'http://127.0.0.1:9999/Car/updateCarById',
                             type:'post',
                             data:$("#updateCarForm").serialize(),
                             success:function(){
@@ -373,7 +373,7 @@
 
     function findBrand(){ //品牌回显
         $.ajax({
-            url:"http://192.168.1.110:9999/Brand/queryBrand",
+            url:"http://127.0.0.1:9999/Brand/queryBrand",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -388,7 +388,7 @@
     }
     function drive(){ //驱动类型
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -402,7 +402,7 @@
     }
     function license(){ //车牌所在地
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -417,7 +417,7 @@
 
     function findCarAge(){ //车龄
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -432,7 +432,7 @@
     }
     function gearbox(){ //变速箱
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -446,7 +446,7 @@
     }
     function findSeries(){ //车系列回显
         $.ajax({
-            url:"http://192.168.1.110:9999/Series/querySeries",
+            url:"http://127.0.0.1:9999/Series/querySeries",
             data:{
                 id:1
             },
@@ -463,7 +463,7 @@
     }
     function carModel(){ //车型
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -477,7 +477,7 @@
     }
     function mileageId(){ //里程表
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -491,7 +491,7 @@
     }
     function carCerId(){ //排量表
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -505,7 +505,7 @@
     }
     function carSeat(){ //座位数
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -519,7 +519,7 @@
     }
     function carFuel(){ //燃油类型
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -533,7 +533,7 @@
     }
     function color(){ //颜色
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -547,7 +547,7 @@
     }
     function nationId(){ //国别表 。。。
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -561,7 +561,7 @@
     }
     function elseId(){ //其他配置 。。。
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryOuther",
+            url:"http://127.0.0.1:9999/Car/queryOuther",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -575,7 +575,7 @@
     }
     function storeId(){ //车辆所在店铺表。。。
         $.ajax({
-            url:"http://192.168.1.110:9999/Store/queryStore",
+            url:"http://127.0.0.1:9999/Store/queryStore",
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -589,7 +589,7 @@
     }
     function areaId(){ //地区。。。
         $.ajax({
-            url:"http://192.168.1.110:9999/Area/queryArea",
+            url:"http://127.0.0.1:9999/Area/queryArea",
             type:"get",
             dataType:"json",
             success:function (data) {

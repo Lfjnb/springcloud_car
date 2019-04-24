@@ -29,7 +29,7 @@ public interface CarService {
      *  查询汽车总表
      */
     @RequestMapping("queryCar")
-    HashMap<String,Object> queryCar(@RequestParam Integer page, @RequestParam Integer rows,@RequestBody CarBean carBean);
+    HashMap<String,Object> queryCar(@RequestParam Integer page, @RequestParam Integer rows, @RequestBody CarBean carBean);
     /**
      *  查询汽车其它配件表
      */

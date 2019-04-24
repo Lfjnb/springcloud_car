@@ -5,7 +5,7 @@ function inityzm() {
         return
     }
     $.ajax({
-        url:"http://192.168.1.127:8767/logina/findduanxin",
+        url:"http://127.0.0.1:8768/logina/findduanxin",
         type:"post",
         data:{
             phone:phone

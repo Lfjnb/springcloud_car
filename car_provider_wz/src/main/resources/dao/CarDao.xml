@@ -263,7 +263,7 @@ FROM
 		LEFT JOIN t_area AS area ON car.areaId = area.id
 		LEFT JOIN t_imgs as img ON img.id = (
 		SELECT MIN(s.id) FROM t_imgs s LEFT JOIN t_car car1 on s.carid=car1.id)
-		<include refid="CarSql"></include>
+
 	LIMIT #{start},#{rows}
 
 
@@ -319,7 +319,7 @@ FROM
     <!-- 查询汽车总表总条数 -->
     <select id="queryCount"  resultType="long">
         select count(1) from t_car  car
-        <include refid="CarSql"></include>
+
     </select>
 
 

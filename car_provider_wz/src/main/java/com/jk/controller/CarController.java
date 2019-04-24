@@ -184,7 +184,7 @@ public class CarController {
     @ResponseBody
     public HashMap<String,Object> queryOuther() {
 
-        HashMap<String, Object> mapObject = (HashMap<String, java.lang.Object>) redisTemplate.opsForValue().get("queryOuther" + 1);
+        HashMap<String, Object> mapObject = (HashMap<String, Object>) redisTemplate.opsForValue().get("queryOuther" + 1);
 
         try {
             if (mapObject == null) {

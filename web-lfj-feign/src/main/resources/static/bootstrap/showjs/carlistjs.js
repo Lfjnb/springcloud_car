@@ -14,7 +14,7 @@ function huoquId() {
 /*查询地区*/
 function initdiqu() {
     $.ajax({
-        url:"http://192.168.1.110:9999/Area/queryArea",
+        url:"http://127.0.0.1:9999/Area/queryArea",
         type:"post",
         success:function (data) {
             var   html="";
@@ -32,7 +32,7 @@ function initdiqu() {
 /*查询汽车品牌*/
 function initCarType() {
     $.ajax({
-        url:"http://192.168.1.110:9999/Brand/queryBrand",
+        url:"http://127.0.0.1:9999/Brand/queryBrand",
         type:"post",
         success:function (data) {
             for (var i=0; i<data.length;i++){
@@ -50,7 +50,7 @@ function selectCarAll(id) {
     $("#pinp").val(id);
 /*这里添加汽车品牌id 到 form*/
     $.ajax({
-        url:"http://192.168.1.110:9999/Series/querySeries",
+        url:"http://127.0.0.1:9999/Series/querySeries",
         type:"post",
         data:{
             id:id

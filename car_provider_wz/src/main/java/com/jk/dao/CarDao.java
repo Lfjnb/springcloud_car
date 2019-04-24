@@ -23,11 +23,11 @@ public interface CarDao {
     /**
      *  查询汽车总表总条数
      */
-    long queryCount( CarBean carBean);
+    long queryCount(CarBean carBean);
     /**
      *  查询汽车总表
      */
-    List<CarBean> queryCar( long start, Integer rows,@Param("carBean") CarBean carBean);
+    List<CarBean> queryCar(long start, Integer rows, CarBean carBean);
 
     //查询字典表车 颜色
     @Select("SELECT *  FROM t_dictionary where codepid=1009")

@@ -64,7 +64,7 @@
                 <label for="licensetime">上牌时间</label>
                 <input type="text" class="form-control date" name="licensetime" id="licensetime">
             </div></br>
-            <input type="text" id="phone" name="phone"  >
+            <input type="hidden" id="phone" name="phone"  >
             <div class="form-group">
                 <label for="cartype">售卖车型</label>
                 <select class="selectpicker" name="cartype" id="cartype"  onchange="initCarTypeMini()">
@@ -102,7 +102,7 @@
     });
 function initCarType() {
     $.ajax({
-        url:"http://192.168.1.110:9999/Brand/queryBrand",
+        url:"http://127.0.0.1:9999/Brand/queryBrand",
         type:"post",
         success:function (data) {
             var   html="    <option value=' ' >请选择<option>";
@@ -120,7 +120,7 @@ function initCarTypeMini() {
         return
     }else{
         $.ajax({
-            url:"http://192.168.1.110:9999/Series/querySeries",
+            url:"http://127.0.0.1:9999/Series/querySeries",
             type:"post",
             data:{
                 id:id
@@ -158,7 +158,7 @@ function addmaiCar() {
     }
 
     $.ajax({
-        url:"http://192.168.1.127:8767/sell/addSellCar",
+        url:"http://127.0.0.1:8768/sell/addSellCar",
         type:"post",
         data:$("#myForm").serialize(),
         success:function (data) {

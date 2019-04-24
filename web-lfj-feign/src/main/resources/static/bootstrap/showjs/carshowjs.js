@@ -14,7 +14,7 @@ $(function () {
 /*查询瓜子问答*/
 function initgzwd() {
     $.ajax({
-        url:"http://192.168.1.101:8767/isseu/findIsseu",
+        url:"http://127.0.0.1:8768/isseu/findIsseu",
         type:"post",
         success:function (data) {
             for (var i=0; i<data.length;i++){
@@ -29,7 +29,7 @@ function initgzwd() {
 /*查询地区*/
 function initdiqu() {
    $.ajax({
-       url:"http://192.168.1.110:9999/Area/queryArea",
+       url:"http://127.0.0.1:9999/Area/queryArea",
        type:"post",
        success:function (data) {
            for (var i=0; i<data.length;i++){
@@ -44,7 +44,7 @@ function initdiqu() {
 /*汽车猜你喜欢*/
 function initcnxh() {
     $.ajax({
-        url:"http://192.168.1.110:9999/Car/queryCarRandom",
+        url:"http://127.0.0.1:9999/Car/queryCarRandom",
         type:"post",
         success:function (data) {
             for (var i=0; i<data.length;i++){
@@ -76,7 +76,7 @@ function initcnxh() {
 /*查询汽车品牌*/
 function initCarType() {
     $.ajax({
-        url:"http://192.168.1.110:9999/Brand/queryBrand",
+        url:"http://127.0.0.1:9999/Brand/queryBrand",
         type:"post",
         success:function (data) {
             for (var i=0; i<data.length;i++){

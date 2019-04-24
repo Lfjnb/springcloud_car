@@ -42,7 +42,7 @@
     function showImg(){
         var id = $("#carId").val();
         $.ajax({
-            url:"http://192.168.1.110:9999/Car/queryImgs",
+            url:"http://127.0.0.1:9999/Car/queryImgs",
             type:"get",
             data:{id:id},
             dataType:"json",
@@ -76,7 +76,7 @@
                     className: 'btn-info',
                     callback: function(){
                         $.ajax({
-                            url:'http://192.168.1.110:9999/Car/addImgs',
+                            url:'http://127.0.0.1:9999/Car/addImgs',
                             type:'post',
                             data:$("#imgForm").serialize(),
                             success:function(){
