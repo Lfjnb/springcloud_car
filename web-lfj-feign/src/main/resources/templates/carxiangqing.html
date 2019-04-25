@@ -10401,7 +10401,6 @@
                         </script>
 <script>
      var id=[[${carId}]]
-     alert(id)
     //查看汽车图片
     $.ajax({
         url:'http://localhost:9999/Car/queryImgs',
@@ -10521,7 +10520,7 @@
                 $("#basicSelect").html(html);
             },
             error: function () {
-                alert("加载失败")
+
             }
         })
 
@@ -10583,26 +10582,73 @@
                 $("#engineSelect").html(html);
             },
             error: function () {
-                alert("加载失败")
-            }
-        })
-
-
-    //底盘及制动
-
-        $.ajax({
-            url: 'http://127.0.0.1:8080/queryBrake',
-            type: 'post',
-            data: {
-                carId: 1
-            },
-            dataType: 'json',
-            success: function (data) {
-                var html = "";
 
             }
         })
 
+
+     //底盘及制动
+     function initBrake() {
+         $.ajax({
+             url: 'http://127.0.0.1:8080/queryBrake',
+             type: 'post',
+             data: {
+                 carId: 1
+             },
+             dataType: 'json',
+             success: function (data) {
+                 var html = "";
+                 for (var i = 0; i < data.length; i++) {
+
+                     html +=
+                         "<tr>" +
+                         "<td width='50%' class='td1'>驱动方式</td>" +
+                         "<td width='50%' class='td2'>" + data[i].driveType + "</td>" +
+                         "</tr>" +
+                         "<tr>" +
+                         "<td width='50%' class='td1'>助力类型</td>" +
+                         "<td width='50%' class='td2'>" + data[i].helpType + "</td>" +
+                         "</tr>" +
+                         "<tr>" +
+                         "<td width='50%' class='td1'>前悬挂类型</td>" +
+                         "<td width='50%' class='td2'>" + data[i].frontSuspension + "</td>" +
+                         "</tr>" +
+                         "<tr>" +
+                         "<td width='50%' class='td1'>后悬挂类型</td>" +
+                         "<td width='50%' class='td2'>" + data[i].rearSuspension + "</td>" +
+                         "</tr>" +
+                         "<tr>" +
+                         "<td width='50%' class='td1'>前制动类型</td>" +
+                         "<td width='50%' class='td2'>" + data[i].frontBrake + "</td>" +
+                         "</tr>" +
+                         "<tr>" +
+                         "<td width='50%' class='td1'>后制动类型</td>" +
+                         "<td width='50%' class='td2'>" + data[i].rearBrake + "</td>" +
+                         "</tr>" +
+                         "<tr>" +
+                         "<td width='50%' class='td1'>驻车制动类型</td>" +
+                         "<td width='50%' class='td2'>" + data[i].stopBrake + "</td>" +
+                         "</tr>" +
+                         "<tr>" +
+                         "<td width='50%' class='td1'>前轮胎规格</td>" +
+                         "<td width='50%' class='td2'>" + data[i].frontLuntai + "</td>" +
+                         "</tr>" +
+                         "<tr>" +
+                         "<td width='50%' class='td1'>后轮胎规格</td>" +
+                         "<td width='50%' class='td2'>" + data[i].rearLuntai + "</td>" +
+                         "</tr>"+
+                         "<tr>" +
+                         "<td width='50%' class='td1'></td>" +
+                         "<td width='50%' class='td2'></td>" +
+                         "</tr>"
+                 }
+                 $("#brakeSelect").html(html);
+             },
+             error: function () {
+
+             }
+         })
+     }
     //安全配置
 
         $.ajax({
@@ -10666,7 +10712,7 @@
                 $("#securitySelect").html(html);
             },
             error: function () {
-                alert("加载失败")
+
             }
         })
 
@@ -10734,7 +10780,6 @@
                 $("#externalSelect").html(html);
             },
             error: function () {
-                alert("加载失败")
             }
         })
 
@@ -10800,23 +10845,23 @@
                 $("#internalSelect").html(html);
             },
             error: function () {
-                alert("加载失败")
+
             }
         })
 
 
     //查看汽车所有图片
       $.ajax({
-          url:'http://localhost:9999/Car/queryImgs',
+          url:'http://localhost:9999/Car/queryCarById',
           data:{
               id:id
           },
           success:function (data) {
               var html="";
-              for(var i=0;i<data.length;i++){
+              for(var i=0;i<data.carBean.length;i++){
                   html+=""+
                       "<li data-role='img' data-index='0' data-title=''style='display: list-item;'>"+
-                      "<img src="+data[i].imgurl+">"+
+                      "<img src="+data.carBean[i].imgUrl+">"+
                       "</li>"
               }
                 $("#daimgs").html(html)

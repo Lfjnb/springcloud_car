@@ -47,7 +47,7 @@ function initCarType() {
 
 /*查询车系*/
 function selectCarAll(id) {
-    $("#pinp").val(id);
+    $("#qcpp").val(id);
 /*这里添加汽车品牌id 到 form*/
     $.ajax({
         url:"http://127.0.0.1:9999/Series/querySeries",

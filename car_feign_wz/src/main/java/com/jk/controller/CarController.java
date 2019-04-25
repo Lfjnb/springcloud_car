@@ -10,6 +10,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.search.SearchHit;
@@ -74,13 +75,12 @@ public class CarController {
 
 
     /**
-     *
      * @ 通过ES 全局搜索
      */
     @RequestMapping("queryCares")
     @ResponseBody
-    public List<CarBean2> findBookList(String carNames, Integer page, Integer rows) {
-        page=1;
+    public List<CarBean2> findBookList(CarBean carBean ,Integer page, Integer rows) {
+        page=page==null? 1 :page;
         rows=12;
         List<CarBean2> carList = new ArrayList<>();
         Client client = elasticsearchTemplate.getClient();
@@ -94,22 +94,78 @@ public class CarController {
         searchRequestBuilder.setQuery(QueryBuilders.matchAllQuery());
         searchRequestBuilder.setFrom((page - 1) * rows).setSize(rows);
         //条件
-        if (carNames!=null &&  !carNames.equals("")) {
+        if (carBean.getCarName()!=null &&  !carBean.getCarName().equals("")) {
             searchRequestBuilder = client.prepareSearch("1809a")
                     .setTypes("car")
-                    .setQuery(new QueryStringQueryBuilder(carNames));
+                    .setQuery(new QueryStringQueryBuilder(carBean.getCarName()));
         }
-//        if (carBean.getCarAgeName()!=null && !carBean.getCarAgeName().equals("-1")){
-//            searchRequestBuilder=client.prepareSearch("1809a")
-//                    .setTypes("car")
-//                    .setQuery(QueryBuilders.matchQuery("carAgeName",carBean.getCarAgeName()));
-//        }
-//        if (carBean.getCarModelName()!=null && !carBean.getCarModelName().equals("-1")){
-//            searchRequestBuilder=client.prepareSearch("1809a")
-//                    .setTypes("car")
-//                    .setQuery(QueryBuilders.matchQuery("carModelName",carBean.getCarModelName()));
-//        }
-
+        if (carBean.getCarAgeName()!=null && !carBean.getCarAgeName().equals("-1")){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("carAgeName",carBean.getCarAgeName()));
+        }
+        if (carBean.getCarModelName()!=null && !carBean.getCarModelName().equals("-1")){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("carModelName",carBean.getCarModelName()));
+        }
+        if (carBean.getBrandId()!=null&& carBean.getBrandId()!=-1){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("brandId",carBean.getBrandId()));
+        }
+        if (carBean.getSeries()!=null && carBean.getSeries()!=-1){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("series",carBean.getSeries()));
+        }
+        if (carBean.getGearbox()!=null && carBean.getGearbox()!=-1){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("gearbox",carBean.getGearbox()));
+        }
+        if (carBean.getMileageName()!=null&& !carBean.getMileageName().equals("-1")){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("mileageName",carBean.getMileageName()));
+        }
+        if (carBean.getCarSeatName()!=null&& !carBean.getCarSeatName().equals("-1")){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("carSeatName",carBean.getCarSeatName()));
+        }
+        if (carBean.getCarFuelName()!=null&& !carBean.getCarFuelName().equals("-1")){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("carFuelName",carBean.getCarFuelName()));
+        }
+        if (carBean.getColorName()!=null&& !carBean.getColorName().equals("-1")){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("colorName",carBean.getColorName()));
+        }
+        if (carBean.getDrive()!=null&&carBean.getDrive()!=-1){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("drive",carBean.getDrive()));
+        }
+        if (carBean.getNationName()!=null&& !carBean.getNationName().equals("-1")){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("nationName",carBean.getNationName()));
+        }
+        if (carBean.getElseName()!=null&& !carBean.getElseName().equals("-1")){
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.matchQuery("elseName",carBean.getElseName()));
+        }
+        if(carBean.getStartPrice()!=null|| carBean.getEndPrice()!=null){
+            carBean.setStartPrice(carBean.getStartPrice()==null? 0.0 : carBean.getStartPrice());
+            carBean.setEndPrice(carBean.getEndPrice()==null? 99999999999.0:carBean.getEndPrice());
+            searchRequestBuilder=client.prepareSearch("1809a")
+                    .setTypes("car")
+                    .setQuery(QueryBuilders.rangeQuery("price").gte(carBean.getStartPrice()).lt(carBean.getEndPrice()));
+        }
 
         //得到查询结果
         SearchResponse searchResponse = searchRequestBuilder.get();
@@ -257,8 +313,6 @@ public class CarController {
         return bool;
     }
 
-
-
     /**
      * 修改根据Id回显
      */
@@ -343,7 +397,6 @@ public class CarController {
         List<ImgsBean> list = carService.queryImgs(id);
         return list;
     }
-
 
 
 

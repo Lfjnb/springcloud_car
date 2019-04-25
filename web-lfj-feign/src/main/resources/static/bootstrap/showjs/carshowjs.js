@@ -34,7 +34,7 @@ function initdiqu() {
        success:function (data) {
            for (var i=0; i<data.length;i++){
                var   html="";
-               html='<a style="color: black" href="javascript:selectCarBydq('+data[i].id+')">'+data[i].area+'</a>  &nbsp;&nbsp;'
+               html='<a style="color: black" href="javascript:selectCarBydq2(\''+data[i].area+'\')">'+data[i].area+'</a>  &nbsp;&nbsp;'
                $("#div").append(html)
            }
 
@@ -81,7 +81,7 @@ function initCarType() {
         success:function (data) {
             for (var i=0; i<data.length;i++){
                 var   html="";
-                html='<a href="javascript:selectCarBydq('+data[i].id+')" data-gzlog="tracking_type=click&amp;eventid=0050080000000024&amp;brand=dazhong">'+data[i].brandName+'</a> &nbsp;&nbsp; '
+                html='<a href="javascript:selectCarBydq(\'' +data[i].brandName+ '\')" data-gzlog="tracking_type=click&amp;eventid=0050080000000024&amp;brand=dazhong">'+data[i].brandName+'</a> &nbsp;&nbsp; '
                 $("#buycar-brand").append(html)
             }
 
@@ -95,9 +95,13 @@ function jumpcarxiangqing(id) {
 function jumpsellcar() {
     location.href="../PageController/jumpsellcar";
 }
-/*点击地区跳转到汽车展示页面   传入地区id*/
-function  selectCarBydq(id){
-    location.href="../PageController/jumpcarlist?dqid="+id;
+/*点击地区跳转到汽车展示页面   传入地区Name*/
+function  selectCarBydq(carName){
+    location.href="../PageController/jumpcarlist?carName="+carName;
+}
+
+function  selectCarBydq2(dqName){
+    location.href="../PageController/jumpcarlist3?dqName="+dqName;
 }
 /*点击汽车品牌跳转到汽车展示页面   传入地区id*/
 function  selectCarBypp(id){

@@ -10256,7 +10256,7 @@
         <div class="search js-search">
             <div class="search-box suggestion_widget" data-default-count="9">
                 <input type="text" class="search-input js_search_input_index" placeholder="搜索您想要的车"
-                       data-role="keywordInput" name="keyword" autocomplete="off" data-domain="bj" id="carName">
+                       data-role="keywordInput" name="keyword" autocomplete="off" data-domain="bj" id="carNames">
                 <button class="search-btn" data-gzlog="tracking_type=click&amp;eventid=0020070000000022"
                         type="button" onclick="carChange()"></button>
                 <input type="hidden" value="bj" name="hiddenCity">
@@ -10846,20 +10846,20 @@
             </dd>
         </dl>
         <!-- 价格 -->
+        <form  id ="carForm">
         <dl class="clearfix">
             <dt>价格</dt>
             <dd>
                 <div class="dd-top">
 
-
                     <div class="rangeFilter" data-url-template="/bj/buy/b{{begin}}e{{end}}/">
-                        <input type="text" value="" class="screen-price js-begin" data-default-value="0" size="4"
-                               maxlength="3" id="my_price_b" name="b">
+                        <input type="text" value="" class="screen-price js-begin"  size="8"
+                                 name="startPrice">
                         <em class="screen-em">-</em>
-                        <input value="" type="text" class="screen-price js-end" data-default-value="999" size="4"
-                               maxlength="3" id="my_price_e" name="e">
+                        <input value="" type="text" class="screen-price js-end"  size="8"
+                                 name="endPrice">
                         <em class="screen-em">万</em>
-                        <button class="price-btn js-btn">确定</button>
+                        <button class="price-btn js-btn" onclick="carChange()">确定</button>
                     </div>
                 </div>
             </dd>
@@ -10868,15 +10868,15 @@
         <dl class="clearfix js-more">
             <dt>更多</dt>
 
-            <form  id ="carForm">
             <dd>
-                <input type="hidden" id="name" name="carName" >
+
+                <input type="text" id="name" name="carName" >
                 <!--车辆品牌 -->
-                <input type="hidden" id="pinp" name="brandId" value="-1" onchange="carChange()">
+                <input type="text" id="qcpp" name="brandId" value="-1" onchange="carChange()">
                 <!--车辆系列 -->
-                <input type="hidden" id="cx" name="series" value="-1" onchange="carChange()" >
+                <input type="text" id="cx" name="series" value="-1" onchange="carChange()" >
                 <!--车辆地区 -->
-                <input type="hidden" id="diqu" name="areaId"  value="-1" onchange="carChange()">
+                <input type="text" id="dqName" name="areaName"  value="-1" onchange="carChange()">
 
                 <!-- 第一个li是默认大小，第二个是加长版，第三个是颜色下拉 -->
                 <ul class="dd-more ">
@@ -10895,7 +10895,7 @@
                     </li>
                     <!-- 变速箱 -->
                     <li class="js-hover">
-                        <select name = "gearboxName" id ="gearbox" onchange="carChange()">
+                        <select name = "gearbox" id ="gearbox" onchange="carChange()">
 
                         </select>
 
@@ -10945,7 +10945,7 @@
                     </li>
                     <!-- 驱动类型 -->
                     <li class="js-hover js-hide">
-                        <select name = "driveName" id ="drive" onchange="carChange()">
+                        <select name = "drive" id ="drive" onchange="carChange()">
 
                         </select>
                     </li>
@@ -10966,9 +10966,9 @@
                 </ul>
                <!-- <span class="dd-btn js-disMore js-option-hid" data-local="">全部<i></i></span>-->
             </dd>
-            </form>
-        </dl>
 
+        </dl>
+        </form>
     </div>
 
     <!-- 筛选结果 -->
@@ -11035,29 +11035,9 @@
     <!--当前筛选-->
     <input type="hidden" id="listFilter" value="{&quot;city_filter&quot;:&quot;12&quot;,&quot;num&quot;:15066}">
     <!-- 分页展示 -->
-    <div class="pageBox" data-widget="app/ms_v2/common/list_page.js#pagination">
-        <ul class="pageLink clearfix">
-            <li class="link-on"><a><span>1</span></a></li>
-            <li><a href="https://www.guazi.com/bj/buy/o2/#bread"
-                   data-gzlog="tracking_type=click&amp;eventid=0060000000000060&amp;pageno=2"><span>2</span></a></li>
-            <li><a href="https://www.guazi.com/bj/buy/o3/#bread"
-                   data-gzlog="tracking_type=click&amp;eventid=0060000000000060&amp;pageno=3"><span>3</span></a></li>
-            <li><a href="https://www.guazi.com/bj/buy/o4/#bread"
-                   data-gzlog="tracking_type=click&amp;eventid=0060000000000060&amp;pageno=4"><span>4</span></a></li>
-            <li><a href="https://www.guazi.com/bj/buy/o5/#bread"
-                   data-gzlog="tracking_type=click&amp;eventid=0060000000000060&amp;pageno=5"><span>5</span></a></li>
-            <li><a href="https://www.guazi.com/bj/buy/o6/#bread"
-                   data-gzlog="tracking_type=click&amp;eventid=0060000000000060&amp;pageno=6"><span>6</span></a></li>
-            <li><a href="https://www.guazi.com/bj/buy/o7/#bread"
-                   data-gzlog="tracking_type=click&amp;eventid=0060000000000060&amp;pageno=7"><span>7</span></a></li>
-            <li class="point"><a><span>...</span></a></li>
-            <li><a href="https://www.guazi.com/bj/buy/o50/#bread"
-                   data-gzlog="tracking_type=click&amp;eventid=0060000000000060&amp;pageno=50"><span>50</span></a></li>
-            <li><a href="https://www.guazi.com/bj/buy/o2/#bread"
-                   data-gzlog="tracking_type=click&amp;eventid=0060000000000059"
-                   class="next"><span>下一页</span><em>&gt;</em></a></li>
-        </ul>
-    </div>
+    <div class="page-box house-lst-page-box" ><a href="javascript:fenye(1)" data-page="2">上一页</a>
+        &nbsp<input id="yeshu" style="width: 40px;height: 30px;text-align: center" value="1">
+        <a href="javascript:fenye(2)" data-page="2">下一页</a></div>
     <!-- 页面一键订阅 s-->
     <!-- 页面一键订阅 e-->
 
@@ -12228,15 +12208,14 @@
         drive();
         nationId();
         elseId();
-        var id=[[${dqid}]]
 
-        /*地区传过来的值*/
-        $("[name='dqid']").val(id)
-        selectCarAllbyid(id)
 
-        /*es传过来的值*/
-        var carName=[[${carName}]]
-        selectCarAllbyes(carName)
+        $("#dqName").val("[[${dqName}]]")
+        selectCarAllbyid(dqName)
+        $("#carpp").val("[[${carName}]]")
+
+
+
     })
 
 
@@ -12515,20 +12494,15 @@
                 $("#elseId").html(op);
             }
         })
-
     }
 
 
-
     function carChange() {
-
-
+        $("#name").val($("#carNames").val())
         //var carFormser= $("#carForm").serialize();
         $.ajax({
             url:"http://localhost:9999/Car/queryCares",
-            data:{
-               carNames: $("#carName").val()
-            },
+            data:$("#carForm").serialize(),
             success:function(data){
                 var html="";
                 for (var i=0;i<data.length;i++){
@@ -12588,6 +12562,60 @@
     }
     })
 
+    function fenye(type){
+        var page=0;
+        var bb=100;
+        var a=parseInt($("#yeshu").val());
+        var b=Math.ceil(parseInt(bb)/2);
+        if(type==1) {
+            if (a == 1) {
+                alert("已经是首页");
+            } else {
+                $("#yeshu").val(a-1);
+                page=  $("#yeshu").val();
+            }
+        }
+        if (type == 2) {
+            if (a == b) {
+                alert("已经是尾页");
+            } else {
+                $("#yeshu").val(a+1);;
+                page=$("#yeshu").val();
+            }
+        }
+        $.ajax({
+            url:'http://localhost:9999/Car/queryCares',
+            dataType:"json",
+            data:{
+                page:page
+            },
+            success:function (data) {
+                var html="";
+                for (var i=0;i<data.length;i++){
+                    html+=""+
+                        "<li data-scroll-track='79479516@0@0@0&amp;0120000000000057'>"+
+                        "<a title='"+data[i].carName+"' href='#' target='_blank' class='car-a' data-gzlog='tracking_type=click&amp;eventid=0120000000000057&amp;carid=79479516&amp;pageno=0&amp;position=0&amp;city_filter=12&amp;num=15066&amp;is_baomai=0'>"+
+                        "<img src='"+data[i].imgUrl+"'>"+
+                        " <h2 class='t'>"+data[i].seriesName+" "+data[i].carName+"</h2>"+
+
+                        "<div class='t-i'>"+data[i].carLicense+"<span class='icon-pad'>|</span>"+data[i].mileageName+"</div>"+
+                        "<div class='t-price'>"+
+
+                        "<p>"+(data[i].price/10000)+"<span>万</span></p>"+
+
+                        "<i class='i-green'>准新车</i><em class='line-through'></em></div>"+
+
+                        "<em class='icon-new'>新上架</em>"+
+
+                        "</a>"+
+                        "</li>"
+                }
+                $("#setli").html(html);
+            }
+        })
+
+
+    }
 
 
 

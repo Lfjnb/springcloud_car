@@ -40,7 +40,9 @@
 	store.storName as storeName,
 	area.area as areaName,
 	car.carLicense,
-	img.imgurl,
+	car.imgurl as imgUrl,
+	car.brandId as brandId,
+	car.series as series,
 	car.carName
 FROM
 	t_car AS car
@@ -58,8 +60,6 @@ FROM
 	LEFT JOIN t_owner AS own ON car.ownerId = own.id
 	LEFT JOIN t_store AS store ON car.storeId = store.id
 	LEFT JOIN t_area AS area ON car.areaId = area.id
-	LEFT JOIN t_imgs as img ON img.id = (
-	  SELECT MIN(s.id) FROM t_imgs s LEFT JOIN t_car c on s.carid=c.id)
 	</select>
 
 
@@ -132,7 +132,7 @@ FROM
 		store.storName as storeName,
 		area.area as areaName,
 		car.carLicense,
-		img.imgurl,
+		car.imgurl as imgUrl,
 		car.carname as carName
 	FROM
 		t_car AS car
@@ -150,8 +150,6 @@ FROM
 		LEFT JOIN t_owner AS own ON car.ownerId = own.id
 		LEFT JOIN t_store AS store ON car.storeId = store.id
 		LEFT JOIN t_area AS area ON car.areaId = area.id
-		LEFT JOIN t_imgs as img ON img.id = (
-	  SELECT MIN(s.id) FROM t_imgs s LEFT JOIN t_car c on s.carid=c.id)
 		WHERE car.id = #{value}
 	</select>
 
@@ -187,7 +185,7 @@ FROM
 		store.storName as storeName,
 		area.area as areaName,
 		car.carLicense,
-		img.imgurl,
+		img.imgurl as imgUrl,
 		car.carname as carName
 	FROM
 		t_car AS car
