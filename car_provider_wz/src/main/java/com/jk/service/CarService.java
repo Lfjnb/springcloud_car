@@ -2,7 +2,9 @@ package com.jk.service;
 
 import com.jk.model.CarBean2;
 import com.jk.pojo.CarBean;
+import com.jk.pojo.CarBean1;
 import com.jk.pojo.ImgsBean;
+import com.jk.utils.ResultUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -74,4 +76,42 @@ public interface CarService {
      * 根据汽车Id 查询图片表
      */
     List<ImgsBean> queryImgs(Integer id);
+
+    /**
+     * 根据汽车Id 1.修改成交价格 2.并录入交易信息到mongdo数据库 3.删除本ID汽车
+     * 杨恩博，只加方法，不改其他地方，我的方法 注释里都写入我的名字
+     */
+    Boolean updatePrice(CarBean carBean);
+
+    /**
+     * 根据汽车Id 1.修改成交价格 2.并录入交易信息到mongdo数据库 3.删除本ID汽车
+     * 杨恩博，只加方法，不改其他地方，我的方法 注释里都写入我的名字
+     */
+    void saveMongodb(CarBean1 carBean1);
+
+    /**
+     * 根据汽车Id 1.修改成交价格 2.并录入交易信息到mongdo数据库 3.删除本ID汽车
+     * 杨恩博，只加方法，不改其他地方，我的方法 注释里都写入我的名字
+     */
+    void deleteCarYangEb(Integer id);
+
+    /**
+     * 根据汽车Id 1.修改成交价格 2.并录入交易信息到mongdo数据库 3.删除本ID汽车
+     * 杨恩博，只加方法，不改其他地方，我的方法 注释里都写入我的名字
+     */
+    CarBean findCarById2(Integer id);
+
+    List<CarBean1> findSellCar(Integer day);
+
+    /**
+     * 用户看车记录查询
+     * 杨恩博
+     * @param page
+     * @param rows
+     * @return
+     */
+    ResultUtil findUserCar(Integer page, Integer rows);
+
+
+    void deleteAppointment(Integer id);
 }

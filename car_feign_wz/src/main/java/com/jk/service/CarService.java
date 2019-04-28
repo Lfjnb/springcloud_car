@@ -2,13 +2,12 @@ package com.jk.service;
 
 import com.jk.model.CarBean2;
 import com.jk.pojo.CarBean;
+import com.jk.pojo.CarBean1;
 import com.jk.pojo.ImgsBean;
+import com.jk.utils.ResultUtil;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -97,4 +96,25 @@ public interface CarService {
      */
     @RequestMapping("queryImgs/{id}")
     List<ImgsBean> queryImgs(@PathVariable Integer id);
+
+    /**
+     * 根据汽车Id 1.修改成交价格 2.并录入交易信息到mongdo数据库 3.删除本ID汽车
+     * 杨恩博，只加方法，不改其他地方，我的方法 注释里都写入我的名字
+     */
+    @RequestMapping("updatePrice")
+    Boolean updatePrice(@RequestBody CarBean carBean);
+
+    @RequestMapping("findSellCar/{day}")
+    List<CarBean1> findSellCar(@PathVariable Integer day);
+
+    /**
+     * 用户看车记录查询
+     * 杨恩博
+     * @param page
+     * @param rows
+     * @return
+     */
+    @RequestMapping("findUserCar")
+    @ResponseBody
+    ResultUtil findUserCar(@RequestParam Integer page, @RequestParam Integer rows);
 }

@@ -8,6 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("PageController")
 public class PageController {
 
+
+    /*跳转我要买车*/
+    @RequestMapping("jumpwymc")
+    public   String  jumpwymc(){
+        return  "carlist";
+    }
+
     /*跳转展示首页*/
     @RequestMapping("PageOrderShow")
     public   String  PageOrderShow(){
@@ -26,11 +33,18 @@ public class PageController {
     public   String  jumpsellcar(){
         return  "sellcar2";
     }
+    /*引入预约车辆页面*/
+    @RequestMapping("jumpyuyue")
+    public   String  jumpyuyue(){
+        return  "yuyue";
+    }
+
     /*引入登录页面*/
     @RequestMapping("jumplogin")
     public   String  jumplogin(){
         return  "login";
     }
+
     /*跳转汽车list页面*/
     @RequestMapping("jumpcarlist")
     public   String  jumpcarlist(String  carName, Model model){

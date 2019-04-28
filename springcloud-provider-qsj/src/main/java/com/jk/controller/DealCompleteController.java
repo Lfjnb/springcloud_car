@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -58,6 +59,16 @@ public class DealCompleteController {
             list.add((CarBean) carBeans);
         }
              return list;
+    }
+    /**
+     * 回显汽车名字价格id
+     * @param carid
+     * @return
+     */
+    @RequestMapping("queryById")
+    @ResponseBody
+    public  CarBean   queryById(@RequestParam Integer  carid){
+        return dealDao.queryByIdCar(carid);
     }
 
 }

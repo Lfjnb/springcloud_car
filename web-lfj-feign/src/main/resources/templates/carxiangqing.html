@@ -2,7 +2,19 @@
 <!-- saved from url=(0079)https://www.guazi.com/bj/0dda8d7b14924f81x.htm#fr_page=index&fr_pos=rec&fr_no=0 -->
 <html>
 <head _tracker="{&quot;pagetype&quot;:&quot;detail&quot;,&quot;carid&quot;:&quot;74269993&quot;,&quot;is_baomai&quot;:&quot;0&quot;,&quot;city&quot;:&quot;bj&quot;,&quot;line&quot;:&quot;c2c&quot;,&quot;platform&quot;:&quot;web&quot;,&quot;ca_city&quot;:&quot;bj&quot;}">
+    <script src="../bootstrap/jquery.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap/bootstrap3/css/bootstrap.css">
+    <script src="../bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../bootstrap/bootStrap-addTabs/bootstrap.addtabs.css">
+    <script src="../bootstrap/bootstrap-bootbox/bootbox.js"></script>
+    <script src="../bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="../bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel="stylesheet" href="../bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap-fileinput/css/fileinput.css">
+    <script src="../bootstrap/bootstrap-fileinput/js/fileinput.min.js"></script>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <style type="text/css">object {
         outline: none;
     }</style>
@@ -9334,7 +9346,7 @@
 
 
             <div class="btnbox clearfix">
-                <a rel="nofollow" href="javascript:" class="orgbtn js-apt"
+                <a rel="nofollow" href="javascript:lookCar()" class="orgbtn js-apt"
                    data-gzlog="tracking_type=click&amp;eventid=0460310000000074&amp;position=1&amp;carid=74269993">预约看车
                     <span class="layer-tip js-layer-tip" style="width: 233px; height: 43px; display: none;">
                     <i class="icon-small-sanjiao"></i>
@@ -9350,6 +9362,81 @@
             </div>
         </div>
         <!--    详情页右上方车源基本信息-->
+        <script>
+            /*判断用户是否登录*/
+            function lookCar(){
+                var id=$("#yycarId").val()
+                console.log(id)
+                $.ajax({
+                    url:'http://127.0.0.1:8768/logina/lookUserLogin',
+                    type:"post",
+                    data:{
+                        carid:id
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+
+                    success:function (data) {
+                        if(data==0){
+                            alert("您已经预约过该车!")
+                            return
+                        }
+                        if(data==1){
+                           bootbox.dialog({
+                                title:'预约车辆',
+                                message: createAddContent("http://127.0.0.1:8082/PageController/jumpyuyue"),
+                                closeButton: true,
+                                buttons : {
+                                    "success" : {
+                                        "label" : "<i class='icon-ok'></i> 保存",
+                                        "className" : "btn-sm btn-success",
+                                        "callback" : function() {
+                                            $.ajax({
+                                                url:'http://127.0.0.1:8768/app/Savexinxi',
+                                                type:'post',
+                                                data:$("#myForm").serialize(),
+                                                dataType:'json',
+                                                xhrFields: {
+                                                    withCredentials: true
+                                                },
+                                                success:function(data){
+                                                    $('#myTable').bootstrapTable('refresh');
+                                                }
+                                            });
+                                        }
+                                    },
+                                    "cancel" : {
+                                        "label" : "<i class='icon-info'></i> 取消",
+                                        "className" : "btn-sm btn-danger",
+                                        "callback" : function() {
+
+                                        }
+                                    }
+
+                                }
+                            });
+
+                            $("#yuyueid").val($("#yycarId").val())
+                        }else{
+                            alert("您还没有登录,请登录之后在预约!")
+                        }
+                    }
+                })
+            }
+
+            var res;
+            function createAddContent(url){
+                $.ajax({
+                    url:url,
+                    async:false,
+                    success:function(data){
+                        res = data;
+                    }
+                });
+                return res;
+            }
+        </script>
     </div>
 
     <!--    保卖体验店介绍-->
@@ -9599,6 +9686,334 @@
             </table>
             <div class="text-ins">
                 以上基本信息为车辆初评时录入，实际情况以看车时为准    </div>
+        </div>
+
+        <!--    车主检测报告-->
+        <div class="test-box js-report">
+            <ul class="test-tit-five clearfix js-reportTop">
+
+            </ul>
+            <!-- 普通项 -->
+            <div class="test-content">
+                <div class="titlediv" id="report"><span>检测报告</span></div>
+                <div class="test03  test-packup  js-onekind">
+                    <div class="test-tit clearfix" id="accident">事故排查检测                        <span class="open-right js-disreport" data-gzlog="tracking_type=click&amp;eventid=0220050000099017">收起<span class="icon-bottom-sanjiao"></span></span>
+                    </div>
+                    <ul class="ul-tab-tit">
+                        <li class="last">
+                            <span class="icon-green-right"></span>
+
+                            <strong>26项&nbsp;排除重大事故                                                                    </strong>
+
+                            <p class="fc-green"><span id="shigu1"></span></p>
+                        </li>
+                        <li class="last">
+                            <span class="icon-green-right"></span>
+
+                            <strong>18项&nbsp;排除泡水火烧                                                                    </strong>
+
+                            <p class="fc-green"><span id="shigu2"></span></p>
+                        </li>
+                        <li class="last">
+                            <span class="icon-green-right"></span>
+
+                            <strong>11项&nbsp;调表排查                                                                    </strong>
+
+                            <p class="fc-green"><span id="shigu3"></span></p>
+                        </li>
+                    </ul>
+                    <div class="tablediv clearfix">
+
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table ">
+                            <thead>
+                            <tr>
+                                <th colspan="3">26项排除重大事故检测</th>
+                            </tr>
+                            </thead>
+                            <tbody id="one">
+                            </tbody>
+                        </table>
+
+                        <table width="100%"  border="0" cellpadding="0" cellspacing="0" class="test-list-table ">
+                            <thead>
+                            <tr>
+                                <th colspan="3">18项排除泡水火烧检测</th>
+                            </tr>
+                            </thead>
+                            <tbody id="two">
+                            </tbody>
+                        </table>
+
+
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table ">
+                            <thead>
+                            <tr>
+                                <th colspan="3">11项调表排查检测</th>
+                            </tr>
+                            </thead>
+                            <tbody id="san"></tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <!-- 外观内饰 -->
+                <div class="test01  test-packup  js-onekind"  align="center">
+                    <div class="test-tit clearfix" id="slight">轻微碰撞                        <span class="open-right js-disreport" data-gzlog="tracking_type=click&amp;eventid=0220050000099021">收起<span class="icon-bottom-sanjiao"></span></span>
+                    </div>
+                    <ul class="ul-tab-tit">
+                        <li class="last">
+                            <span class="icon-green-right"></span>
+
+                            <strong>21项&nbsp;轻微碰撞                                                                    </strong>
+
+                            <p class="fc-green"><span id="shigu4"></span></p>
+                        </li>
+                    </ul>
+                    <div class="tablediv clearfix">
+                        <table width="100%" class="test-list-table ">
+                            <thead>
+                            <tr>
+                                <th colspan="3">21项轻微碰撞检测</th>
+                            </tr>
+                            </thead>
+                            <tbody id="si">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 外观内饰 -->
+
+                <div class="test01  test-packup  js-onekind">
+                    <div class="test-tit clearfix" id="easyWear">易损耗部件                        <span class="open-right js-disreport" data-gzlog="tracking_type=click&amp;eventid=0220050000099022">收起<span class="icon-bottom-sanjiao"></span></span>
+                    </div>
+                    <ul class="ul-tab-tit">
+                        <li class="last">
+                            <span class="icon-green-right"></span>
+
+                            <strong>18项&nbsp;易损耗部件                                                                    </strong>
+
+                            <p class="fc-green"><span id="shigu5"></span></p>
+                        </li>
+                    </ul>
+                    <div class="tablediv clearfix">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table last">
+                            <thead>
+                            <tr>
+                                <th colspan="3">18项易损耗部件检测</th>
+                            </tr>
+                            </thead>
+                            <tbody id="wu"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 外观内饰 -->
+
+                <div class="test06  test-packup  js-onekind">
+                    <div class="test-tit clearfix" id="function">常用功能检测                        <span class="open-right js-disreport" data-gzlog="tracking_type=click&amp;eventid=0220050000099019">收起<span class="icon-bottom-sanjiao"></span></span>
+                    </div>
+                    <ul class="ul-tab-tit">
+                        <li class="last">
+                            <span class="icon-green-right"></span>
+
+                            <strong>15项&nbsp;安全系统                                                                    </strong>
+
+                            <p class="fc-green"><span id="shigu6"></span></p>
+                        </li>
+                        <li class="last">
+                            <span class="icon-green-right"></span>
+
+                            <strong>26项&nbsp;外部配置                                                                    </strong>
+
+                            <p class="fc-green"><span id="shigu7"></span></p>
+                        </li>
+                        <li class="last">
+                            <span class="icon-green-right"></span>
+
+                            <strong>19项&nbsp;内部配置                                                                    </strong>
+
+                            <p class="fc-green"><span id="shigu8"></span></p>
+                        </li>
+                        <li class="last">
+                            <span class="icon-green-right"></span>
+
+                            <strong>16项&nbsp;灯光系统                                                                    </strong>
+
+                            <p class="fc-green"><span id="shigu9"></span></p>
+                        </li>
+                        <li class="last">
+                            <span class="icon-green-right"></span>
+
+                            <strong>5项&nbsp;高科技配置                                                                    </strong>
+
+                            <p class="fc-green"><span id="shigu10"></span></p>
+                        </li>
+                        <li class="last">
+                            <span class="icon-green-right"></span>
+
+                            <strong>5项&nbsp;随车工具                                                                            <span class="tip-icon js-tip-icon5">
+                                            <span class="layer-tip bottom-layer">
+                                            <i class="icon-small-sanjiao"></i>随车工具是否随车赠送，需在交易过程中与车主确认</span>
+                                        </span>
+                            </strong>
+
+                            <p class="fc-green"><span id="shigu11"></span></p>
+                        </li>
+                    </ul>
+                    <div class="tablediv clearfix">
+
+
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table ">
+                            <thead>
+                            <tr>
+                                <th colspan="3">15项安全系统检测</th>
+                            </tr>
+                            </thead>
+                            <tbody id="liu"></tbody>
+                        </table>
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table ">
+                            <thead>
+                            <tr>
+                                <th colspan="3">26项外部配置检测</th>
+                            </tr>
+                            </thead>
+                            <tbody id="qi"></tbody>
+                        </table>
+
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table ">
+                            <thead>
+                            <tr>
+                                <th colspan="3">19项内部配置检测</th>
+                            </tr>
+                            </thead>
+                            <tbody id="ba"></tbody>
+                        </table>
+
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table ">
+                            <thead>
+                            <tr>
+                                <th colspan="3">16项灯光系统检测</th>
+                            </tr>
+                            </thead>
+                            <tbody id="jiu"></tbody>
+                        </table>
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table ">
+                            <thead>
+                            <tr>
+                                <th colspan="3">5项高科技配置检测</th>
+                            </tr>
+                            </thead>
+                            <tbody id="shi"></tbody>
+                        </table>
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table last">
+                            <thead>
+                            <tr>
+                                <th colspan="3">5项随车工具检测</th>
+                            </tr>
+                            <tr>
+                            </thead>
+                            <tbody id="shiyi"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- 外观内饰 -->
+
+            <div class="test03  test-packup  js-onekind">
+                <div class="test-tit clearfix" id="start">启动驾驶检测                        <span class="open-right js-disreport" data-gzlog="tracking_type=click&amp;eventid=0220050000099020">收起<span class="icon-bottom-sanjiao"></span></span>
+                </div>
+                <ul class="ul-tab-tit">
+                    <li class="last">
+                        <span class="icon-green-right"></span>
+
+                        <strong>9项&nbsp;仪表台指示灯                                                                    </strong>
+
+                        <p class="fc-green"><span id="shigu12"></span></p>
+                    </li>
+                    <li class="last">
+                        <span class="icon-green-right"></span>
+
+                        <strong>5项&nbsp;发动机状态                                                                    </strong>
+
+                        <p class="fc-green"><span id="shigu13"></span></p>
+                    </li>
+                    <li class="last">
+                        <span class="icon-green-right"></span>
+
+                        <strong>5项&nbsp;变速箱及转向                                                                    </strong>
+
+                        <p class="fc-green"><span id="shigu14"></span></p>
+                    </li>
+                </ul>
+                <div class="tablediv clearfix">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table ">
+                        <thead>
+                        <tr>
+                            <th colspan="3">9项仪表台指示灯检测</th>
+                        </tr>
+                        </thead>
+                        <tbody id="shier"></tbody>
+                    </table>
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table ">
+                        <thead>
+                        <tr>
+                            <th colspan="3">5项发动机状态检测</th>
+                        </tr>
+                        </thead>
+                        <tbody id="shisan"></tbody>
+                    </table>
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="test-list-table last">
+                        <thead>
+                        <tr>
+                            <th colspan="3">5项变速箱及转向检测</th>
+                        </tr>
+                        </thead>
+                        <tbody id="shisi"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 外观内饰 -->
+
+            <div class="test04 surface js-onekind
+                     test-packup" id="surface">
+                <div class="test-tit clearfix">外观内饰检测&nbsp;23项
+                    <span class="open-right js-disreport" data-gzlog="tracking_type=click&amp;eventid=0220050000099021">
+                                                        收起
+                            <span class="icon-bottom-sanjiao"></span></span>
+                </div>
+                <ul class="ul-tab-tit">
+                    <li>
+                        <span class="icon-green-right"></span>
+                        <!--                            <strong>67项&nbsp;缺陷项检测</strong>-->
+                        <strong>缺陷项检测</strong>
+                        <p class="fc-yellow">正常</p>
+                    </li>
+                    <li>
+                        <span class="icon-green-right"></span>
+                        <!--                            <strong>21项&nbsp;漆面修复检测</strong>-->
+                        <strong>漆面修复检测</strong>
+                        <p class="fc-green">正常</p>
+                    </li>
+                    <li>
+                        <span class="icon-green-right"></span>
+                        <!--                            <strong>21项&nbsp;钣金修复检测</strong>-->
+                        <strong>钣金修复检测</strong>
+                        <p class="fc-green">正常</p>
+                    </li>
+                    <li>
+                        <span class="icon-green-right"></span>
+                        <!--                            <strong>21项&nbsp;外观件更换检测</strong>-->
+                        <strong>外观件更换检测</strong>
+                        <p class="fc-green">正常</p>
+                    </li>
+                </ul>
+
+            </div>
+
         </div>
 
         <!--    车主基本信息-->
@@ -10432,9 +10847,9 @@
         },
         success:function(data){
             var car=data.carBean[0];
-            var st= "<h2 class='titlebox'>"+car.carName+"</h2>"+
+            var st= "<h2 class='titlebox'>"+car.brandName+"  "+car.seriesName+"</h2>"+
 
-            "<ul class='assort clearfix'>"+
+            "<input type='hidden' name='carId' id='yycarId' value='"+car.id+"' ><ul class='assort clearfix'>"+
             "<li class='one'><span>"+car.carLicense+"</span>"+car.carLicense+"</li>"+
             "<li class='two'><span>"+car.mileageName+"万公里</span>表显里程</li>"+
             "<li class='three'><span>"+car.areaName+"</span>上牌地</li>"+
@@ -10460,6 +10875,491 @@
     })
 
 
+     //1
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:1
+         },
+         dataType:'json',
+         success:function(data){
+             if (null !== data && data.length > 0) {
+                 var html = "";
+
+                 var index = data.length;//checkbox的总数。下面会判断总数。
+
+                 if (index % 2 != 0) {//奇数，数目为奇数的时候
+                     for (var i = 0; i < index - 1; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html += "<td>"+status+data[i].detectionName+"</td>"
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+                         $("#one").html(html);
+                     }
+                 } else { //偶数，数据是偶数的时候，0也是偶数。
+                     for (var i = 0; i < index; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html +="<td>"+status+data[i].detectionName+"</td>";
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+
+                     }
+                 }
+             }
+             $("#one").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //2
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:2
+         },
+         dataType:'json',
+         success:function(data){
+             if (null !== data && data.length > 0) {
+                 var html = "";
+
+                 var index = data.length;//checkbox的总数。下面会判断总数。
+
+                 if (index % 2 != 0) {//奇数，数目为奇数的时候
+                     for (var i = 0; i < index - 1; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html += "<td>"+status+data[i].detectionName+"</td>"
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+                         $("#two").html(html);
+                     }
+                 } else { //偶数，数据是偶数的时候，0也是偶数。
+                     for (var i = 0; i < index; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html +="<td>"+status+data[i].detectionName+"</td>";
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+
+                     }
+                 }
+             }
+             $("#two").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //3
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:3
+         },
+         dataType:'json',
+         success:function(data){
+             if (null !== data && data.length > 0) {
+                 var html = "";
+
+                 var index = data.length;//checkbox的总数。下面会判断总数。
+
+                 if (index % 2 != 0) {//奇数，数目为奇数的时候
+                     for (var i = 0; i < index - 1; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html += "<td>"+status+data[i].detectionName+"</td>"
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+                         $("#san").html(html);
+                     }
+                 } else { //偶数，数据是偶数的时候，0也是偶数。
+                     for (var i = 0; i < index; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html +="<td>"+status+data[i].detectionName+"</td>";
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+
+                     }
+                 }
+             }
+             $("#san").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //4
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:4
+         },
+         dataType:'json',
+         success:function(data){
+             if (null !== data && data.length > 0) {
+                 var html = "";
+
+                 var index = data.length;//checkbox的总数。下面会判断总数。
+
+                 if (index % 2 != 0) {//奇数，数目为奇数的时候
+                     for (var i = 0; i < index - 1; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html += "<td>"+status+data[i].detectionName+"</td>"
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+                         $("#si").html(html);
+                     }
+                 } else { //偶数，数据是偶数的时候，0也是偶数。
+                     for (var i = 0; i < index; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html +="<td>"+status+data[i].detectionName+"</td>";
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+
+                     }
+                 }
+             }
+             $("#si").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //5
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:5
+         },
+         dataType:'json',
+         success:function(data){
+             if (null !== data && data.length > 0) {
+                 var html = "";
+
+                 var index = data.length;//checkbox的总数。下面会判断总数。
+
+                 if (index % 2 != 0) {//奇数，数目为奇数的时候
+                     for (var i = 0; i < index - 1; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html += "<td>"+status+data[i].detectionName+"</td>"
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+                         $("#wu").html(html);
+                     }
+                 } else { //偶数，数据是偶数的时候，0也是偶数。
+                     for (var i = 0; i < index; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html +="<td>"+status+data[i].detectionName+"</td>";
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+
+                     }
+                 }
+             }
+             $("#wu").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //6
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:6
+         },
+         dataType:'json',
+         success:function(data){
+             var html = "";
+             for(var i = 0 ; i < data.length ; i++){
+                 var status = data[i].status == 1 ? "<span class='icon-line-gray'></span>" : "<span class='icon-right'></span>";
+                 html+=
+                     "<tr>"+
+                     "<td>"+status+data[i].detectionName+"</td>"+
+                     "</tr>"
+             }
+             $("#liu").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //7
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:7
+         },
+         dataType:'json',
+         success:function(data){
+             var html = "";
+             for(var i = 0 ; i < data.length ; i++){
+                 var status = data[i].status == 1 ? "<span class='icon-line-gray'></span>" : "<span class='icon-right'></span>";
+                 html+=
+                     "<tr>"+
+                     "<td>"+status+data[i].detectionName+"</td>"+
+                     "</tr>"
+             }
+             $("#qi").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //8
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:8
+         },
+         dataType:'json',
+         success:function(data){
+             var html = "";
+             for(var i = 0 ; i < data.length ; i++){
+                 var status = data[i].status == 1 ? "<span class='icon-line-gray'></span>" : "<span class='icon-right'></span>";
+                 html+=
+                     "<tr>"+
+                     "<td>"+status+data[i].detectionName+"</td>"+
+                     "</tr>"
+             }
+             $("#ba").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //9
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:9
+         },
+         dataType:'json',
+         success:function(data){
+             var html = "";
+             for(var i = 0 ; i < data.length ; i++){
+                 var status = data[i].status == 1 ? "<span class='icon-line-gray'></span>" : "<span class='icon-right'></span>";
+                 html+=
+                     "<tr>"+
+                     "<td>"+status+data[i].detectionName+"</td>"+
+                     "</tr>"
+             }
+             $("#jiu").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //10
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:10
+         },
+         dataType:'json',
+         success:function(data){
+             var html = "";
+             for(var i = 0 ; i < data.length ; i++){
+                 var status = data[i].status == 1 ? "<span class='icon-line-gray'></span>" : "<span class='icon-right'></span>";
+                 html+=
+                     "<tr>"+
+                     "<td>"+status+data[i].detectionName+"</td>"+
+                     "</tr>"
+             }
+             $("#shi").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //11
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:11
+         },
+         dataType:'json',
+         success:function(data){
+             var html = "";
+             for(var i = 0 ; i < data.length ; i++){
+                 var status = data[i].status == 1 ? "<span class='icon-line-gray'></span>" : "<span class='icon-right'></span>";
+                 html+=
+                     "<tr>"+
+                     "<td>"+status+data[i].detectionName+"</td>"+
+                     "</tr>"
+             }
+             $("#shiyi").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //12
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:12
+         },
+         dataType:'json',
+         success:function(data){
+             if (null !== data && data.length > 0) {
+                 var html = "";
+
+                 var index = data.length;//checkbox的总数。下面会判断总数。
+
+                 if (index % 2 != 0) {//奇数，数目为奇数的时候
+                     for (var i = 0; i < index - 1; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html += "<td>"+status+data[i].detectionName+"</td>"
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+                         $("#shier").html(html);
+                     }
+                 } else { //偶数，数据是偶数的时候，0也是偶数。
+                     for (var i = 0; i < index; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html +="<td>"+status+data[i].detectionName+"</td>";
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+
+                     }
+                 }
+             }
+             $("#shier").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //13
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:13
+         },
+         dataType:'json',
+         success:function(data){
+             if (null !== data && data.length > 0) {
+                 var html = "";
+
+                 var index = data.length;//checkbox的总数。下面会判断总数。
+
+                 if (index % 2 != 0) {//奇数，数目为奇数的时候
+                     for (var i = 0; i < index - 1; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html += "<td>"+status+data[i].detectionName+"</td>"
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+                         $("#shisan").html(html);
+                     }
+                 } else { //偶数，数据是偶数的时候，0也是偶数。
+                     for (var i = 0; i < index; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html +="<td>"+status+data[i].detectionName+"</td>";
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+
+                     }
+                 }
+             }
+             $("#shisan").html(html)
+         },
+         error:function(){
+
+         }
+     })
+
+     //14
+     $.ajax({
+         url:'http://127.0.0.1:8080/queryDetectionStatus',
+         type:'post',
+         data:{
+             carId:id,
+             pid:14
+         },
+         dataType:'json',
+         success:function(data){
+             if (null !== data && data.length > 0) {
+                 var html = "";
+
+                 var index = data.length;//checkbox的总数。下面会判断总数。
+
+                 if (index % 2 != 0) {//奇数，数目为奇数的时候
+                     for (var i = 0; i < index - 1; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html += "<td>"+status+data[i].detectionName+"</td>"
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+                         $("#shisi").html(html);
+                     }
+                 } else { //偶数，数据是偶数的时候，0也是偶数。
+                     for (var i = 0; i < index; i += 2) {
+                         var status = data[i].status == 1 ? "<span class='icon-yellow-error'></span>" : "<span class='icon-right'></span>";
+                         html += "<tr>";
+                         html +="<td>"+status+data[i].detectionName+"</td>";
+                         html += "<td>"+status+data[i+1].detectionName+"</td>"
+                         html += "</tr>";
+
+                     }
+                 }
+             }
+             $("#shisi").html(html)
+         },
+         error:function(){
+
+         }
+     })
 
 
     //基本参数
@@ -11293,66 +12193,13 @@
     <!--后服务费弹层-->
 
     <!--新预约看车后弹层-->
-    <div class="pop-box show pop-order-time-succ pop-order-time js-appoint-see-car" style="display: none">
-        <div class="pop-close"></div>
-        <div class="pop-title-left">预约看车</div>
-        <div class="pop-bottom">
-            <div class="pop-con">预约<i class="js-appoint-time-desc"></i>看车，即享优惠</div>
-            <div class="pop-address">
-                看车地点 <span>
-                燕郊            </span>
-            </div>
-            <div class="pop-time">看车时间
-                <div id="appoint-time"><span class="active">今天</span><span>明天</span><span>后天</span></div>
-            </div>
-            <input name="selected_time" type="hidden" value="">
-        </div>
-        <div class="pop-btn" data-gzlog="tracking_type=click&amp;eventid=92334677" data-val="74269993">立即预约</div>
-    </div>
 
 
     <!--新线索提交成功弹层-->
-    <div class="pop-box show pop-order-time-succ no-qrCode js-appoint-other" style="display: none">
-        <div class="pop-close"></div>
-
-        <div class="succ-icon"></div>
-        <div class="pop-center">
-            <div class="pop-title">提交成功</div>
-            <div class="pop-info">车主降价后，我们马上联系您</div>
-        </div>
-        <div class="pop-right">
-            <div class="qrCode"></div>
-            <div class="qrCode-info">下APP 看车源动态</div>
-        </div>
-
-        <div class="pop-bottom">
-            <div class="pop-con">预约<i class="js-appoint-time-desc"></i>看车，即享优惠</div>
-            <div class="pop-address">看车地点 <span>
-                燕郊            </span>
-            </div>
-            <div class="pop-time">看车时间
-                <div id="appoint_time"><span class="active">今天</span><span>明天</span><span>后天</span></div>
-            </div>
-            <input name="selected_time" type="hidden" value="">
-            <input name="heart_price" type="hidden" value="16">
-            <input name="original_price" type="hidden" value="16">
-        </div>
-        <div class="pop-btn margin30" data-gzlog="tracking_type=click&amp;eventid=92334677" data-val="74269993">立即预约
-        </div>
-    </div>
 
 
-    <!--直约结果弹层-->
-    <div class="pop-box show pop-order-succ js-appoint-success" style="display: none">
-        <div class="pop-close"></div>
-        <div class="pop-title">
-            <div class="title-inner"><i></i><span class="pop-title-info">预约成功<span></span></span></div>
-        </div>
-        <div class="pop-info pop-info-one">专属瓜子管家将致电给您，请保持电话畅通，留意接听</div>
-        <div class="pop-info pop-info-two">在APP（我的-即将看车）中查看预约信息</div>
-        <div class="qrCode"></div>
-        <div class="qrCode-info">微信扫一扫，下载APP</div>
-    </div>
+
+
 
 
 </div>

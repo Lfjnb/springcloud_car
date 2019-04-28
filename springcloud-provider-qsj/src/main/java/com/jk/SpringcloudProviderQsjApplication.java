@@ -11,9 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("com.jk.*")
 @MapperScan("com.jk.dao")
 public class SpringcloudProviderQsjApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(SpringcloudProviderQsjApplication.class, args);
     }
-
 }

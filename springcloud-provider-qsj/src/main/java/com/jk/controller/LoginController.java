@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jk.constantconf.ConstantConf;
 import com.jk.dao.LoginDao;
+import com.jk.pojo.AppointmentBean;
 import com.jk.utils.stutas;
 import com.jk.pojo.UserBean;
 import com.jk.utils.HttpClientUtil;
@@ -155,6 +156,13 @@ public class LoginController {
         redisTemplate.opsForValue().set(ConstantConf.SMS_LOGIN_PHONE+phone,phone);
         session.setAttribute(session.getId(),phone);
         return "登录成功";
+    }
+
+    @RequestMapping("selectLoginUser")
+    @ResponseBody
+    public  AppointmentBean selectLoginUser(@RequestParam("carid")Integer carid, @RequestParam("toString")String toString){
+        AppointmentBean appointmentBean=loginDao.selectLoginUser(carid,toString);
+        return appointmentBean;
     }
 
 }

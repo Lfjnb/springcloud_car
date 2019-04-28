@@ -62,4 +62,17 @@ public class AppointmentBean implements Serializable {
     public void setLookcartime(String lookcartime) {
         this.lookcartime = lookcartime;
     }
+
+
+    @Override
+    public String toString() {
+        return "AppointmentBean{" +
+                "id=" + id +
+                ", phone='" + phone + '\'' +
+                ", area=" + area +
+                ", lookcartime='" + lookcartime + '\'' +
+                ", carid=" + carid +
+                ", status=" + status +
+                '}';
+    }
 }

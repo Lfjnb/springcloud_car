@@ -2,13 +2,17 @@ package com.jk.controller;
 
 import com.jk.model.CarBean2;
 import com.jk.pojo.CarBean;
+import com.jk.pojo.CarBean1;
 import com.jk.pojo.ImgsBean;
 import com.jk.service.CarService;
+import com.jk.utils.ResultUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -89,10 +93,9 @@ public class CarController {
     /**
      * 修改根据Id回显
      */
-    @RequestMapping("findCarById/{id}")
     @ResponseBody
-    public CarBean findCarById(@PathVariable Integer id){
-
+    @RequestMapping("findCarById/{id}")
+    CarBean findCarById(@PathVariable Integer id){
         return carService.findCarById(id);
     }
 
@@ -143,6 +146,48 @@ public class CarController {
     public List<CarBean> queryCarRandom(){
         List<CarBean> list = carService.queryCarRandom();
         return list;
+    }
+
+
+    /**
+     * 根据汽车Id 1.修改成交价格 2.并录入交易信息到mongdo数据库 3.删除本ID汽车
+     * 杨恩博，只加方法，不改其他地方，我的方法 注释里都写入我的名字
+     */
+    @RequestMapping("updatePrice")
+    @ResponseBody
+    public Boolean updatePrice(@RequestBody CarBean carBean) {
+        Boolean bool = carService.updatePrice(carBean);//修改成交价格 注意：可不从数据库查询price(修改的目的就是修改这个成交价格)，直接set到拷贝后的carBean1里面
+        CarBean carById = carService.findCarById2(carBean.getId());//根据汽车Id 查询修改过价格的车的信息（卖出的车）
+        CarBean1 carBean1 = new CarBean1();
+        BeanUtils.copyProperties(carById,carBean1);
+        carBean1.setSellCarTime(new Date());
+        carService.saveMongodb(carBean1); //存入mongo
+        carService.deleteCarYangEb(carBean.getId()); //你的删除Id为String carBean.gitId 为Integer 报错  我重新写个
+        carService.deleteAppointment(carBean.getId());
+        return bool;
+    }
+
+    /**
+     * 从mongo查出卖车信息
+     * @return
+     */
+    @RequestMapping("findSellCar/{day}")
+    @ResponseBody
+    public List<CarBean1> findSellCar(@PathVariable Integer day){
+
+        return carService.findSellCar(day);
+    }
+    /**
+     * 用户看车记录查询
+     * 杨恩博
+     * @param page
+     * @param rows
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("findUserCar")
+    public ResultUtil findUserCar(@RequestParam Integer page, @RequestParam Integer rows){
+        return carService.findUserCar(page,rows);
     }
 
 

@@ -7,7 +7,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mysql://localhost:3306/1809a06?serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://127.0.0.1:3306/1809a06?serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8
   application:
     name: car-provider-wz
   redis:
@@ -21,9 +21,14 @@ spring:
     max-idle: 8
     max-wait: -1
     max-active: 20
+  data:
+    mongodb:
+      host: 127.0.0.1
+      prot: 27017
+      database: sellCar110
+
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-

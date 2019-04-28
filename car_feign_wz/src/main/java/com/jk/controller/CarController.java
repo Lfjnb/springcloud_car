@@ -2,10 +2,12 @@ package com.jk.controller;
 
 import com.jk.model.CarBean2;
 import com.jk.pojo.CarBean;
+import com.jk.pojo.CarBean1;
 import com.jk.pojo.ImgsBean;
 import com.jk.repostory.CarRepostory;
 import com.jk.service.CarService;
 import com.jk.utils.IOssService;
+import com.jk.utils.ResultUtil;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -59,20 +61,15 @@ public class CarController {
      *
      * 查询Car表所有数据 缓存到ES
      */
-    @Scheduled(fixedRate = 5000)//定时器注解
-    @ResponseBody
-    public void testTasks(){
-        List<CarBean2> list = carService.findCarListAll();
-        System.out.println("定时器");
-        for (CarBean2 carBean2:list){
-            carRepostory.save(carBean2);
-        }
-    }
-
-
-
-
-
+//    @Scheduled(fixedRate = 5000)//定时器注解
+//    @ResponseBody
+//    public void testTasks(){
+//        List<CarBean2> list = carService.findCarListAll();
+//        System.out.println("定时器");
+//        for (CarBean2 carBean2:list){
+//            carRepostory.save(carBean2);
+//        }
+//    }
 
     /**
      * @ 通过ES 全局搜索
@@ -300,15 +297,18 @@ public class CarController {
         return carList;
     }
 
-
-
-
     /**
      * 修改根据回显的Id
      */
     @RequestMapping("updateCarById")
     @ResponseBody
     public Boolean updateCarById(CarBean carBean){
+        List<CarBean2> list = carService.findCarListAll();
+        System.out.println();
+        System.out.println("同步数据");
+        for (CarBean2 carBean2:list){
+            carRepostory.save(carBean2);
+        }
         Boolean bool = carService.updateCarById(carBean);
         return bool;
     }
@@ -346,7 +346,14 @@ public class CarController {
     @RequestMapping("deleteCar")
     @ResponseBody
     public Boolean deleteCar(String id){
+
         Boolean bool = carService.deleteCar(id);
+        List<CarBean2> list = carService.findCarListAll();
+        System.out.println("同步数据");
+        for (CarBean2 carBean2:list){
+            carRepostory.save(carBean2);
+        }
+
         return bool;
     }
 
@@ -398,6 +405,48 @@ public class CarController {
         return list;
     }
 
+    /**
+     * 根据汽车Id 1.修改成交价格 2.并录入交易信息到mongdo数据库 3.删除本ID汽车
+     * 杨恩博，只加方法，不改其他地方，我的方法 注释里都写入我的名字
+     */
+    @RequestMapping("updatePrice")
+    @ResponseBody
+    public Boolean updatePrice(CarBean carBean){
+        Boolean bool = carService.updatePrice(carBean);
+        return bool;
+    }
+
+    /**
+     * 从mongo查出卖车信息
+     * y杨恩博
+     * @return
+     */
+    @RequestMapping("findSellCar")
+    @ResponseBody
+    public List<CarBean1> findSellCar(Integer day){
+        return carService.findSellCar(day);
+    }
+
+    @RequestMapping("findSellCar2")
+    @ResponseBody
+    public List<CarBean1> findSellCar2(Integer day){
+        return carService.findSellCar(day);
+    }
+
+
+    /**
+     * 用户看车记录查询
+     * 杨恩博
+     * @param page
+     * @param rows
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("findUserCar")
+    public ResultUtil findUserCar(Integer page, Integer rows){
+        return carService.findUserCar(page,rows);
+    }
+
 
 
     /**
@@ -408,9 +457,14 @@ public class CarController {
     @RequestMapping("addCar")
     @ResponseBody
     public Boolean addCarAndImgs(CarBean carBean){
+
+        List<CarBean2> list = carService.findCarListAll();
+        System.out.println("同步数据");
+        for (CarBean2 carBean2:list){
+            carRepostory.save(carBean2);
+        }
         //新增汽车表
-        Boolean bool;
-        bool = carService.addCar(carBean);
+        Boolean bool = carService.addCar(carBean);
         return bool;
     }
 
@@ -421,8 +475,7 @@ public class CarController {
     @RequestMapping("queryCar")
     @ResponseBody
     public HashMap<String,Object> queryCar(Integer page, Integer rows,CarBean carBean){
-         page = 1;
-         rows = 10;
+
         HashMap<String,Object> map = carService.queryCar(page,rows,carBean);
         return map;
     }

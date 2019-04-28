@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<script src="../bootstrap/jquery.min.js"></script>
+<link rel="stylesheet" href="../bootstrap/bootstrap3/css/bootstrap.css">
+<script src="../bootstrap/bootstrap3/js/bootstrap.js"></script>
+<link rel="stylesheet" href="../bootstrap/bootStrap-addTabs/bootstrap.addtabs.css">
+<script src="../bootstrap/bootstrap-bootbox/bootbox.js"></script>
+<script src="../bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="../bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<link rel="stylesheet" href="../bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" href="../bootstrap/bootstrap-fileinput/css/fileinput.css">
+<script src="../bootstrap/bootstrap-fileinput/js/fileinput.min.js"></script>
+<body>
+    <form  id="myForm">
+        <div class="form-group">
+            <input type="hidden"  id="yuyueid"  name="carid">
+            <input type="hidden"     name="area" value="0">
+            <input type="hidden"    name="status" value="0">
+            <label for="phone">手机号</label>
+            <input type="text" class="form-control" id="phone" name="phone">
+        </div>
+        <div class="form-group">
+            <label for="lookcartime">预约时间</label>
+            <input type="text" class="form-control date" name="lookcartime" id="lookcartime">
+        </div>
+    </form>
+<script>
+    $('.date').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: 'yyyy-mm-dd',//显示格式
+        minView: "month",//设置只显示到月份
+        initialDate: new Date(),//初始化当前日期
+        autoclose: true,//选中自动关闭
+        todayBtn: true//显示今日按钮
+    });
+    $.ajax({
+        url:"http://127.0.0.1:8768/logina/selectLoginUser",
+        xhrFields: {
+            withCredentials: true
+        },
+        success:function (data) {
+            $("#phone").val(data)
+        }
+    })
+</script>
+</body>
+</html>

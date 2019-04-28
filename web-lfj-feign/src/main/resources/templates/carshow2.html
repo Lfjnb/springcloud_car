@@ -7264,14 +7264,18 @@
                href="javascript:jumpsellcar()"
                data-gzlog="tracking_type=click&amp;eventid=0010050000000009">我要卖车</a>
             <a class="fl" baidu_alog="pc_index_top_tab&amp;click&amp;pc_index_top_tab_buy_c"
-               href="https://www.guazi.com/bj/buy/"
+               href="javascript:jumpwymc()"
                data-gzlog="tracking_type=click&amp;eventid=0010000000000008">我要买车</a>
             <a class="fl active" baidu_alog="pc_index_top_tab&amp;click&amp;pc_index_top_tab_index_c"
                href="javascript:jumpcarShow()" data-gzlog="tracking_type=click&amp;eventid=0010000000000007">首页</a>
         </div>
     </div>
 </div>
-
+<script>
+    function jumpwymc() {
+        location.href="../PageController/jumpwymc";
+    }
+</script>
 <!-- 视频 s -->
 <div class="index-top-video js-video" data-play="1">
     <div class="w1200">
@@ -7357,7 +7361,7 @@
                    href="javascript:jumpsellcar()"
                    data-gzlog="tracking_type=click&amp;eventid=0010050000000009">我要卖车</a>
                 <a class="fl " baidu_alog="pc_index_top_tab&amp;click&amp;pc_index_top_tab_buy_c"
-                   href="https://www.guazi.com/bj/buy/" data-gzlog="tracking_type=click&amp;eventid=0010000000000008">我要买车</a>
+                   href="../PageController/jumpwymc" data-gzlog="tracking_type=click&amp;eventid=0010000000000008">我要买车</a>
                 <a class="fl active" baidu_alog="pc_index_top_tab&amp;click&amp;pc_index_top_tab_index_c"
                    href="javascript:jumpcarShow()" data-gzlog="tracking_type=click&amp;eventid=0010000000000007">首页</a>
             </div>
@@ -7420,7 +7424,7 @@
         <!-- 买车 s -->
         <div class="entry-buycar fl">
             <div class="entry-title clearfix">
-                <a href="https://www.guazi.com/bj/buy/" class="fl"
+                <a href="../PageController/jumpwymc" class="fl"
                    data-gzlog="tracking_type=click&amp;eventid=92780751">我要买车<i class="icon-buysell"></i></a>
                 <!-- input在focus状态下，最外层div添加class名active -->
                 <div class="search">
@@ -8952,7 +8956,7 @@
                    class="data-js-suv" show-log="1010000000000029" data-carshow="1">
         </ul>
         <div class="index-carmore">
-            <a data-gzlog="tracking_type=click&amp;eventid=0080340000000041" href="https://www.guazi.com/bj/buy/h2/"
+            <a data-gzlog="tracking_type=click&amp;eventid=0080340000000041" href=""
                rel="nofollow">更多SUV<i class="iconbg"></i></a></div>
     </div>
 </div>
@@ -9086,7 +9090,7 @@
         <span class="iconbg"></span>
         <p class="foot-buysell-tel fl"><span class="iconbg"></span>免费咨询电话：400-069-6530</p>
         <div class="foot-buysell-btn fl">
-            <a href="https://www.guazi.com/bj/buy/" rel="nofollow" class="foot-btn-buy"
+            <a href="../PageController/jumpwymc" rel="nofollow" class="foot-btn-buy"
                data-gzlog="tracking_type=click&amp;eventid=1010000000000016">我要买车</a>
             <a href="javascript:jumpsellcar()" rel="nofollow" class="foot-btn-sell"
                data-gzlog="tracking_type=click&amp;eventid=1010000000000017">我要卖车</a>
@@ -9291,7 +9295,6 @@
 <!-- 估价弹层  s -->
 <!-- 弹框  s -->
 <div id="assessControl">
-
     <div class="pop-box pop-sell" id="assessPage">
         <div class="pop-close js-closeAssess"></div>
         <p class="pop-tit">先估价再卖车，心里倍儿有底</p>

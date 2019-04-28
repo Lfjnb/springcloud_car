@@ -2,13 +2,23 @@ package com.jk.serviceimpl;
 
 import com.jk.dao.CarDao;
 import com.jk.model.CarBean2;
+import com.jk.pojo.AppotionBean;
 import com.jk.pojo.CarBean;
+import com.jk.pojo.CarBean1;
 import com.jk.pojo.ImgsBean;
 import com.jk.service.CarService;
+import com.jk.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,12 +42,16 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public HashMap<String, Object> queryCar(Integer page, Integer rows, CarBean carBean) {
-
+        HashMap<String,Object> paramert =new HashMap<>();
+        paramert.put("carBean",carBean);
         long start = (page-1)*rows;
-        long total = carDao.queryCount(carBean);
+        long total = carDao.queryCount(paramert);
+
+        paramert.put("start",start);
+        paramert.put("rows",rows);
 
         HashMap<String,Object> map =new HashMap<>();
-        List<CarBean> list = carDao.queryCar(start,rows,carBean);
+        List<CarBean> list = carDao.queryCar(paramert);
         map.put("rows",list);
         map.put("total",total);
         return map;
@@ -194,6 +208,115 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<ImgsBean> queryImgs(Integer id) {
         return carDao.queryImgs(id);
+    }
+
+
+    /**
+     * 根据汽车Id 1.修改成交价格 2.并录入交易信息到mongdo数据库 3.删除本ID汽车
+     * 杨恩博，只加方法，不改其他地方，我的方法 注释里都写入我的名字
+     */
+    @Override
+    public Boolean updatePrice(CarBean carBean) {
+        Boolean bool = false;
+        int i = carDao.updatePrice(carBean);
+        if(i>0){
+            bool = true;
+        }
+        return bool;
+    }
+
+    /**
+     * 注入MongoDB
+     * 杨恩博
+     */
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    /**
+     * 2.并录入交易信息到mongdo数据库
+     * 杨恩博，只加方法，不改其他地方，我的方法 注释里都写入我的名字
+     */
+    @Override
+    public void saveMongodb(CarBean1 carBean1) {
+        mongoTemplate.insert(carBean1);
+    }
+
+    /**
+     * 根据汽车Id 1.修改成交价格 2.并录入交易信息到mongdo数据库 3.删除本ID汽车
+     * 杨恩博，只加方法，不改其他地方，我的方法 注释里都写入我的名字
+     */
+    @Override
+    public void deleteCarYangEb(Integer id) {
+        carDao.deleteCarYangEb(id);
+    }
+
+    /**
+     * 根据汽车Id 1.修改成交价格 2.并录入交易信息到mongdo数据库 3.删除本ID汽车
+     * 杨恩博，只加方法，不改其他地方，我的方法 注释里都写入我的名字
+     */
+    @Override
+    public CarBean findCarById2(Integer id) {
+        return carDao.findCarById2(id);
+    }
+
+    /**
+     * 从mongo查出卖车信息
+     * 杨恩博
+     * @param day
+     * @return
+     */
+    @Override
+    public List<CarBean1> findSellCar(Integer day) {
+        Query query = new Query();
+        if(day!=null&&day>0){
+            //定义时间格式
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            //获取当前日期
+            Date date = new Date();
+            // System.out.println(date);
+            //获取30天前的时间日期--minDate
+            Calendar instance = Calendar.getInstance();
+            instance.add(Calendar.DAY_OF_MONTH,-30);
+            String format = simpleDateFormat.format(instance.getTime());
+            Date parse1 = null;
+            try {
+                parse1 = simpleDateFormat.parse(format);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            //System.out.println(format);
+
+            query.addCriteria(Criteria.where("sellCarTime").gte(parse1));
+        }
+
+        List<CarBean1> carBean1s = mongoTemplate.find(query, CarBean1.class);
+        return carBean1s;
+    }
+
+    /**
+     * 用户看车记录查询
+     * 杨恩博
+     * @param page
+     * @param rows
+     * @return
+     */
+    @Override
+    public ResultUtil findUserCar(Integer page, Integer rows) {
+        ResultUtil resultUtil = new ResultUtil();
+        //HashMap<String, Object> params = new HashMap<>();
+        //查询总条数
+        int count = carDao.findUserCarCount();
+        resultUtil.setTotal(count);
+        //分页查询
+        Integer start = (page-1)*rows;
+        List<AppotionBean> list= carDao.findUserCarPage(start,rows);
+        resultUtil.setRows(list);
+        return resultUtil;
+    }
+
+    @Override
+    public void deleteAppointment(Integer id) {
+        carDao.deleteAppointment(id);
     }
 
 

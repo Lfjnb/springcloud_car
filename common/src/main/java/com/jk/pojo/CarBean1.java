@@ -1,7 +1,10 @@
 package com.jk.pojo;
 
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 类描述：车辆信息表
@@ -11,7 +14,8 @@ import java.io.Serializable;
  * 修改时间：2019/4/1618:54
  * 修改备注：
  */
-public class CarBean implements Serializable {
+@Document(collection = "sellCar")
+public class CarBean1 implements Serializable {
 
     private static final long serialVersionUID = 4592182085915324838L;
 
@@ -22,8 +26,6 @@ public class CarBean implements Serializable {
     private Integer brandId;//品牌Id
 
     private String brandName;//品牌名称
-
-    private Integer yymcid;
 
     private Integer series; //车辆系列id
 
@@ -95,12 +97,14 @@ public class CarBean implements Serializable {
 
     private String imgUrl; //图片路径
 
-    public Integer getYymcid() {
-        return yymcid;
+    private Date sellCarTime;//卖车时间存入mongo
+
+    public Date getSellCarTime() {
+        return sellCarTime;
     }
 
-    public void setYymcid(Integer yymcid) {
-        this.yymcid = yymcid;
+    public void setSellCarTime(Date sellCarTime) {
+        this.sellCarTime = sellCarTime;
     }
 
     public Integer getId() {

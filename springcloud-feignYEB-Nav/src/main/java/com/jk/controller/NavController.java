@@ -60,9 +60,11 @@ public class NavController {
         return "jsp/addimg";
     }
     @RequestMapping("toupdateCar")
-    public String toupdateCar(Integer id ,HttpSession session){
-        session.setAttribute("id",id);
+    public String toupdateCar(Integer id,Integer  carid,Model  model){
+        model.addAttribute("id",id);
+        model.addAttribute("carid",carid);
         return "jsp/updateCar";
+
     }
 
     @RequestMapping("outcar")

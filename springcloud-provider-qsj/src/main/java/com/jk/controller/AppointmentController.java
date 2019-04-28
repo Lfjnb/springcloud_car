@@ -34,8 +34,12 @@ public class AppointmentController {
       @ResponseBody
       public Boolean  Savexinxi (@RequestBody AppointmentBean appointmentBean){
               try{
+
+
                   //将redis中的登录用户手机号取出来存在mysql表里
                   appointmentDao.Savexinxi(appointmentBean);
+
+
                   return  true;
               }catch (Exception e){
                   e.printStackTrace();

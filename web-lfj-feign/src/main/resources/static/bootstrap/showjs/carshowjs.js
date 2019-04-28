@@ -60,7 +60,7 @@ function initcnxh() {
                 '<div class="t-i">2018年<span class="icon-pad">|</span>'+data[i].mileageName+'</div>'+
                 '<div class="t-price">'+
                   '  <!-- 价格 -->'+
-                '   <p>'+data[i].price+'<span>万</span></p>'+
+                '   <p>'+(data[i].price/10000)+'<span>万</span></p>'+
                '<!-- 标签 -->'+
                '<i class="i-green">准新车</i></div>'+
                '</div>'+

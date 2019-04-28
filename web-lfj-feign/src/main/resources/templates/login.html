@@ -596,6 +596,9 @@ a:hover {
                      phone:phone,
                      code:code
                  },
+                 xhrFields: {
+                     withCredentials: true
+                 },
                  success:function (data) {
                      alert(data)
                      if (data=="登录成功"){

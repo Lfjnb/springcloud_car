@@ -53,6 +53,7 @@ public interface DealDao {
 
 
 
-
+    @Select("select id,carname,price from t_car where  id  = #{value}")
+    CarBean queryByIdCar(Integer carid);
 
 }

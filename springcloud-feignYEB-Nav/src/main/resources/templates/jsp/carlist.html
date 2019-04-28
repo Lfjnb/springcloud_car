@@ -35,13 +35,9 @@
             <div class="input-group" >
                 <input type="text" id="carName" class="form-control"/>
             </div>
-            <label for="brandId2">品牌</label>
+            <label for="phone">车主手机号</label>
             <div class="input-group">
-                <select id="brandId2" class="form-control"></select>
-            </div>
-            <label for="carAgeId2">车龄</label>
-            <div class="input-group">
-                <select id="carAgeId2" class="form-control"></select>
+                <input type="text" id="phone" class="form-control"/>
             </div>
         </div>
         <div class="form-group">
@@ -82,14 +78,12 @@
             queryParams: function () { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 //console.log(params)
                 var carName = $("#carName").val();
-                var brandId = $("#brandId2").val();
-                var carAgeId = $("#carAgeId2").val();
+                var brandId = $("#phone").val();
                 return {
                     page: this.pageNumber, // 每页显示数据的开始行号
                     rows: this.pageSize, // 每页要显示的数据条数,
                     carName:carName,
-                    brandId:brandId,
-                    carAgeId:carAgeId
+                    ownerId:brandId
                     // dataId: $("#dataId").val() // 额外添加的参数,
                 }
             },
@@ -133,8 +127,9 @@
                 {field:"storeName",title:"店铺"},
                 {field:"carLicense",title:"上牌时间"},
                 {field:"areaName",title:"地区"},
+                {field:"ownerId",title:"车主手机号"},
                 {field:"123",title:"操作",width:"80px",formatter:function(value,row,index){
-                        return '<a href="javascript:detection('+row.id+')">配置详情</a> | <a href="javascript:findImg('+row.id+')">查看图片</a> | <a href="javascript:editCaar('+row.id+')">修改</a>';
+                        return '<a href="javascript:detection('+row.id+')">配置详情</a> | <a href="javascript:findImg('+row.id+')">查看图片</a> | <a href="javascript:editCaar('+row.id+')">卖车</a>';
                     }}
             ]
         })
@@ -347,11 +342,11 @@
                     }
                 },
                 ok: {
-                    label: "保存",
+                    label: "确认",
                     className: 'btn-info',
                     callback: function(){
                         $.ajax({
-                            url:'http://127.0.0.1:9999/Car/updateCarById',
+                            url:'http://127.0.0.1:9999/Car/updatePrice',
                             type:'post',
                             data:$("#updateCarForm").serialize(),
                             success:function(){

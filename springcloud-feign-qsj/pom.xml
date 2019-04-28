@@ -111,6 +111,12 @@
             <version>1.2.44</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alipay.api</groupId>
+            <artifactId>k12-alipay-sdk</artifactId>
+            <version>0.0.1-beta</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>

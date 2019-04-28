@@ -154,6 +154,53 @@ FROM
 	</select>
 
 
+	<!-- 根据Id查询汽车表详情 -->
+	<select id="findCarById2" parameterType="Integer" resultType="com.jk.pojo.CarBean">
+		SELECT
+		car.id,
+		brand.brandName as brandName,
+		series.seriesName as seriesName,
+		car.price,
+		dic.text as carAgeName,
+		car.gearbox,
+		dic2.text as carModelName,
+		dic3.text as mileageName,
+		dic4.text as carCerNmae,
+		dic5.text as carSeatName,
+		dic6.text as carFuelName,
+		dic7.text as colorName,
+		car.drive,
+		dic8.text as nationName,
+		dic9.text as elseName,
+		own.ownerName as ownerName,
+		store.storName as storeName,
+		area.area as areaName,
+		car.carLicense,
+		img.imgurl,
+		car.carname as carName
+	FROM
+		t_car AS car
+		LEFT JOIN t_brand AS brand ON car.brandId = brand.id
+		LEFT JOIN t_series AS series ON car.series = series.id
+		LEFT JOIN t_dictionary AS dic ON car.carAgeId = dic.codeid
+		LEFT JOIN t_dictionary AS dic2 ON car.carModel = dic2.codeid
+		LEFT JOIN t_dictionary AS dic3 ON car.mileageId = dic3.codeid
+		LEFT JOIN t_dictionary AS dic4 ON car.carCerId = dic4.codeid
+		LEFT JOIN t_dictionary AS dic5 ON car.carSeat = dic5.codeid
+		LEFT JOIN t_dictionary AS dic6 ON car.carFuel = dic6.codeid
+		LEFT JOIN t_dictionary AS dic7 ON car.color = dic7.codeid
+		LEFT JOIN t_dictionary AS dic8 ON car.nationId = dic8.codeid
+		LEFT JOIN t_dictionary AS dic9 ON car.elseId = dic9.codeid
+		LEFT JOIN t_owner AS own ON car.ownerId = own.id
+		LEFT JOIN t_store AS store ON car.storeId = store.id
+		LEFT JOIN t_area AS area ON car.areaId = area.id
+		LEFT JOIN t_imgs as img ON img.id = (
+	  SELECT MIN(s.id) FROM t_imgs s LEFT JOIN t_car c on s.carid=c.id)
+		WHERE car.id = #{value}
+	</select>
+
+
+
 	<!-- 根据Id删除汽车表 -->
 	<delete id="deleteCar" parameterType="String">
 		delete from t_car  where id  in
@@ -220,7 +267,7 @@ FROM
 
 
 	<!-- 查询汽车总表 -->
-    <select id="queryCar"  resultType="com.jk.pojo.CarBean">
+	<select id="queryCar"  resultType="com.jk.pojo.CarBean" parameterType="map">
 		SELECT
 		car.id,
 		brand.brandName as brandName ,
@@ -237,7 +284,7 @@ FROM
 		car.drive,
 		dic8.text as nationName,
 		dic9.text as elseName,
-		own.ownerName as ownerName,
+		car.ownerId ,
 		store.storName as storeName,
 		area.area as areaName,
 		car.carLicense,
@@ -256,68 +303,35 @@ FROM
 		LEFT JOIN t_dictionary AS dic7 ON car.color = dic7.codeid
 		LEFT JOIN t_dictionary AS dic8 ON car.nationId = dic8.codeid
 		LEFT JOIN t_dictionary AS dic9 ON car.elseId = dic9.codeid
-		LEFT JOIN t_owner AS own ON car.ownerId = own.id
 		LEFT JOIN t_store AS store ON car.storeId = store.id
 		LEFT JOIN t_area AS area ON car.areaId = area.id
 		LEFT JOIN t_imgs as img ON img.id = (
 		SELECT MIN(s.id) FROM t_imgs s LEFT JOIN t_car car1 on s.carid=car1.id)
-
-	LIMIT #{start},#{rows}
-
-
-    </select>
-	<sql id="CarSql">
 		<where>
-                  <if test=" carBean.brandId != -1 and carBean.brandId != null and  carBean.brandId != ' ' ">
-					  and  car.brandid=#{carBean.brandId}
-				  </if>
-			<if test="carBean.series!=-1">
-				and #{carBean.series} = car.series
+			<if test="carBean.carName!=null and carBean.carName!=''">
+				and car.carname like '%${carBean.carName}%'
 			</if>
-			<if test="carBean.areaId!=null and carBean.areaId!=-1">
-				and #{carBean.areaId} = car.areaId
+			<if test="carBean.ownerId!=null and carBean.ownerId!=''">
+				and car.ownerId like '%${carBean.ownerId}%'
 			</if>
-			<if test="carBean.carAgeId!=null and carBean.carAgeId!=-1">
-				and #{carBean.carAgeId} = car.carAgeId
-			</if>
-			<if test="carBean.gearbox!=null and carBean.gearbox!=-1">
-				and #{carBean.gearbox} = car.gearbox
-			</if>
-			<if test="carBean.carModel!=null and carBean.carModel!=-1">
-				and #{carBean.carModel} = car.carModel
-			</if>
-			<if test="carBean.mileageId!=null and carBean.mileageId!=-1">
-				and #{carBean.mileageId} = car.mileageId
-			</if>
-			<if test="carBean.carCerId!=null and carBean.carCerId!=-1">
-				and #{carBean.carCerId} = car.carCerId
-			</if>
-			<if test="carBean.carSeat!=null and carBean.carSeat!=-1">
-				and #{carBean.carSeat} = car.carSeat
-			</if>
-			<if test="carBean.carFuel!=null and carBean.carFuel!=-1">
-				and #{carBean.carFuel} = car.carFuel
-			</if>
-			<if test="carBean.color!=null and carBean.color!=-1">
-				and #{carBean.color}  = car.color
-			</if>
-			<if	test="carBean.drive!=null and carBean.drive!=-1">
-				and #{carBean.drive} = car.drive
-			</if>
-			<if test="carBean.nationId!=null and carBean.nationId!=-1">
-				and #{carBean.nationId} = car.nationId
-			</if>
-			<if test="carBean.elseId!=null and carBean.elseId!=-1">
-				and #{carBean.elseId} = car.elseId
-			</if>
-
 		</where>
-	</sql>
+		LIMIT #{start},#{rows}
+
+
+
+	</select>
 
     <!-- 查询汽车总表总条数 -->
-    <select id="queryCount"  resultType="long">
+    <select id="queryCount"  resultType="long" parameterType="map">
         select count(1) from t_car  car
-
+		<where>
+			<if test="carBean.carName!=null and carBean.carName!=''">
+				and car.carname like '%${carBean.carName}%'
+			</if>
+			<if test="carBean.ownerId!=null and carBean.ownerId!=''">
+				and car.ownerId like '%${carBean.ownerId}%'
+			</if>
+		</where>
     </select>
 
 

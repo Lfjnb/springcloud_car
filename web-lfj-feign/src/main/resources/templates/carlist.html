@@ -9396,7 +9396,7 @@
                href=""
                data-gzlog="tracking_type=click&amp;eventid=0010050000000009">我要卖车</a>
             <a class="fl active" baidu_alog="pc_index_top_tab&amp;click&amp;pc_index_top_tab_buy_c"
-               href=""
+               href="#"
                data-gzlog="tracking_type=click&amp;eventid=0010000000000008">我要买车</a>
             <a class="fl " baidu_alog="pc_index_top_tab&amp;click&amp;pc_index_top_tab_index_c"
                href="javascript:jumpcarShow()" data-gzlog="tracking_type=click&amp;eventid=0010000000000007">首页</a>
@@ -10870,13 +10870,13 @@
 
             <dd>
 
-                <input type="text" id="name" name="carName" >
+                <input type="hidden" id="name" name="carName" >
                 <!--车辆品牌 -->
-                <input type="text" id="qcpp" name="brandId" value="-1" onchange="carChange()">
+                <input type="hidden" id="qcpp" name="brandId" value="-1" onchange="carChange()">
                 <!--车辆系列 -->
-                <input type="text" id="cx" name="series" value="-1" onchange="carChange()" >
+                <input type="hidden" id="cx" name="series" value="-1" onchange="carChange()" >
                 <!--车辆地区 -->
-                <input type="text" id="dqName" name="areaName"  value="-1" onchange="carChange()">
+                <input type="hidden" id="dqName" name="areaName"  value="-1" onchange="carChange()">
 
                 <!-- 第一个li是默认大小，第二个是加长版，第三个是颜色下拉 -->
                 <ul class="dd-more ">
