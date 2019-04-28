@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="common" />
+        <module name="detection-feign" />
+        <module name="detection-provider" />
+        <module name="eureka" />
+        <module name="springcloud-feign" />
+        <module name="springcloud-feign-qsj" />
+        <module name="springcloud-feignYEB-Nav" />
+        <module name="springcloud-provider" />
+        <module name="springcloud-provider-qsj" />
+        <module name="springcloud-providerYEB-Nav" />
+        <module name="springcloud_car" />
+        <module name="web-lfj-feign" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common" target="1.8" />
+      <module name="detection-feign" target="1.8" />
+      <module name="detection-provider" target="1.8" />
+      <module name="eureka" target="1.8" />
+      <module name="springcloud-feign" target="1.8" />
+      <module name="springcloud-feign-qsj" target="1.8" />
+      <module name="springcloud-feignYEB-Nav" target="1.8" />
+      <module name="springcloud-provider" target="1.8" />
+      <module name="springcloud-provider-qsj" target="1.8" />
+      <module name="springcloud-providerYEB-Nav" target="1.8" />
+      <module name="springcloud_car" target="1.5" />
+      <module name="web-lfj-feign" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="common" options="-parameters" />
+      <module name="detection-feign" options="-parameters" />
+      <module name="detection-provider" options="-parameters" />
+      <module name="eureka" options="-parameters" />
+      <module name="springcloud-feign" options="-parameters" />
+      <module name="springcloud-feign-qsj" options="-parameters" />
+      <module name="springcloud-feignYEB-Nav" options="-parameters" />
+      <module name="springcloud-provider" options="-parameters" />
+      <module name="springcloud-provider-qsj" options="-parameters" />
+      <module name="springcloud-providerYEB-Nav" options="-parameters" />
+      <module name="web-lfj-feign" options="-parameters" />
+    </option>
+  </component>
+</project>

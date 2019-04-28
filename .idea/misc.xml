@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/web-lfj-feign/pom.xml" />
+        <option value="$PROJECT_DIR$/springcloud-providerYEB-Nav/pom.xml" />
+        <option value="$PROJECT_DIR$/springcloud-provider-qsj/pom.xml" />
+        <option value="$PROJECT_DIR$/springcloud-feignYEB-Nav/pom.xml" />
+        <option value="$PROJECT_DIR$/springcloud-feign-qsj/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka/pom.xml" />
+        <option value="$PROJECT_DIR$/detection-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/detection-feign/pom.xml" />
+        <option value="$PROJECT_DIR$/common/pom.xml" />
+        <option value="$PROJECT_DIR$/car_provider_wz/pom.xml" />
+        <option value="$PROJECT_DIR$/car_feign_wz/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/classes" />
+  </component>
+</project>

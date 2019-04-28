@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/detection-feign/detection-feign.iml" filepath="$PROJECT_DIR$/detection-feign/detection-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/detection-provider/detection-provider.iml" filepath="$PROJECT_DIR$/detection-provider/detection-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/car_feign_wz/springcloud-feign.iml" filepath="$PROJECT_DIR$/car_feign_wz/springcloud-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcloud-feign-qsj/springcloud-feign-qsj.iml" filepath="$PROJECT_DIR$/springcloud-feign-qsj/springcloud-feign-qsj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcloud-feignYEB-Nav/springcloud-feignYEB-Nav.iml" filepath="$PROJECT_DIR$/springcloud-feignYEB-Nav/springcloud-feignYEB-Nav.iml" />
+      <module fileurl="file://$PROJECT_DIR$/car_provider_wz/springcloud-provider.iml" filepath="$PROJECT_DIR$/car_provider_wz/springcloud-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcloud-provider-qsj/springcloud-provider-qsj.iml" filepath="$PROJECT_DIR$/springcloud-provider-qsj/springcloud-provider-qsj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcloud-providerYEB-Nav/springcloud-providerYEB-Nav.iml" filepath="$PROJECT_DIR$/springcloud-providerYEB-Nav/springcloud-providerYEB-Nav.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcloud_car.iml" filepath="$PROJECT_DIR$/springcloud_car.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-lfj-feign/web-lfj-feign.iml" filepath="$PROJECT_DIR$/web-lfj-feign/web-lfj-feign.iml" />
+    </modules>
+  </component>
+</project>
